@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-const config = process.env.HEROKU_MONGO ? process.env.HEROKU_MONGO : require('./config/db');
+const config = process.env.HEROKU_MONGO ? JSON.parse(process.env.HEROKU_MONGO) : require('./config/db');
 
 const User = require('../models/user.model');
 
