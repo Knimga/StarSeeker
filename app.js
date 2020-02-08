@@ -11,7 +11,7 @@ const gamedata = require('./routes/gamedata');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const config = process.env.HEROKU_MONGO ? JSON.parse(process.env.HEROKU_MONGO) : require('./config/db');
+const config = process.env.HEROKU_MONGO ? process.env.HEROKU_MONGO : require('./config/db');
 
 mongoose.connect(config.meanDb,{useNewUrlParser: true, useUnifiedTopology: true,});
 mongoose.connection.on('connected', () => {console.log(`connected to mongo db '${config.dbName}'!`)});
