@@ -36,6 +36,7 @@ export class CharBuildRaceComponent implements OnInit {
       this.selectedRace.subdecisions.forEach((d) => {
         this.subdecisions[d.decisionName] = null;
       });
+      console.log(this.subdecisions);
       this.showSubdecisions = true;
     }
   }

@@ -418,6 +418,7 @@ var CharBuildRaceComponent = (function () {
             this.selectedRace.subdecisions.forEach(function (d) {
                 _this.subdecisions[d.decisionName] = null;
             });
+            console.log(this.subdecisions);
             this.showSubdecisions = true;
         }
     };
