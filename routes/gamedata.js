@@ -11,8 +11,8 @@ router.get('/raceDesc', (req,res) => {
 });
 
 router.get('/themeDesc', (req,res) => {
-    ThemeDesc.find().lean().then((raceDesc) => {
-        res.status(200).send(raceDesc);
+    ThemeDesc.find().lean().then((themeDesc) => {
+        res.status(200).send(themeDesc);
     }).catch((e) => {res.status(400).send(e)});
 });
 

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const config = process.env.HEROKU_MONGO ? JSON.parse(process.env.HEROKU_MONGO) : require('./config/db');
 
 const UserSchema = mongoose.Schema({
     name: {

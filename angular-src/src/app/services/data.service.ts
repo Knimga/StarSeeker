@@ -4,21 +4,22 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
+  url: String = window.location.origin;
 
   constructor(private http:Http) { } 
 
   getRaceDesc() {
-    let url = 'http://localhost:3000/gamedata/raceDesc';
+    let raceDescUrl = this.url+'/gamedata/raceDesc';
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get(url, {headers: headers}).map(res => res.json());
+    return this.http.get(raceDescUrl, {headers: headers}).map(res => res.json());
   }
 
   getThemeDesc() {
-    let url = 'http://localhost:3000/gamedata/themeDesc';
+    let themeDescUrl = this.url+'/gamedata/themeDesc';
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get(url, {headers: headers}).map(res => res.json());
+    return this.http.get(themeDescUrl, {headers: headers}).map(res => res.json());
   }
 
 }

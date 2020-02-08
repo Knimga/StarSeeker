@@ -24,18 +24,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DataService = (function () {
     function DataService(http) {
         this.http = http;
+        this.url = window.location.origin;
     }
     DataService.prototype.getRaceDesc = function () {
-        var url = 'http://localhost:3000/gamedata/raceDesc';
+        var raceDescUrl = this.url + '/gamedata/raceDesc';
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get(raceDescUrl, { headers: headers }).map(function (res) { return res.json(); });
     };
     DataService.prototype.getThemeDesc = function () {
-        var url = 'http://localhost:3000/gamedata/themeDesc';
+        var themeDescUrl = this.url + '/gamedata/themeDesc';
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get(themeDescUrl, { headers: headers }).map(function (res) { return res.json(); });
     };
     DataService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
@@ -44,7 +45,7 @@ var DataService = (function () {
     return DataService;
     var _a;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/data.service.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/data.service.js.map
 
 /***/ }),
 
@@ -82,7 +83,7 @@ var ValidateService = (function () {
     ], ValidateService);
     return ValidateService;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/validate.service.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/validate.service.js.map
 
 /***/ }),
 
@@ -117,7 +118,7 @@ if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/main.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/main.js.map
 
 /***/ }),
 
@@ -151,7 +152,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/app.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/app.component.js.map
 
 /***/ }),
 
@@ -251,7 +252,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/app.module.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/app.module.js.map
 
 /***/ }),
 
@@ -333,7 +334,7 @@ var CharBuildComponent = (function () {
     ], CharBuildComponent);
     return CharBuildComponent;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/char-build.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build.component.js.map
 
 /***/ }),
 
@@ -368,7 +369,7 @@ var CharBuildClassComponent = (function () {
     ], CharBuildClassComponent);
     return CharBuildClassComponent;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/char-build-class.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-class.component.js.map
 
 /***/ }),
 
@@ -454,7 +455,7 @@ var CharBuildRaceComponent = (function () {
     return CharBuildRaceComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/char-build-race.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-race.component.js.map
 
 /***/ }),
 
@@ -512,7 +513,7 @@ var CharBuildStartComponent = (function () {
     return CharBuildStartComponent;
     var _a;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/char-build-start.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-start.component.js.map
 
 /***/ }),
 
@@ -570,7 +571,7 @@ var CharBuildThemeComponent = (function () {
     return CharBuildThemeComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/char-build-theme.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-theme.component.js.map
 
 /***/ }),
 
@@ -610,7 +611,7 @@ var DashboardComponent = (function () {
     return DashboardComponent;
     var _a;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/dashboard.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/dashboard.component.js.map
 
 /***/ }),
 
@@ -645,7 +646,7 @@ var HomeComponent = (function () {
     ], HomeComponent);
     return HomeComponent;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/home.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/home.component.js.map
 
 /***/ }),
 
@@ -706,7 +707,7 @@ var LoginComponent = (function () {
     return LoginComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/login.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/login.component.js.map
 
 /***/ }),
 
@@ -754,7 +755,7 @@ var NavbarComponent = (function () {
     return NavbarComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/navbar.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/navbar.component.js.map
 
 /***/ }),
 
@@ -803,7 +804,7 @@ var ProfileComponent = (function () {
     return ProfileComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/profile.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/profile.component.js.map
 
 /***/ }),
 
@@ -880,7 +881,7 @@ var RegisterComponent = (function () {
     return RegisterComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/register.component.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/register.component.js.map
 
 /***/ }),
 
@@ -925,7 +926,7 @@ var AuthGuard = (function () {
     return AuthGuard;
     var _a, _b;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/auth.guard.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/auth.guard.js.map
 
 /***/ }),
 
@@ -941,7 +942,7 @@ var AuthGuard = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/environment.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/environment.js.map
 
 /***/ }),
 
@@ -1189,7 +1190,7 @@ var AuthService = (function () {
     return AuthService;
     var _a;
 }());
-//# sourceMappingURL=D:/Code/MEAN-sandbox/angular-src/src/auth.service.js.map
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/auth.service.js.map
 
 /***/ })
 
