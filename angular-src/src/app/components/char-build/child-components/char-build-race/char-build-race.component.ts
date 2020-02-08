@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../../../../services/data.service';
 
 @Component({
@@ -11,9 +11,8 @@ export class CharBuildRaceComponent implements OnInit {
   viewedRace: Object;
   selectedRace: any = {};
   showSubdecisions: Boolean;
-  subdecisions: {[k: string]: any} = {};
+  subdecisions: {decisionName: String, selectedOption: Object}[] = [];
 
-  @ViewChild('raceList') raceList: ElementRef;
   @Output() raceComplete: EventEmitter<any> = new EventEmitter();
 
   constructor(private dataService:DataService) { }
@@ -33,26 +32,34 @@ export class CharBuildRaceComponent implements OnInit {
       this.showSubdecisions = false; this.subdecisions = null;
       this.raceComplete.emit({race: this.selectedRace, subdecisions: this.subdecisions});
     } else {
-      this.selectedRace.subdecisions.forEach((d) => {
-        this.subdecisions[d.decisionName] = null;
-      });
-      console.log(this.subdecisions);
       this.showSubdecisions = true;
     }
   }
 
   makeSubdecision(decisionName,selectElement) {
     let decisionObject = this.selectedRace.subdecisions.find((d) => {return d.decisionName == decisionName});
-    let optionObject = decisionObject.selectOptions[selectElement.selectedIndex - 1];
-    this.subdecisions[decisionName] = optionObject;
+    let selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
+    
+    if(this.subdecisions.find(d => d.decisionName === decisionName)) {
+      let existingDecision = this.subdecisions.find(d => d.decisionName === decisionName);
+      existingDecision.selectedOption = selectedOption;
+    } else {
+      this.subdecisions.push({decisionName: decisionName, selectedOption: selectedOption});
+    }
+    
     if(this.subdecisionsComplete()) {
       this.raceComplete.emit({race: this.selectedRace, subdecisions: this.subdecisions});
     }
   }
 
   subdecisionsComplete() {
-    for (let decision in this.subdecisions) {if(!decision) return false}
+    let decisionNames = this.selectedRace.subdecisions.map(d => d.decisionName);
+    for (let i=0;i<decisionNames.length;i++) {
+      if(!this.subdecisions.find(d => d.decisionName === decisionNames[i])) {return false}
+    }
     return true;
   }
+
+  
 
 }

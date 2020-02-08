@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
-  url: String = window.location.origin;
+  url: String = (window.location.origin == 'http://localhost:4200') ? 'http://localhost:3000': window.location.origin;
 
   constructor(private http:Http) { } 
 

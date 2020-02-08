@@ -24,7 +24,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DataService = (function () {
     function DataService(http) {
         this.http = http;
-        this.url = window.location.origin;
+        this.url = (window.location.origin == 'http://localhost:4200') ? 'http://localhost:3000' : window.location.origin;
     }
     DataService.prototype.getRaceDesc = function () {
         var raceDescUrl = this.url + '/gamedata/raceDesc';
@@ -395,7 +395,7 @@ var CharBuildRaceComponent = (function () {
     function CharBuildRaceComponent(dataService) {
         this.dataService = dataService;
         this.selectedRace = {};
-        this.subdecisions = {};
+        this.subdecisions = [];
         this.raceComplete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     CharBuildRaceComponent.prototype.ngOnInit = function () {
@@ -407,7 +407,6 @@ var CharBuildRaceComponent = (function () {
     };
     CharBuildRaceComponent.prototype.viewRace = function (race) { this.viewedRace = race; };
     CharBuildRaceComponent.prototype.selectRace = function (race) {
-        var _this = this;
         this.selectedRace = race;
         if (!this.selectedRace.subdecisions) {
             this.showSubdecisions = false;
@@ -415,35 +414,40 @@ var CharBuildRaceComponent = (function () {
             this.raceComplete.emit({ race: this.selectedRace, subdecisions: this.subdecisions });
         }
         else {
-            this.selectedRace.subdecisions.forEach(function (d) {
-                _this.subdecisions[d.decisionName] = null;
-            });
-            console.log(this.subdecisions);
             this.showSubdecisions = true;
         }
     };
     CharBuildRaceComponent.prototype.makeSubdecision = function (decisionName, selectElement) {
         var decisionObject = this.selectedRace.subdecisions.find(function (d) { return d.decisionName == decisionName; });
-        var optionObject = decisionObject.selectOptions[selectElement.selectedIndex - 1];
-        this.subdecisions[decisionName] = optionObject;
+        var selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
+        if (this.subdecisions.find(function (d) { return d.decisionName === decisionName; })) {
+            var existingDecision = this.subdecisions.find(function (d) { return d.decisionName === decisionName; });
+            existingDecision.selectedOption = selectedOption;
+        }
+        else {
+            this.subdecisions.push({ decisionName: decisionName, selectedOption: selectedOption });
+        }
         if (this.subdecisionsComplete()) {
             this.raceComplete.emit({ race: this.selectedRace, subdecisions: this.subdecisions });
         }
     };
     CharBuildRaceComponent.prototype.subdecisionsComplete = function () {
-        for (var decision in this.subdecisions) {
-            if (!decision)
-                return false;
+        var decisionNames = this.selectedRace.subdecisions.map(function (d) { return d.decisionName; });
+        var _loop_1 = function(i) {
+            if (!this_1.subdecisions.find(function (d) { return d.decisionName === decisionNames[i]; })) {
+                return { value: false };
+            }
+        };
+        var this_1 = this;
+        for (var i = 0; i < decisionNames.length; i++) {
+            var state_1 = _loop_1(i);
+            if (typeof state_1 === "object") return state_1.value;
         }
         return true;
     };
     __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('raceList'), 
-        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _a) || Object)
-    ], CharBuildRaceComponent.prototype, "raceList", void 0);
-    __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _a) || Object)
     ], CharBuildRaceComponent.prototype, "raceComplete", void 0);
     CharBuildRaceComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -451,10 +455,10 @@ var CharBuildRaceComponent = (function () {
             template: __webpack_require__(701),
             styles: [__webpack_require__(689)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _b) || Object])
     ], CharBuildRaceComponent);
     return CharBuildRaceComponent;
-    var _a, _b, _c;
+    var _a, _b;
 }());
 //# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-race.component.js.map
 
