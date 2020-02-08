@@ -1,0 +1,42 @@
+<div class="race-container">
+  <div class="race-list">
+    <ul class="list-group">
+      <li *ngFor="let race of races" class="list-group-item {{race.raceName === selectedRace.raceName ? 'selected-race' : ''}}" (click)="viewRace(race)">{{race.raceName}}</li>
+    </ul>
+  </div>
+  <div class="race-detail-container">
+    <div *ngIf="!viewedRace" class="placeholder">Select a Race...</div>
+    <div *ngIf="viewedRace" class="race-detail">
+      <h4>{{viewedRace.raceName}}</h4>
+      <div class="race-stat-box">
+        <strong>{{viewedRace.AS}}</strong>
+        <strong>HP: {{viewedRace.HP}}</strong>
+        <small>{{viewedRace.sizeType}}</small>
+      </div>
+      <div class="race-desc">{{viewedRace.description}}</div>
+      <div class="select-button-container">
+        <button type="button" class="btn btn-primary btn-lg" (click)="selectRace(viewedRace)">Choose This Race</button>
+        <div *ngIf="viewedRace.subdecisions && showSubdecisions">
+          <div class="subdecisions">
+            <div *ngFor="let decision of viewedRace.subdecisions">
+              <div>{{decision.selectLabel}}</div>
+              <select class="custom-select" (change)="makeSubdecision(decision.decisionName,$event.target)">
+                <option hidden disabled selected>Select</option>
+                <option *ngFor="let option of decision.selectOptions">{{option.name}} ({{option.detail}})</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="race-ability-container">
+    <div *ngIf="!viewedRace" class="placeholder"></div>
+    <div *ngIf="viewedRace" class="race-abilities">
+      <div *ngFor="let ability of viewedRace.racialAbilities" class="race-ability-box">
+        <div class="race-ability-name">{{ability.name}}</div>
+        <small class="race-ability-desc">{{ability.description}}</small>
+      </div>
+    </div>
+  </div>
+</div>

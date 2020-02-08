@@ -1,0 +1,29 @@
+<div class="theme-container">
+  <div class="theme-list">
+    <ul class="list-group">
+      <li *ngFor="let theme of themes" class="list-group-item" (click)="viewTheme(theme)">{{theme.themeName}}</li>
+    </ul>
+  </div>
+  <div class="theme-detail-container">
+    <div *ngIf="!viewedTheme" class="placeholder">Select a Theme...</div>
+    <div *ngIf="viewedTheme" class="theme-detail">
+      <h4>{{viewedTheme.themeName}}</h4>
+      <div class="theme-stat-box">
+        <strong>{{viewedTheme.AS}}</strong>
+      </div>
+      <div class="theme-desc">{{viewedTheme.description}}</div>
+      <div class="select-button-container">
+        <button type="button" class="btn btn-primary btn-lg" (click)="selectTheme(viewedTheme)">Choose This Theme</button>
+      </div>
+    </div>
+  </div>
+  <div class="theme-ability-container">
+    <div *ngIf="!viewedTheme" class="placeholder"></div>
+    <div *ngIf="viewedTheme" class="theme-abilities">
+      <div *ngFor="let ability of viewedTheme.themeAbilities" class="theme-ability-box">
+        <div class="theme-ability-name">{{ability.name}} - Level {{ability.level}}</div>
+        <small class="theme-ability-desc">{{ability.description}}</small>
+      </div>
+    </div>
+  </div>
+</div>

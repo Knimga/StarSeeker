@@ -1,0 +1,19 @@
+.start-container {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+}
+
+.name-container, .starting-level-container {display: flex;}
+
+.start-container {height: 100%; margin-top: -50px;}
+.inputs > * {margin: 20px;}
+
+input {background-color: #303030; color: white; text-align: center; font-size: 125%;}
+
+input:focus {background-color: #303030; color: white;}
+
+.input-group-text {width: 200px;}
+
+.starting-level > input {width: 75px;}
+
+.errors {color: pink; height: 0;}

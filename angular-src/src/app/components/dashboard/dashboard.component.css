@@ -1,0 +1,27 @@
+.dashboard-container {
+    width: 100%;
+    height: 700px;
+}
+
+.char-container {
+    background-color: #404040;
+    border-radius: 10px;
+    height: 100%; width: 30%;
+    padding: 10px;
+}
+
+.char-card {
+    height: 80px;
+}
+
+.char-card:hover * {
+    background-color: #252525;
+    color: white;
+}
+
+.add-char {
+    display:flex; flex-direction: column;
+    align-items: center; justify-content: space-evenly;
+    color: #9c9c9c;
+    height: 100%;
+}

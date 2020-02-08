@@ -1,0 +1,13 @@
+<nav class="navbar navbar-dark bg-dark navbar-default">
+  <a class="navbar-brand" href="#">MEAN App</a>
+  <ul class="navbar-nav mr-auto navbar-left">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+  </ul>
+  <div class="navbar-nav navbar-right navitem-spacing">
+    <a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Login</a>
+    <a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Register</a>
+    <a *ngIf="authService.loggedIn()" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+    <a *ngIf="authService.loggedIn()" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Profile</a>
+    <a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Logout</a>
+  </div>
+</nav>

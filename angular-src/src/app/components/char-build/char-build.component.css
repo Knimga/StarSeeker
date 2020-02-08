@@ -1,0 +1,15 @@
+.container {
+    height: 800px; width: 100%;
+    padding: 20px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-around;
+}
+
+.container > * {margin: 10px;}
+
+.charBuild-area {
+    height: 630px; width: 100%;
+    background-color: #404040;
+    border-radius: 10px;
+    padding: 10px;
+}
