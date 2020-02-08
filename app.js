@@ -9,7 +9,7 @@ const users = require('./routes/users');
 const gamedata = require('./routes/gamedata');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const config = process.env.HEROKU_MONGO ? JSON.parse(process.env.HEROKU_MONGO) : require('./config/db');
 
@@ -34,9 +34,9 @@ app.get('/', (req,res) => {
     res.send('Invalid endpoint');
 }); 
 
-/* app.get('*', (req,res) => {
+app.get('*', (req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
-}); */
+});
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
