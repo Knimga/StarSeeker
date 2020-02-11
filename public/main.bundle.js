@@ -415,6 +415,7 @@ var CharBuildRaceComponent = (function () {
         }
         else {
             this.showSubdecisions = true;
+            this.subdecisions = [];
         }
     };
     CharBuildRaceComponent.prototype.makeSubdecision = function (decisionName, selectElement) {

@@ -29,19 +29,21 @@ export class CharBuildRaceComponent implements OnInit {
   selectRace(race) {
     this.selectedRace = race;
     if (!this.selectedRace.subdecisions) {
-      this.showSubdecisions = false; this.subdecisions = null;
+      this.showSubdecisions = false; 
+      this.subdecisions = null;
       this.raceComplete.emit({race: this.selectedRace, subdecisions: this.subdecisions});
     } else {
-      this.showSubdecisions = true;
+      this.showSubdecisions = true; 
+      this.subdecisions = [];
     }
   }
 
   makeSubdecision(decisionName,selectElement) {
-    let decisionObject = this.selectedRace.subdecisions.find((d) => {return d.decisionName == decisionName});
+    let decisionObject = this.selectedRace.subdecisions.find((d) => d.decisionName == decisionName);
     let selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
     
     if(this.subdecisions.find(d => d.decisionName === decisionName)) {
-      let existingDecision = this.subdecisions.find(d => d.decisionName === decisionName);
+      let existingDecision = this.subdecisions.find((d) => d.decisionName === decisionName);
       existingDecision.selectedOption = selectedOption;
     } else {
       this.subdecisions.push({decisionName: decisionName, selectedOption: selectedOption});
