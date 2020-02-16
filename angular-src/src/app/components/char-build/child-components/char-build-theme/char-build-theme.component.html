@@ -1,28 +1,43 @@
-<div class="theme-container">
-  <div class="theme-list">
+<div class="component-container">
+  <div class="list-column">
     <ul class="list-group">
-      <li *ngFor="let theme of themes" class="list-group-item" (click)="viewTheme(theme)">{{theme.themeName}}</li>
+      <li *ngFor="let theme of themes" class="list-group-item {{theme.themeName === selectedTheme.themeName ? 'selected' : ''}}" (click)="viewTheme(theme)">{{theme.themeName}}</li>
     </ul>
   </div>
-  <div class="theme-detail-container">
+  <div class="container-column-1">
     <div *ngIf="!viewedTheme" class="placeholder">Select a Theme...</div>
-    <div *ngIf="viewedTheme" class="theme-detail">
+    <div *ngIf="viewedTheme" class="selection-detail">
       <h4>{{viewedTheme.themeName}}</h4>
-      <div class="theme-stat-box">
-        <strong>{{viewedTheme.AS}}</strong>
+      <div class="stat-box-centered">
+        <strong>{{viewedTheme.ASDesc}}</strong>
       </div>
-      <div class="theme-desc">{{viewedTheme.description}}</div>
+      <div class="selection-desc">{{viewedTheme.description}}</div>
       <div class="select-button-container">
         <button type="button" class="btn btn-primary btn-lg" (click)="selectTheme(viewedTheme)">Choose This Theme</button>
+        <div *ngIf="viewedThemeDecisions && showDecisions">
+          <div class="decisions">
+            <div *ngFor="let decision of viewedThemeDecisions">
+              <div>{{decision.selectLabel}}</div>
+              <select class="custom-select" (change)="makeDecision(decision.name,$event.target)">
+                <option hidden disabled selected>Select</option>
+                <option *ngFor="let option of decision.selectOptions">{{option.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="theme-ability-container">
+  <div class="container-column-1">
     <div *ngIf="!viewedTheme" class="placeholder"></div>
-    <div *ngIf="viewedTheme" class="theme-abilities">
-      <div *ngFor="let ability of viewedTheme.themeAbilities" class="theme-ability-box">
-        <div class="theme-ability-name">{{ability.name}} - Level {{ability.level}}</div>
-        <small class="theme-ability-desc">{{ability.description}}</small>
+    <div *ngIf="viewedTheme" class="ability-container">
+      <div *ngFor="let ability of viewedTheme.themeAbilities; let i = index" class="card ability-card" (click)="hideShow(i)">
+          <div class="card-label">
+            <div>{{ability.name}}</div><div>Level {{ability.level}}</div>
+          </div>
+          <div class="ability-desc" *ngIf="showDesc[i]">
+            {{ability.description}}
+          </div>
       </div>
     </div>
   </div>

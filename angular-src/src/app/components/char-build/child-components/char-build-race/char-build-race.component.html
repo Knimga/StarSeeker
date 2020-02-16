@@ -1,28 +1,28 @@
-<div class="race-container">
-  <div class="race-list">
+<div class="component-container">
+  <div class="list-column">
     <ul class="list-group">
-      <li *ngFor="let race of races" class="list-group-item {{race.raceName === selectedRace.raceName ? 'selected-race' : ''}}" (click)="viewRace(race)">{{race.raceName}}</li>
+      <li *ngFor="let race of races" class="list-group-item {{race.raceName === selectedRace.raceName ? 'selected' : ''}}" (click)="viewRace(race)">{{race.raceName}}</li>
     </ul>
   </div>
-  <div class="race-detail-container">
+  <div class="container-column-1">
     <div *ngIf="!viewedRace" class="placeholder">Select a Race...</div>
-    <div *ngIf="viewedRace" class="race-detail">
+    <div *ngIf="viewedRace" class="selection-detail">
       <h4>{{viewedRace.raceName}}</h4>
-      <div class="race-stat-box">
-        <strong>{{viewedRace.AS}}</strong>
-        <strong>HP: {{viewedRace.HP}}</strong>
+      <div class="stat-box-centered">
+        <strong>{{viewedRace.ASDesc}}</strong>
+        <strong>HP: {{viewedRace.raceData.HP}}</strong>
         <small>{{viewedRace.sizeType}}</small>
       </div>
-      <div class="race-desc">{{viewedRace.description}}</div>
+      <div class="selection-desc">{{viewedRace.description}}</div>
       <div class="select-button-container">
         <button type="button" class="btn btn-primary btn-lg" (click)="selectRace(viewedRace)">Choose This Race</button>
-        <div *ngIf="viewedRace.subdecisions && showSubdecisions">
-          <div class="subdecisions">
-            <div *ngFor="let decision of viewedRace.subdecisions">
+        <div *ngIf="viewedRaceDecisions && showDecisions">
+          <div class="decisions">
+            <div *ngFor="let decision of viewedRaceDecisions">
               <div>{{decision.selectLabel}}</div>
-              <select class="custom-select" (change)="makeSubdecision(decision.decisionName,$event.target)">
+              <select class="custom-select" (change)="makeDecision(decision.name,$event.target)">
                 <option hidden disabled selected>Select</option>
-                <option *ngFor="let option of decision.selectOptions">{{option.name}} ({{option.detail}})</option>
+                <option *ngFor="let option of decision.selectOptions">{{option.name}}</option>
               </select>
             </div>
           </div>
@@ -30,12 +30,16 @@
       </div>
     </div>
   </div>
-  <div class="race-ability-container">
+  <div class="container-column-1">
     <div *ngIf="!viewedRace" class="placeholder"></div>
-    <div *ngIf="viewedRace" class="race-abilities">
-      <div *ngFor="let ability of viewedRace.racialAbilities" class="race-ability-box">
-        <div class="race-ability-name">{{ability.name}}</div>
-        <small class="race-ability-desc">{{ability.description}}</small>
+    <div *ngIf="viewedRace" class="ability-container">
+      <div *ngFor="let ability of viewedRace.racialAbilities; let i = index" class="card ability-card" (click)="hideShow(i)">
+        <div class="card-label">
+          <div>{{ability.name}}</div>
+        </div>
+        <div class="ability-desc" *ngIf="showDesc[i]">
+          {{ability.description}}
+        </div>
       </div>
     </div>
   </div>

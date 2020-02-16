@@ -5,8 +5,10 @@
 
 .name-container, .starting-level-container {display: flex;}
 
-.start-container {height: 100%; margin-top: -50px;}
-.inputs > * {margin: 20px;}
+.start-container {height: 100%;}
+
+.inputs {margin-top: -10%;}
+.inputs > * {margin: 20px; height: 45px;}
 
 input {background-color: #303030; color: white; text-align: center; font-size: 125%;}
 
@@ -16,4 +18,20 @@ input:focus {background-color: #303030; color: white;}
 
 .starting-level > input {width: 75px;}
 
-.errors {color: pink; height: 0;}
+.increment-button {
+    display: flex; justify-content: center;
+    background-color: #202020;
+}
+
+.increment-button:hover {background-color: #101010;}
+
+.error {position: absolute; bottom: 42%; color: pink;}
+
+/* hides the increment buttons on number-type inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

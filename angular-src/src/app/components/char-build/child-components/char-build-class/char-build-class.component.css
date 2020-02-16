@@ -1,0 +1,44 @@
+.multiclass-container {
+    display: flex; flex-direction: column;
+    padding: 5%;
+    margin-bottom: 5%;
+    background-color: #303030;
+    border-radius: 10px;
+}
+
+.multiclass-checkbox {
+    display: flex;
+    justify-content: center; align-items: center;
+    color: lightgray;
+}
+
+.multiclass-checkbox > * {margin: 5%;}
+
+.mc-on {background-color: #202020;height: 25%;}
+
+.mc-classlist {margin-left: 5%; color: lightgray;}
+.mc-classlist-item {display: flex; justify-content: space-between;}
+.mc-classlevel {display: flex; align-items: center;}
+
+.mc-selected {color: #6082a6; font-weight: bold;}
+.mc-placeholder {color: gray; margin-left: 5%;}
+.mc-error {color: pink; text-align: center;}
+
+hr {border-color: white; margin-bottom: 0;}
+
+.mc-charlevel {display: flex; justify-content: space-between; margin: auto 5%;}
+
+.increment-button {
+    display: flex; 
+    justify-content: center; align-items: center;
+    height: 15px; width: 15px;
+    padding: 0;
+}
+
+.class-detail {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    width: 90%;
+    text-align: center;
+    margin: 3%;
+}

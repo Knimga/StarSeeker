@@ -1,3 +1,90 @@
-<p>
-  char-build-class works!
-</p>
+<div class="component-container">
+  <div class="list-column">
+    <div *ngIf="charLevel > 1" class="multiclass-container {{multiclass ? 'mc-on' : ''}}">
+      <div class="multiclass-checkbox">
+        <input type="checkbox" id="multiclassCheck" [(ngModel)]="multiclass" name="multiclass" (change)="mcToggle()">
+        <label class="{{multiclass ? 'mc-selected' : ''}}" for="multiclassCheck">Multiclass</label>
+      </div>
+      <div *ngIf="multiclass">
+        <div class="mc-placeholder" *ngIf="!selectedClasses.length">Select a class...</div>
+        <div class="mc-classlist" *ngIf="selectedClasses.length">
+          <div *ngFor="let class of selectedClasses" class="mc-classlist-item">
+            <div>{{class.className}}</div>
+            <div class="mc-classlevel">
+              <div>{{class.classLevel}}</div>
+              <div class="btn-group ml-1">
+                <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="inc(class.className,1)">
+                  <i class="fas fa-xs fa-caret-up"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="inc(class.className,-1)">
+                  <i class="fas fa-xs fa-caret-down"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mc-placeholder" *ngIf="selectedClasses.length == 1">Select another class...</div>
+        <div class="mc-footer">
+          <hr>
+          <div class="mc-charlevel">
+            <small>Character Level</small><small>{{charLevel}}</small>
+          </div>
+          <div class="mc-error">
+            <small *ngIf="mcError">{{mcError}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="list-group">
+      <li *ngFor="let class of classes" class="list-group-item {{selectedClassNames.includes(class.className) ? 'selected' : ''}}" (click)="viewClass(class)">{{class.className}}</li>
+    </ul>
+  </div>
+  <div class="container-column-1">
+    <div *ngIf="!viewedClass" class="placeholder">Select a Class...</div>
+    <div *ngIf="viewedClass" class="selection-detail">
+      <h4>{{viewedClass.className}}</h4>
+      <div class="stat-box-centered">
+        <strong>Stamina: {{viewedClass.classData.stamina}} + Con mod</strong>
+        <strong>HP: {{viewedClass.classData.HP}}</strong>
+      </div>
+      <div class="selection-desc">{{viewedClass.description}}</div>
+      <div class="stat-box-centered">
+        <div class="class-detail">
+          <strong>Key Ability Score:</strong>
+          <small>{{viewedClass.keyABDesc}}</small>
+        </div>
+        <div class="class-detail">
+          <strong>Skills:</strong>
+          <span>Ranks per Level: {{viewedClass.classData.skillRanksPerLvl}}</span>
+          <small>{{createSkillList(viewedClass.classData.skills)}}</small>
+        </div>
+        <div class="class-detail">
+          <strong>Proficiencies:</strong>
+          <div class="proficiencies">
+            <small><strong>Armor:</strong> {{viewedClass.classData.proficiencies.armor.join(', ')}}</small>
+          </div>
+          <div class="proficiencies">
+            <small><strong>Weapons:</strong> {{viewedClass.classData.proficiencies.weapons.join(', ')}}</small>
+          </div>
+        </div>
+      
+      </div>
+      <div class="select-button-container">
+        <button type="button" class="btn btn-primary btn-lg" (click)="selectClass(viewedClass)">Choose This Class</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-column-1">
+    <div *ngIf="!viewedClass" class="placeholder"></div>
+    <div *ngIf="viewedClass" class="ability-container">
+      <div *ngFor="let feature of viewedClass.classFeatures; let i = index" class="card ability-card" (click)="hideShow(i)">
+        <div class="card-label">
+          <div>{{feature.name}}</div><div>Level {{feature.level}}</div>
+        </div>
+        <div class="ability-desc" *ngIf="showDesc[i]">
+          {{feature.desc}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

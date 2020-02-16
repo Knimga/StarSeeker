@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-char-build-start',
@@ -6,22 +6,38 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./char-build-start.component.css']
 })
 export class CharBuildStartComponent implements OnInit {
-  @Input() charName: String;
-  @Input() startingLevel: Number;
-  @Output() startComplete: EventEmitter<any> = new EventEmitter();
+  charName: String;
+  startingLevel: Number = 1;
   error: String;
 
-  constructor() { }
+  @Output() startComplete: EventEmitter<any> = new EventEmitter();
+  @Output() startUpdate: EventEmitter<any> = new EventEmitter();
 
-  ngOnInit() {
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
   startGo() {
-    if(!this.charName || !this.startingLevel) {this.error = "Omg fill everything in!"}
-      else {
-        this.error = "";
-        this.startComplete.emit({charName: this.charName, startingLevel: this.startingLevel});
-      }
+    if(this.validate()) 
+      this.startComplete.emit({charName: this.charName, startingLevel: this.startingLevel});
+  }
+
+  inc(value) {
+    let newLevel = this.startingLevel + value;
+    if(newLevel > 0 && newLevel < 21) {
+      this.startingLevel = newLevel;
+      this.updateParent();
+    }
+  }
+
+  updateParent() {
+    if(this.validate()) 
+      this.startUpdate.emit({charName: this.charName, startingLevel: this.startingLevel})
+  }
+
+  validate() {
+    if(!this.charName) {this.error = "Provide a character name"; return false;}
+      else {this.error = ""; return true;}
   }
 
 }

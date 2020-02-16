@@ -13,3 +13,7 @@
     border-radius: 10px;
     padding: 10px;
 }
+
+.tab-complete {background-color: #375A7F; color: white; font-weight: bold;}
+
+.nav-button-border {border-bottom: 2px solid white;}

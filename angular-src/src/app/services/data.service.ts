@@ -8,18 +8,16 @@ export class DataService {
 
   constructor(private http:Http) { } 
 
-  getRaceDesc() {
-    let raceDescUrl = this.url+'/gamedata/raceDesc';
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.get(raceDescUrl, {headers: headers}).map(res => res.json());
-  }
+  getRaceDesc() {return this.getGameData('raceDesc')}
+  getThemeDesc() {return this.getGameData('themeDesc')}
+  getClassDesc() {return this.getGameData('classDesc')}
+  getSkills() {return this.getGameData('skills')}
 
-  getThemeDesc() {
-    let themeDescUrl = this.url+'/gamedata/themeDesc';
+  getGameData(routeString) {
+    let url = this.url+'/gamedata/'+routeString;
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get(themeDescUrl, {headers: headers}).map(res => res.json());
+    return this.http.get(url, {headers: headers}).map(res => res.json());
   }
 
 }

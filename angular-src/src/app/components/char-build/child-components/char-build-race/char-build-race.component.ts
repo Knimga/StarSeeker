@@ -4,64 +4,81 @@ import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'app-char-build-race',
   templateUrl: './char-build-race.component.html',
-  styleUrls: ['./char-build-race.component.css']
+  styleUrls: ['./char-build-race.component.css','../../char-build-common.css']
 })
 export class CharBuildRaceComponent implements OnInit {
   races: Object;
-  viewedRace: Object;
+  viewedRace: any;
+  viewedRaceDecisions: any[];
   selectedRace: any = {};
-  showSubdecisions: Boolean;
-  subdecisions: {decisionName: String, selectedOption: Object}[] = [];
+  showDecisions: Boolean;
+  decisionsMade: {decisionName: String, selectedOption: Object}[] = [];
+  showDesc: any = {};
 
   @Output() raceComplete: EventEmitter<any> = new EventEmitter();
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.showSubdecisions = false;
+    this.showDecisions = false;
     this.dataService.getRaceDesc().subscribe(raceDesc => {
       this.races = raceDesc;
     }, err => {console.log(err);return false;});
   }
 
-  viewRace(race) {this.viewedRace = race}
+  viewRace(race) {
+    this.viewedRace = race;
+    this.showDesc = {};
+
+    if(this.viewedRace.decisions) {
+      this.viewedRaceDecisions = this.viewedRace.decisions.filter(d => d.context == 'race')
+    } else {this.viewedRaceDecisions = null}
+
+    let length = this.viewedRace.racialAbilities.length;
+    for (let i=0;i<length;i++) {this.showDesc[i] = false}
+  }
 
   selectRace(race) {
     this.selectedRace = race;
-    if (!this.selectedRace.subdecisions) {
-      this.showSubdecisions = false; 
-      this.subdecisions = null;
-      this.raceComplete.emit({race: this.selectedRace, subdecisions: this.subdecisions});
+    if (!this.viewedRaceDecisions) {
+      this.showDecisions = false; 
+      this.decisionsMade = null;
+      this.raceComplete.emit({race: this.selectedRace, decisionsMade: null, decisionsRemaining: null});
     } else {
-      this.showSubdecisions = true; 
-      this.subdecisions = [];
+      this.raceComplete.emit(false);
+      this.showDecisions = true;
+      this.decisionsMade = [];
     }
   }
 
-  makeSubdecision(decisionName,selectElement) {
-    let decisionObject = this.selectedRace.subdecisions.find((d) => d.decisionName == decisionName);
+  hideShow(i) {this.showDesc[i] = !this.showDesc[i]}
+
+  makeDecision(decisionName,selectElement) {
+    let decisionObject = this.viewedRaceDecisions.find((d) => d.name == decisionName);
     let selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
     
-    if(this.subdecisions.find(d => d.decisionName === decisionName)) {
-      let existingDecision = this.subdecisions.find((d) => d.decisionName === decisionName);
+    if(this.decisionsMade.find(d => d.decisionName === decisionName)) {
+      let existingDecision = this.decisionsMade.find((d) => d.decisionName === decisionName);
       existingDecision.selectedOption = selectedOption;
     } else {
-      this.subdecisions.push({decisionName: decisionName, selectedOption: selectedOption});
+      this.decisionsMade.push({decisionName: decisionName, selectedOption: selectedOption});
     }
     
-    if(this.subdecisionsComplete()) {
-      this.raceComplete.emit({race: this.selectedRace, subdecisions: this.subdecisions});
+    if(this.decisionsComplete()) {
+      this.raceComplete.emit({
+        race: this.selectedRace,
+        decisionsMade: this.decisionsMade,
+        decisionsRemaining: this.selectedRace.decisions.filter(d => d.context != 'race')
+      });
     }
   }
 
-  subdecisionsComplete() {
-    let decisionNames = this.selectedRace.subdecisions.map(d => d.decisionName);
+  decisionsComplete() {
+    let decisionNames = this.viewedRaceDecisions.map(d => d.name);
     for (let i=0;i<decisionNames.length;i++) {
-      if(!this.subdecisions.find(d => d.decisionName === decisionNames[i])) {return false}
+      if(!this.decisionsMade.find(d => d.decisionName === decisionNames[i])) {return false}
     }
     return true;
   }
-
-  
 
 }

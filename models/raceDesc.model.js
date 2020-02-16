@@ -5,10 +5,11 @@ const raceDescSchema = new Schema({
     raceName: String,
     Source: String,
     description: String,
-    AS: String,
-    HP: String,
+    ASDesc: String,
     sizeType: String,
-    racialAbilities: Object
+    racialAbilities: Object,
+    raceData: Object,
+    decisions: Object
 });
 
 module.exports = mongoose.model('raceDescriptions', raceDescSchema, 'raceDescriptions');
