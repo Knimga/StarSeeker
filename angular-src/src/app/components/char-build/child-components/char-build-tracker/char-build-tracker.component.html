@@ -1,0 +1,107 @@
+<div class="tracker-column">
+  <div class="rounded-box normal-font">
+    <div *ngIf="charObject.charName && charObject.charLevel">
+      <span>{{charObject.charName}}, Level {{charObject.charLevel}}</span>
+    </div>
+  </div>
+  <div class="rounded-box flex-column">
+    <div class="box-inner-row">
+      <span>Race:</span><div *ngIf="charObject.race"><span>{{charObject.race.raceName}}</span></div>
+    </div>
+    <div class="box-inner-row">
+      <span>Theme:</span><div *ngIf="charObject.theme"><span>{{charObject.theme.themeName}}</span></div>
+    </div>
+    <div class="box-inner-row">
+      <span>Class:</span><span>{{classString()}}</span>
+    </div>
+  </div>
+  <div class="rounded-box flex-column">
+    <div class="box-inner-row space-around">
+      <span *ngIf="charObject.race">Size: {{charObject.race.raceData.size}}</span>
+      <span *ngIf="charObject.race">Speed: {{charObject.race.raceData.speed}}ft</span>
+    </div>
+  </div>
+  <div class="rounded-box flex-column">
+    <div class="box-inner-row space-around">
+      <div class="hp-stam-res stamina">
+        <strong>{{charObject.stamina}}</strong>
+        <small>Stamina</small>
+      </div>
+      <div class="hp-stam-res hp">
+        <strong>{{charObject.HP}}</strong>
+        <small>HP</small>
+      </div>
+      <div class="hp-stam-res resolve">
+        <strong>{{charObject.resolve}}</strong>
+        <small>Resolve</small>
+      </div>
+    </div>
+  </div>
+  <div class="box-row space-between">
+    <div class="rounded-box flex-column w-40 AS">
+      <div class="box-inner-row">
+        <span>Str</span><strong>{{charObject.AS[0]}} ({{ASMod(charObject.AS[0])}})</strong>
+      </div>
+      <div class="box-inner-row">
+        <span>Dex</span><strong>{{charObject.AS[1]}} ({{ASMod(charObject.AS[1])}})</strong>
+      </div>
+      <div class="box-inner-row">
+        <span>Con</span><strong>{{charObject.AS[2]}} ({{ASMod(charObject.AS[2])}})</strong>
+      </div>
+      <div class="box-inner-row">
+        <span>Int</span><strong>{{charObject.AS[3]}} ({{ASMod(charObject.AS[3])}})</strong>
+      </div>
+      <div class="box-inner-row">
+        <span>Wis</span><strong>{{charObject.AS[4]}} ({{ASMod(charObject.AS[4])}})</strong>
+      </div>
+      <div class="box-inner-row">
+        <span>Cha</span><strong>{{charObject.AS[5]}} ({{ASMod(charObject.AS[5])}})</strong>
+      </div>
+    </div>
+    <div class="box-column w-30">
+      <div class="rounded-box flex-column saves">
+        <div class="box-inner-row">
+          <small>Fort (Con)</small><strong>{{charObject.saves.fort}}</strong>
+        </div>
+        <div class="box-inner-row">
+          <small>Ref (Dex)</small><strong>{{charObject.saves.ref}}</strong>
+        </div>
+        <div class="box-inner-row">
+          <small>Will (Wis)</small><strong>{{charObject.saves.will}}</strong>
+        </div>
+      </div>
+      <div class="rounded-box flex-column AC">
+        <div class="box-inner-row">
+          <small>EAC</small><strong>19</strong>
+        </div>
+        <div class="box-inner-row">
+          <small>KAC</small><strong>20</strong>
+        </div>
+        <div class="box-inner-row">
+          <small>vs. CM</small><strong>28</strong>
+        </div>
+      </div>
+    </div>
+    <div class="box-column w-30">
+      <div class="rounded-box flex-column attack-bonuses">
+        <div class="box-inner-row space-around">
+          <small>Attack Bonuses</small>
+        </div>
+        <div class="box-inner-row">
+          <small>Melee (Str)</small><strong>{{charObject.bab.melee}}</strong>
+        </div>
+        <div class="box-inner-row">
+          <small>Ranged (Dex)</small><strong>{{charObject.bab.ranged}}</strong>
+        </div>
+        <div class="box-inner-row">
+          <small>Thrown (Str)</small><strong>{{charObject.bab.thrown}}</strong>
+        </div>
+      </div>
+      <div class="rounded-box flex-column initiative">
+        <div class="box-inner-row">
+          <span>Initiative:</span><strong>{{charObject.ini}}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

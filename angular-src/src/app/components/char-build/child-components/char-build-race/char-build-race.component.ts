@@ -12,10 +12,11 @@ export class CharBuildRaceComponent implements OnInit {
   viewedRaceDecisions: any[];
   selectedRace: any = {};
   showDecisions: Boolean;
-  decisionsMade: {decisionName: String, selectedOption: Object}[] = [];
+  decisionsMade: {name: String, context: String, target: String, value: any}[] = [];
   showDesc: any = {};
 
-  @Output() raceComplete: EventEmitter<any> = new EventEmitter();
+  @Output() raceComplete: EventEmitter<Boolean> = new EventEmitter();
+  @Output() raceUpdate: EventEmitter<any> = new EventEmitter();
 
   constructor(private dataService:DataService) { }
 
@@ -34,8 +35,7 @@ export class CharBuildRaceComponent implements OnInit {
       this.viewedRaceDecisions = this.viewedRace.decisions.filter(d => d.context == 'race')
     } else {this.viewedRaceDecisions = null}
 
-    let length = this.viewedRace.racialAbilities.length;
-    for (let i=0;i<length;i++) {this.showDesc[i] = false}
+    for (let i=0;i<this.viewedRace.racialAbilities.length;i++) {this.showDesc[i] = false}
   }
 
   selectRace(race) {
@@ -43,8 +43,10 @@ export class CharBuildRaceComponent implements OnInit {
     if (!this.viewedRaceDecisions) {
       this.showDecisions = false; 
       this.decisionsMade = null;
-      this.raceComplete.emit({race: this.selectedRace, decisionsMade: null, decisionsRemaining: null});
+      this.raceUpdate.emit({race: this.selectedRace, decisionsMade: null, decisionsToMake: null});
+      this.raceComplete.emit(true);
     } else {
+      this.raceUpdate.emit({race: this.selectedRace, decisionsMade: null, decisionsToMake: null});
       this.raceComplete.emit(false);
       this.showDecisions = true;
       this.decisionsMade = [];
@@ -54,29 +56,36 @@ export class CharBuildRaceComponent implements OnInit {
   hideShow(i) {this.showDesc[i] = !this.showDesc[i]}
 
   makeDecision(decisionName,selectElement) {
-    let decisionObject = this.viewedRaceDecisions.find((d) => d.name == decisionName);
-    let selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
-    
-    if(this.decisionsMade.find(d => d.decisionName === decisionName)) {
-      let existingDecision = this.decisionsMade.find((d) => d.decisionName === decisionName);
-      existingDecision.selectedOption = selectedOption;
-    } else {
-      this.decisionsMade.push({decisionName: decisionName, selectedOption: selectedOption});
+    let thisDecision = this.viewedRaceDecisions.find((d) => d.name == decisionName);
+    let decisionEffect = thisDecision.selectOptions[selectElement.selectedIndex - 1].effect;
+  
+    let decisionObject = {
+      name: thisDecision.name, 
+      context: thisDecision.context,
+      target: decisionEffect.target,
+      value: decisionEffect.value
     }
-    
+
+    if(this.decisionsMade.find(d => d.name === decisionName)) {
+      this.decisionsMade = this.decisionsMade.filter(d => d.name != decisionName);
+    }
+
+    this.decisionsMade.push(decisionObject);
+
     if(this.decisionsComplete()) {
-      this.raceComplete.emit({
+      this.raceUpdate.emit({
         race: this.selectedRace,
         decisionsMade: this.decisionsMade,
-        decisionsRemaining: this.selectedRace.decisions.filter(d => d.context != 'race')
+        decisionsToMake: this.selectedRace.decisions.filter(d => d.context != 'race')
       });
+      this.raceComplete.emit(true);
     }
   }
 
   decisionsComplete() {
     let decisionNames = this.viewedRaceDecisions.map(d => d.name);
     for (let i=0;i<decisionNames.length;i++) {
-      if(!this.decisionsMade.find(d => d.decisionName === decisionNames[i])) {return false}
+      if(!this.decisionsMade.find(d => d.name === decisionNames[i])) {return false}
     }
     return true;
   }

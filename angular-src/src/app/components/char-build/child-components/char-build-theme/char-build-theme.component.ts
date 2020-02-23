@@ -12,10 +12,11 @@ export class CharBuildThemeComponent implements OnInit {
   viewedThemeDecisions: any[];
   selectedTheme: any = {};
   showDecisions: Boolean;
-  decisionsMade: {decisionName: String, selectedOption: Object}[] = [];
+  decisionsMade: {name: String, context: String, target: String, value: any}[] = [];
   showDesc: any = {};
 
-  @Output() themeComplete: EventEmitter<any> = new EventEmitter();
+  @Output() themeComplete: EventEmitter<Boolean> = new EventEmitter();
+  @Output() themeUpdate: EventEmitter<any> = new EventEmitter();
 
   constructor(private dataService:DataService) { }
 
@@ -43,8 +44,10 @@ export class CharBuildThemeComponent implements OnInit {
     if (!this.viewedThemeDecisions) {
       this.showDecisions = false; 
       this.decisionsMade = null;
-      this.themeComplete.emit({theme: this.selectedTheme, decisionsMade: null, decisionsRemaining: null});
+      this.themeUpdate.emit({theme: this.selectedTheme, decisionsMade: null, decisionsRemaining: null});
+      this.themeComplete.emit(true);
     } else {
+      this.themeUpdate.emit({theme: this.selectedTheme, decisionsMade: null, decisionsRemaining: null});
       this.themeComplete.emit(false);
       this.showDecisions = true;
       this.decisionsMade = [];
@@ -54,32 +57,38 @@ export class CharBuildThemeComponent implements OnInit {
   hideShow(i) {this.showDesc[i] = !this.showDesc[i]}
 
   makeDecision(decisionName,selectElement) {
-    let decisionObject = this.viewedThemeDecisions.find((d) => d.name == decisionName);
-    let selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
-    
-    if(this.decisionsMade.find(d => d.decisionName === decisionName)) {
-      let existingDecision = this.decisionsMade.find((d) => d.decisionName === decisionName);
-      existingDecision.selectedOption = selectedOption;
-    } else {
-      this.decisionsMade.push({decisionName: decisionName, selectedOption: selectedOption});
+    let thisDecision = this.viewedThemeDecisions.find((d) => d.name == decisionName);
+    let decisionEffect = thisDecision.selectOptions[selectElement.selectedIndex - 1].effect;
+
+    let decisionObject = {
+      name: thisDecision.name, 
+      context: thisDecision.context,
+      target: decisionEffect.target,
+      value: decisionEffect.value
     }
+
+    if(this.decisionsMade.find(d => d.name === decisionName)) {
+      this.decisionsMade = this.decisionsMade.filter(d => d.name != decisionName);
+    }
+
+    this.decisionsMade.push(decisionObject);
     
     if(this.decisionsComplete()) {
-      this.themeComplete.emit({
+      this.themeUpdate.emit({
         theme: this.selectedTheme,
         decisionsMade: this.decisionsMade,
         decisionsRemaining: this.selectedTheme.decisions.filter(d => d.context != 'theme')
       });
+      this.themeComplete.emit(true);
     }
   }
 
   decisionsComplete() {
     let decisionNames = this.viewedThemeDecisions.map(d => d.name);
     for (let i=0;i<decisionNames.length;i++) {
-      if(!this.decisionsMade.find(d => d.decisionName === decisionNames[i])) {return false}
+      if(!this.decisionsMade.find(d => d.name === decisionNames[i])) {return false}
     }
     return true;
   }
-
 
 }

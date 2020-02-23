@@ -26,16 +26,17 @@ var DataService = (function () {
         this.http = http;
         this.url = (window.location.origin == 'http://localhost:4200') ? 'http://localhost:3000' : window.location.origin;
     }
-    DataService.prototype.getRaceDesc = function () { return this.getGameData('raceDesc'); };
-    DataService.prototype.getThemeDesc = function () { return this.getGameData('themeDesc'); };
-    DataService.prototype.getClassDesc = function () { return this.getGameData('classDesc'); };
-    DataService.prototype.getSkills = function () { return this.getGameData('skills'); };
     DataService.prototype.getGameData = function (routeString) {
         var url = this.url + '/gamedata/' + routeString;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
     };
+    DataService.prototype.getRaceDesc = function () { return this.getGameData('raceDesc'); };
+    DataService.prototype.getThemeDesc = function () { return this.getGameData('themeDesc'); };
+    DataService.prototype.getClassDesc = function () { return this.getGameData('classDesc'); };
+    DataService.prototype.getSkills = function () { return this.getGameData('skills'); };
+    DataService.prototype.getBabSaves = function () { return this.getGameData('babSaves'); };
     DataService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === 'function' && _a) || Object])
@@ -50,7 +51,7 @@ var DataService = (function () {
 /***/ 244:
 /***/ (function(module, exports) {
 
-module.exports = ".component-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: justify; justify-content: space-between;\r\n    height: 100%;\r\n}\r\n\r\n.container-column-1 {\r\n    width: 400px; height: 100%;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    background-color: #303030;\r\n    border-radius: 15px;\r\n    padding: 10px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.list-column {width: 200px; overflow-y: auto; padding: 10px;}\r\n\r\n.list-group-item:hover {background-color: #202020; color: lightblue;}\r\n\r\n.selected {background-color: #375A7F; color: white; font-weight: bold;}\r\n\r\n.placeholder {\r\n    width: 100%; height: 100%;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: center; justify-content: center;\r\n    background-color: #303030; color: gray;\r\n    font-size: 150%;\r\n    border-radius: 15px;\r\n    padding-top: 50px;\r\n}\r\n\r\n.selection-detail {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center;\r\n    height: 100%;\r\n}\r\n\r\n.selection-detail > * {margin: 5px;}\r\n\r\n.stat-box-centered {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center;\r\n    background-color: #202020; color: lightgray;\r\n    padding: 5px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.selection-desc {text-align: center; font-size: 90%; color: lightgray;}\r\n\r\n.select-button-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: distribute;\r\n        justify-content: space-around; -ms-flex-align: center; align-items: center;\r\n    height: 100%; width: 100%;\r\n    margin: 5% auto;\r\n}\r\n\r\n.decisions {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: center;\r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    background-color: #202020;\r\n    border-radius: 15px;\r\n    width: 300px; height: 200px;\r\n}\r\n\r\n.decisions > div {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: center;\r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    width: 90%;\r\n    margin: 5%;\r\n}\r\n\r\n.decisions > div > select {\r\n    width: 90%;\r\n    background-color: #404040; color: white;\r\n}\r\n\r\n.ability-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n}\r\n\r\n.ability-card {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: center;\r\n        justify-content: center;\r\n    height: auto; width: auto;\r\n    margin: 2%; padding: 5% 5%;\r\n    border-radius: 10px;\r\n    background-color: #202020;\r\n    color: lightgray;\r\n}\r\n\r\n.card-label {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: justify; justify-content: space-between;\r\n    color: #6082a6;\r\n    font-weight: bold;\r\n}\r\n\r\n.ability-desc {\r\n    padding: 5px;\r\n    font-size: 85%;\r\n    color: gray;\r\n}\r\n\r\n.ability-box {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    margin: 20px;\r\n}\r\n\r\n.ability-name {padding: 5px;}\r\n.ability-name {background-color: #101010;}\r\n.ability-desc {background-color: #202020; color: lightgray;}"
+module.exports = ".component-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: justify; justify-content: space-between;\r\n    height: 100%;\r\n}\r\n\r\n.container-column-1 {\r\n    width: 400px; height: 100%;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    background-color: #303030;\r\n    border-radius: 15px;\r\n    padding: 10px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.list-column {width: 200px; overflow-y: auto; padding: 10px;}\r\n\r\n.list-group-item:hover {background-color: #202020; color: lightblue;}\r\n\r\n.selected {background-color: #375A7F; color: white; font-weight: bold;}\r\n\r\n.placeholder {\r\n    width: 100%; height: 100%;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: center; justify-content: center;\r\n    background-color: #303030; color: gray;\r\n    font-size: 150%;\r\n    border-radius: 15px;\r\n    padding-top: 50px;\r\n}\r\n\r\n.selection-detail {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center;\r\n    height: 100%;\r\n}\r\n\r\n.selection-detail > * {margin: 5px;}\r\n\r\n.stat-box-centered {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center;\r\n    background-color: #202020; color: lightgray;\r\n    padding: 5px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.selection-desc {text-align: center; font-size: 90%; color: lightgray;}\r\n\r\n.select-button-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: distribute;\r\n        justify-content: space-around; -ms-flex-align: center; align-items: center;\r\n    height: 100%; width: 100%;\r\n    margin: 5% auto;\r\n    -ms-flex-positive: 2;\r\n        flex-grow: 2;\r\n}\r\n\r\n.decisions {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: center;\r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    background-color: #202020;\r\n    border-radius: 15px;\r\n    width: 300px; height: 150px;\r\n}\r\n\r\n.decisions > div {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: center;\r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    width: 90%;\r\n    margin: 5%;\r\n}\r\n\r\n.decisions > div > select {\r\n    width: 90%;\r\n    background-color: #404040; color: white;\r\n}\r\n\r\n.ability-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n}\r\n\r\n.ability-card {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-pack: center;\r\n        justify-content: center;\r\n    height: auto; width: auto;\r\n    margin: 2%; padding: 5% 5%;\r\n    border-radius: 10px;\r\n    background-color: #202020;\r\n    color: lightgray;\r\n}\r\n\r\n.card-label {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: justify; justify-content: space-between;\r\n    color: #6082a6;\r\n    font-weight: bold;\r\n}\r\n\r\n.ability-desc {\r\n    padding: 5px;\r\n    font-size: 85%;\r\n    color: gray;\r\n}\r\n\r\n.ability-box {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    margin: 20px;\r\n}\r\n\r\n.ability-name {padding: 5px;}\r\n.ability-name {background-color: #101010;}\r\n.ability-desc {background-color: #202020; color: lightgray;}"
 
 /***/ }),
 
@@ -113,7 +114,7 @@ webpackEmptyContext.id = 398;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(486);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(530);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(532);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__(517);
 
 
@@ -150,8 +151,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(699),
-            styles: [__webpack_require__(687)]
+            template: __webpack_require__(703),
+            styles: [__webpack_require__(689)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -171,21 +172,23 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(516);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_navbar_navbar_component__ = __webpack_require__(526);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_login_login_component__ = __webpack_require__(525);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_register_register_component__ = __webpack_require__(528);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__ = __webpack_require__(524);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_dashboard_component__ = __webpack_require__(523);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_profile_profile_component__ = __webpack_require__(527);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_navbar_navbar_component__ = __webpack_require__(528);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_login_login_component__ = __webpack_require__(527);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_register_register_component__ = __webpack_require__(530);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__ = __webpack_require__(526);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_dashboard_component__ = __webpack_require__(525);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_profile_profile_component__ = __webpack_require__(529);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_validate_service__ = __webpack_require__(340);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_auth_service__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__guards_auth_guard__ = __webpack_require__(529);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__guards_auth_guard__ = __webpack_require__(531);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_data_service__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_char_build_char_build_component__ = __webpack_require__(518);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_char_build_child_components_char_build_start_char_build_start_component__ = __webpack_require__(521);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_char_build_child_components_char_build_race_char_build_race_component__ = __webpack_require__(520);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_char_build_child_components_char_build_theme_char_build_theme_component__ = __webpack_require__(522);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_char_build_child_components_char_build_class_char_build_class_component__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_char_build_child_components_char_build_start_char_build_start_component__ = __webpack_require__(522);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_char_build_child_components_char_build_race_char_build_race_component__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_char_build_child_components_char_build_theme_char_build_theme_component__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_char_build_child_components_char_build_class_char_build_class_component__ = __webpack_require__(520);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_char_build_child_components_char_build_tracker_char_build_tracker_component__ = __webpack_require__(524);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_char_build_child_components_char_build_as_char_build_as_component__ = __webpack_require__(519);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -196,6 +199,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
@@ -242,7 +247,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_17__components_char_build_child_components_char_build_start_char_build_start_component__["a" /* CharBuildStartComponent */],
                 __WEBPACK_IMPORTED_MODULE_18__components_char_build_child_components_char_build_race_char_build_race_component__["a" /* CharBuildRaceComponent */],
                 __WEBPACK_IMPORTED_MODULE_19__components_char_build_child_components_char_build_theme_char_build_theme_component__["a" /* CharBuildThemeComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_char_build_child_components_char_build_class_char_build_class_component__["a" /* CharBuildClassComponent */]
+                __WEBPACK_IMPORTED_MODULE_20__components_char_build_child_components_char_build_class_char_build_class_component__["a" /* CharBuildClassComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__components_char_build_child_components_char_build_tracker_char_build_tracker_component__["a" /* CharBuildTrackerComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_char_build_child_components_char_build_as_char_build_as_component__["a" /* CharBuildASComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -282,13 +289,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var CharBuildComponent = (function () {
     function CharBuildComponent(dataService) {
         this.dataService = dataService;
-        this.race = {};
-        this.theme = {};
-        this.class = {};
-        this.skillsData = Array;
+        this.charObject = {
+            charName: String,
+            charLevel: Number,
+            race: Object,
+            theme: Object,
+            classes: Array,
+            AS: Array,
+            keyAS: Number,
+            HP: Number,
+            stamina: Number,
+            resolve: Number,
+            ini: Number,
+            saves: { fort: Number, ref: Number, will: Number },
+            bab: { melee: Number, ranged: Number, thrown: Number }
+        };
+        this.decisionsMade = [];
+        this.decisionsToMake = [];
+        this.isShown = 'start';
     }
     CharBuildComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.charObject = {
+            charName: '',
+            charLevel: 1,
+            race: null,
+            theme: null,
+            classes: [],
+            AS: [10, 10, 10, 10, 10, 10],
+            keyAS: null,
+            HP: null,
+            stamina: null,
+            resolve: null,
+            ini: null,
+            saves: { fort: null, ref: null, will: null },
+            bab: { melee: null, ranged: null, thrown: null }
+        };
         this.isLocked = {
             raceThemeClass: true,
             AS: true,
@@ -296,17 +332,6 @@ var CharBuildComponent = (function () {
             skills: true,
             feats: true,
             spells: true
-        };
-        this.isShown = {
-            start: true,
-            race: false,
-            theme: false,
-            class: false,
-            AS: false,
-            classChoices: false,
-            skills: false,
-            feats: false,
-            spells: false
         };
         this.isComplete = {
             start: false,
@@ -322,74 +347,149 @@ var CharBuildComponent = (function () {
         this.dataService.getSkills().subscribe(function (skills) {
             _this.skillsData = skills;
         }, function (err) { console.log(err); return false; });
+        this.dataService.getBabSaves().subscribe(function (babSaves) {
+            _this.babSavesData = babSaves[0];
+        }, function (err) { console.log(err); return false; });
     };
-    CharBuildComponent.prototype.showTab = function (tabName) {
-        for (var tab in this.isShown) {
-            this.isShown[tab] = false;
-        }
-        this.isShown[tabName] = true;
-    };
+    CharBuildComponent.prototype.logCharObject = function () { console.log(this.charObject); }; //debugging purposes
+    CharBuildComponent.prototype.showTab = function (tabName) { this.isShown = tabName; };
     CharBuildComponent.prototype.startGo = function (nameLevel) {
-        this.charName = nameLevel.charName;
-        this.charLevel = nameLevel.startingLevel;
-        this.isComplete.start = true;
+        this.charObject.charName = nameLevel.charName;
+        this.charObject.charLevel = nameLevel.startingLevel;
         this.isLocked.raceThemeClass = false;
         this.showTab('race');
     };
     CharBuildComponent.prototype.startUpdate = function (nameLevel) {
-        this.charName = nameLevel.charName;
-        this.charLevel = nameLevel.startingLevel;
-    };
-    CharBuildComponent.prototype.raceComplete = function (raceObject) {
-        if (raceObject) {
-            this.race = {
-                raceObject: raceObject.race,
-                decisionsMade: raceObject.decisionsMade,
-                decisionsRemaining: raceObject.decisionsRemaining
-            };
-            console.log(this.race.raceObject.raceName + ' race selected!');
-            this.isComplete.race = true;
-            if (this.race && this.theme && this.class) {
-                this.isLocked.AS = false;
-            }
-        }
-        else {
-            this.isComplete.race = false;
+        this.charObject.charName = nameLevel.charName;
+        this.charObject.charLevel = nameLevel.startingLevel;
+        if (this.charObject.classes && this.charObject.classes.length == 1) {
+            this.charObject.classes[0].classLevel = this.charObject.charLevel;
+            this.statCalc();
         }
     };
-    CharBuildComponent.prototype.themeComplete = function (themeObject) {
-        if (themeObject) {
-            this.theme = themeObject;
-            console.log(this.theme.theme.themeName + ' theme selected!');
-            this.isComplete.theme = true;
-            if (this.race && this.theme && this.class) {
-                this.isLocked.AS = false;
-            }
-        }
-        else {
-            this.isComplete.theme = false;
+    CharBuildComponent.prototype.startComplete = function (boolean) { this.isComplete.start = boolean; };
+    CharBuildComponent.prototype.raceComplete = function (boolean) { this.isComplete.race = boolean; this.tabLockCheck(); };
+    CharBuildComponent.prototype.themeComplete = function (boolean) { this.isComplete.theme = boolean; this.tabLockCheck(); };
+    CharBuildComponent.prototype.classComplete = function (boolean) { this.isComplete.class = boolean; this.tabLockCheck(); };
+    CharBuildComponent.prototype.raceUpdate = function (raceInfo) {
+        if (raceInfo) {
+            this.charObject.race = raceInfo.race;
+            this.updateDecisions('race', raceInfo.decisionsMade, raceInfo.decisionsToMake);
+            this.statCalc();
         }
     };
-    CharBuildComponent.prototype.classComplete = function (classObject) {
-        if (classObject) {
-            this.class = classObject.class;
-            if (this.class.length == 1) {
-                console.log(this.class[0].className + ' class selected!');
-            }
-            else {
-                console.log('multiclassing: ' + this.class.map(function (c) { return c.className; }).join(', '));
-            }
-            this.isComplete.class = true;
+    CharBuildComponent.prototype.themeUpdate = function (themeInfo) {
+        if (themeInfo) {
+            this.charObject.theme = themeInfo.theme;
+            this.updateDecisions('theme', themeInfo.decisionsMade, themeInfo.decisionsToMake);
+            this.statCalc();
+        }
+    };
+    CharBuildComponent.prototype.classUpdate = function (classInfo) {
+        if (classInfo) {
+            this.charObject.classes = classInfo.class;
+            this.updateDecisions('class', classInfo.decisionsMade, classInfo.decisionsToMake);
+            this.statCalc();
         }
         else {
             this.isComplete.class = false;
         }
     };
+    CharBuildComponent.prototype.tabLockCheck = function () {
+        if (this.isComplete.race && this.isComplete.theme && this.isComplete.class) {
+            this.isLocked.AS = false;
+        }
+    };
+    CharBuildComponent.prototype.updateDecisions = function (context, decisionsMade, decisionsToMake) {
+        this.decisionsMade = this.decisionsMade.filter(function (d) { return d.context != context; });
+        this.decisionsToMake = this.decisionsToMake.filter(function (d) { return d.context != context; });
+        if (decisionsMade) {
+            this.decisionsMade = this.decisionsMade.concat(decisionsMade);
+        }
+        if (decisionsToMake) {
+            this.decisionsToMake = this.decisionsToMake.concat(decisionsToMake);
+        }
+    };
+    CharBuildComponent.prototype.statCalc = function () {
+        this.updateAS();
+        this.processDecisions();
+        this.updateKeyAS();
+        this.updateStamHPResolve();
+        this.updateBabSaves();
+        this.updateIni();
+    };
+    CharBuildComponent.prototype.processDecisions = function () {
+        var _this = this;
+        this.decisionsMade.forEach(function (d) {
+            switch (d.target) {
+                case 'AS':
+                    for (var i = 0; i < 6; i++) {
+                        _this.charObject.AS[i] += d.value[i];
+                    }
+                    break;
+                case 'keyAS':
+                    var targetClass = _this.charObject.classes.find(function (c) { return c.className == d.value.className; });
+                    targetClass.classData.keyASIndex = d.value.keyASIndex;
+                    break;
+                default: break;
+            }
+        });
+    };
+    CharBuildComponent.prototype.updateKeyAS = function () {
+        if (this.charObject.classes.length) {
+            this.charObject.keyAS = Math.max.apply(Math, this.charObject.classes.map(function (c) { return c.classData.keyASIndex; }));
+        }
+    };
+    CharBuildComponent.prototype.updateAS = function () {
+        var newAS = [10, 10, 10, 10, 10, 10];
+        if (this.charObject.race) {
+            for (var i = 0; i < 6; i++) {
+                newAS[i] += this.charObject.race.raceData.AS[i];
+            }
+        }
+        if (this.charObject.theme) {
+            newAS[this.charObject.theme.themeData.ASBonusIndex]++;
+        }
+        this.charObject.AS = newAS;
+    };
+    CharBuildComponent.prototype.updateStamHPResolve = function () {
+        var _this = this;
+        if (this.charObject.race && this.charObject.classes) {
+            var classHP_1 = 0;
+            this.charObject.classes.forEach(function (c) { return classHP_1 += c.classData.HP * c.classLevel; });
+            this.charObject.HP = this.charObject.race.raceData.HP + classHP_1;
+        }
+        if (this.charObject.classes.length) {
+            var stamina_1 = 0;
+            this.charObject.classes.forEach(function (c) { return stamina_1 += (c.classData.stamina + _this.ASMod(2)) * c.classLevel; });
+            this.charObject.stamina = stamina_1;
+            var resolve = Math.floor(this.charObject.charLevel / 2) + this.ASMod(this.charObject.keyAS);
+            this.charObject.resolve = (resolve < 1) ? 1 : resolve;
+        }
+    };
+    CharBuildComponent.prototype.updateBabSaves = function () {
+        var _this = this;
+        var bab = 0, fort = 0, ref = 0, will = 0;
+        var allBabs = this.charObject.classes.map(function (c) { return _this.babSavesData.bab[c.classData.bab][c.classLevel - 1]; });
+        var allForts = this.charObject.classes.map(function (c) { return _this.babSavesData.saves[c.classData.saves.fort][c.classLevel - 1]; });
+        var allRefs = this.charObject.classes.map(function (c) { return _this.babSavesData.saves[c.classData.saves.ref][c.classLevel - 1]; });
+        var allWills = this.charObject.classes.map(function (c) { return _this.babSavesData.saves[c.classData.saves.will][c.classLevel - 1]; });
+        for (var i = 0; i < this.charObject.classes.length; i++) {
+            bab += allBabs[i];
+            fort += allForts[i];
+            ref += allRefs[i];
+            will += allWills[i];
+        }
+        this.charObject.bab = { melee: bab + this.ASMod(0), ranged: bab + this.ASMod(1), thrown: bab + this.ASMod(0) };
+        this.charObject.saves = { fort: fort, ref: ref, will: will };
+    };
+    CharBuildComponent.prototype.updateIni = function () { this.charObject.ini = this.ASMod(1); };
+    CharBuildComponent.prototype.ASMod = function (ASIndex) { return Math.floor((this.charObject.AS[ASIndex] - 10) / 2); };
     CharBuildComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-char-build',
-            template: __webpack_require__(700),
-            styles: [__webpack_require__(688)]
+            template: __webpack_require__(704),
+            styles: [__webpack_require__(690)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _a) || Object])
     ], CharBuildComponent);
@@ -401,6 +501,41 @@ var CharBuildComponent = (function () {
 /***/ }),
 
 /***/ 519:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CharBuildASComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var CharBuildASComponent = (function () {
+    function CharBuildASComponent() {
+    }
+    CharBuildASComponent.prototype.ngOnInit = function () {
+    };
+    CharBuildASComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-char-build-as',
+            template: __webpack_require__(705),
+            styles: [__webpack_require__(691)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CharBuildASComponent);
+    return CharBuildASComponent;
+}());
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-as.component.js.map
+
+/***/ }),
+
+/***/ 520:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -421,10 +556,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var CharBuildClassComponent = (function () {
     function CharBuildClassComponent(dataService) {
         this.dataService = dataService;
+        this.viewedClassDecisions = [];
+        this.decisionsMade = [];
         this.selectedClasses = [];
         this.selectedClassNames = [];
         this.showDesc = {};
         this.multiclass = false;
+        this.classUpdate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.classComplete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     CharBuildClassComponent.prototype.ngOnInit = function () {
@@ -436,6 +574,12 @@ var CharBuildClassComponent = (function () {
     CharBuildClassComponent.prototype.viewClass = function (clickedClass) {
         this.viewedClass = clickedClass;
         this.showDesc = {};
+        if (this.viewedClass.decisions) {
+            this.viewedClassDecisions = this.viewedClass.decisions.filter(function (d) { return d.context == 'class'; });
+        }
+        else {
+            this.viewedClassDecisions = [];
+        }
         var length = this.viewedClass.classFeatures.length;
         for (var i = 0; i < length; i++) {
             this.showDesc[i] = false;
@@ -443,28 +587,31 @@ var CharBuildClassComponent = (function () {
     };
     CharBuildClassComponent.prototype.selectClass = function (selectedClass) {
         if (this.multiclass) {
-            if (this.checkMCLevels(1) && !this.selectedClassNames.includes(selectedClass.className)) {
+            if (this.checkMCLevels(1) && !this.classIsSelected(selectedClass.className)) {
                 selectedClass.classLevel = 1;
                 this.selectedClasses.push(selectedClass);
                 this.updateClassNames();
+                this.updateDecisionsUI();
+                this.sendUpdate();
             }
         }
         else {
             selectedClass.classLevel = this.charLevel;
             this.selectedClasses = [selectedClass];
             this.updateClassNames();
-            this.classComplete.emit({ class: this.selectedClasses });
+            this.updateDecisionsUI();
+            this.sendUpdate();
         }
-        console.log(this.selectedClasses);
+        this.validate();
     };
-    CharBuildClassComponent.prototype.hideShow = function (i) { this.showDesc[i] = !this.showDesc[i]; };
-    CharBuildClassComponent.prototype.updateClassNames = function () { this.selectedClassNames = this.selectedClasses.map(function (c) { return c.className; }); };
     CharBuildClassComponent.prototype.mcToggle = function () {
         if (!this.multiclass && this.selectedClasses.length) {
             this.selectedClasses = [this.selectedClasses[0]];
+            this.selectedClasses[0].classLevel = 1;
+            this.sendUpdate();
             this.updateClassNames();
         }
-        console.log(this.selectedClasses);
+        this.validate();
     };
     CharBuildClassComponent.prototype.checkMCLevels = function (inc) {
         var levelCount = 0;
@@ -480,10 +627,88 @@ var CharBuildClassComponent = (function () {
     };
     CharBuildClassComponent.prototype.inc = function (className, inc) {
         if (this.checkMCLevels(inc)) {
-            var targetClass = this.selectedClasses.find(function (c) { return c.className == className; });
-            if (targetClass.classLevel + inc > 0)
-                targetClass.classLevel += inc;
+            var targetClass_1 = this.selectedClasses.find(function (c) { return c.className == className; });
+            if (targetClass_1.classLevel + inc > 0) {
+                targetClass_1.classLevel += inc;
+                this.sendUpdate();
+            }
+            else if (targetClass_1.classLevel + inc == 0) {
+                this.selectedClasses = this.selectedClasses.filter(function (c) { return c.className != targetClass_1.className; });
+                this.updateClassNames();
+            }
         }
+        this.validate();
+    };
+    CharBuildClassComponent.prototype.validate = function () {
+        var totalClassLevels = 0;
+        for (var i = 0; i < this.selectedClasses.length; i++) {
+            totalClassLevels += this.selectedClasses[i].classLevel;
+        }
+        if (totalClassLevels == this.charLevel && this.decisionsComplete()) {
+            this.classComplete.emit(true);
+        }
+        else {
+            this.classComplete.emit(false);
+        }
+    };
+    CharBuildClassComponent.prototype.sendUpdate = function () {
+        this.classUpdate.emit({
+            class: this.selectedClasses,
+            decisionsMade: this.decisionsMade,
+            decisionsToMake: this.getDecisionsToMake()
+        });
+    };
+    CharBuildClassComponent.prototype.hideShow = function (i) { this.showDesc[i] = !this.showDesc[i]; };
+    CharBuildClassComponent.prototype.updateClassNames = function () { this.selectedClassNames = this.selectedClasses.map(function (c) { return c.className; }); };
+    CharBuildClassComponent.prototype.classIsSelected = function (className) { return this.selectedClassNames.includes(className); };
+    CharBuildClassComponent.prototype.updateDecisionsUI = function () {
+        if (!this.viewedClassDecisions) {
+            this.showDecisions = false;
+            this.decisionsMade = null;
+        }
+        else {
+            this.showDecisions = true;
+        }
+    };
+    CharBuildClassComponent.prototype.makeDecision = function (decisionName, selectElement) {
+        var thisDecision = this.viewedClassDecisions.find(function (d) { return d.name == decisionName; });
+        var decisionEffect = thisDecision.selectOptions[selectElement.selectedIndex - 1].effect;
+        var decisionObject = {
+            name: thisDecision.name,
+            context: thisDecision.context,
+            target: decisionEffect.target,
+            value: decisionEffect.value
+        };
+        if (this.decisionsMade.find(function (d) { return d.name === decisionName; })) {
+            this.decisionsMade = this.decisionsMade.filter(function (d) { return d.name != decisionName; });
+        }
+        this.decisionsMade.push(decisionObject);
+        if (this.decisionsComplete()) {
+            this.sendUpdate();
+        }
+        this.validate();
+    };
+    CharBuildClassComponent.prototype.getDecisionsToMake = function () {
+        var decisionsArray = [];
+        this.selectedClasses.forEach(function (c) {
+            if (c.decisions)
+                decisionsArray.push(c.decisions.filter(function (d) { return d.context != 'class'; }));
+        });
+        return decisionsArray;
+    };
+    CharBuildClassComponent.prototype.decisionsComplete = function () {
+        var decisionNames = this.viewedClassDecisions.map(function (d) { return d.name; });
+        var _loop_1 = function(i) {
+            if (!this_1.decisionsMade.find(function (d) { return d.name === decisionNames[i]; })) {
+                return { value: false };
+            }
+        };
+        var this_1 = this;
+        for (var i = 0; i < decisionNames.length; i++) {
+            var state_1 = _loop_1(i);
+            if (typeof state_1 === "object") return state_1.value;
+        }
+        return true;
     };
     CharBuildClassComponent.prototype.createSkillList = function (classSkillArray) {
         var _this = this;
@@ -503,23 +728,27 @@ var CharBuildClassComponent = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _a) || Object)
+    ], CharBuildClassComponent.prototype, "classUpdate", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
+        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
     ], CharBuildClassComponent.prototype, "classComplete", void 0);
     CharBuildClassComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-char-build-class',
-            template: __webpack_require__(701),
-            styles: [__webpack_require__(689), __webpack_require__(244)]
+            template: __webpack_require__(706),
+            styles: [__webpack_require__(692), __webpack_require__(244)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _c) || Object])
     ], CharBuildClassComponent);
     return CharBuildClassComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-class.component.js.map
 
 /***/ }),
 
-/***/ 520:
+/***/ 521:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -544,6 +773,7 @@ var CharBuildRaceComponent = (function () {
         this.decisionsMade = [];
         this.showDesc = {};
         this.raceComplete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.raceUpdate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     CharBuildRaceComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -561,8 +791,7 @@ var CharBuildRaceComponent = (function () {
         else {
             this.viewedRaceDecisions = null;
         }
-        var length = this.viewedRace.racialAbilities.length;
-        for (var i = 0; i < length; i++) {
+        for (var i = 0; i < this.viewedRace.racialAbilities.length; i++) {
             this.showDesc[i] = false;
         }
     };
@@ -571,9 +800,11 @@ var CharBuildRaceComponent = (function () {
         if (!this.viewedRaceDecisions) {
             this.showDecisions = false;
             this.decisionsMade = null;
-            this.raceComplete.emit({ race: this.selectedRace, decisionsMade: null, decisionsRemaining: null });
+            this.raceUpdate.emit({ race: this.selectedRace, decisionsMade: null, decisionsToMake: null });
+            this.raceComplete.emit(true);
         }
         else {
+            this.raceUpdate.emit({ race: this.selectedRace, decisionsMade: null, decisionsToMake: null });
             this.raceComplete.emit(false);
             this.showDecisions = true;
             this.decisionsMade = [];
@@ -581,27 +812,31 @@ var CharBuildRaceComponent = (function () {
     };
     CharBuildRaceComponent.prototype.hideShow = function (i) { this.showDesc[i] = !this.showDesc[i]; };
     CharBuildRaceComponent.prototype.makeDecision = function (decisionName, selectElement) {
-        var decisionObject = this.viewedRaceDecisions.find(function (d) { return d.name == decisionName; });
-        var selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
-        if (this.decisionsMade.find(function (d) { return d.decisionName === decisionName; })) {
-            var existingDecision = this.decisionsMade.find(function (d) { return d.decisionName === decisionName; });
-            existingDecision.selectedOption = selectedOption;
+        var thisDecision = this.viewedRaceDecisions.find(function (d) { return d.name == decisionName; });
+        var decisionEffect = thisDecision.selectOptions[selectElement.selectedIndex - 1].effect;
+        var decisionObject = {
+            name: thisDecision.name,
+            context: thisDecision.context,
+            target: decisionEffect.target,
+            value: decisionEffect.value
+        };
+        if (this.decisionsMade.find(function (d) { return d.name === decisionName; })) {
+            this.decisionsMade = this.decisionsMade.filter(function (d) { return d.name != decisionName; });
         }
-        else {
-            this.decisionsMade.push({ decisionName: decisionName, selectedOption: selectedOption });
-        }
+        this.decisionsMade.push(decisionObject);
         if (this.decisionsComplete()) {
-            this.raceComplete.emit({
+            this.raceUpdate.emit({
                 race: this.selectedRace,
                 decisionsMade: this.decisionsMade,
-                decisionsRemaining: this.selectedRace.decisions.filter(function (d) { return d.context != 'race'; })
+                decisionsToMake: this.selectedRace.decisions.filter(function (d) { return d.context != 'race'; })
             });
+            this.raceComplete.emit(true);
         }
     };
     CharBuildRaceComponent.prototype.decisionsComplete = function () {
         var decisionNames = this.viewedRaceDecisions.map(function (d) { return d.name; });
         var _loop_1 = function(i) {
-            if (!this_1.decisionsMade.find(function (d) { return d.decisionName === decisionNames[i]; })) {
+            if (!this_1.decisionsMade.find(function (d) { return d.name === decisionNames[i]; })) {
                 return { value: false };
             }
         };
@@ -616,22 +851,26 @@ var CharBuildRaceComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _a) || Object)
     ], CharBuildRaceComponent.prototype, "raceComplete", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
+        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
+    ], CharBuildRaceComponent.prototype, "raceUpdate", void 0);
     CharBuildRaceComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-char-build-race',
-            template: __webpack_require__(702),
-            styles: [__webpack_require__(690), __webpack_require__(244)]
+            template: __webpack_require__(707),
+            styles: [__webpack_require__(693), __webpack_require__(244)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _c) || Object])
     ], CharBuildRaceComponent);
     return CharBuildRaceComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-race.component.js.map
 
 /***/ }),
 
-/***/ 521:
+/***/ 522:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -649,14 +888,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var CharBuildStartComponent = (function () {
     function CharBuildStartComponent() {
+        var _this = this;
         this.startingLevel = 1;
+        this.startData = function () {
+            return { charName: _this.charName, startingLevel: _this.startingLevel };
+        };
         this.startComplete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.startUpdate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.startGo = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     CharBuildStartComponent.prototype.ngOnInit = function () { };
-    CharBuildStartComponent.prototype.startGo = function () {
+    CharBuildStartComponent.prototype.go = function () {
         if (this.validate())
-            this.startComplete.emit({ charName: this.charName, startingLevel: this.startingLevel });
+            this.startGo.emit(this.startData());
+    };
+    CharBuildStartComponent.prototype.updateParent = function () {
+        if (this.validate())
+            this.startUpdate.emit(this.startData());
     };
     CharBuildStartComponent.prototype.inc = function (value) {
         var newLevel = this.startingLevel + value;
@@ -665,17 +913,16 @@ var CharBuildStartComponent = (function () {
             this.updateParent();
         }
     };
-    CharBuildStartComponent.prototype.updateParent = function () {
-        if (this.validate())
-            this.startUpdate.emit({ charName: this.charName, startingLevel: this.startingLevel });
-    };
     CharBuildStartComponent.prototype.validate = function () {
         if (!this.charName) {
             this.error = "Provide a character name";
+            this.startComplete.emit(false);
+            this.startUpdate.emit(this.startData());
             return false;
         }
         else {
             this.error = "";
+            this.startComplete.emit(true);
             return true;
         }
     };
@@ -687,22 +934,26 @@ var CharBuildStartComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
     ], CharBuildStartComponent.prototype, "startUpdate", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
+        __metadata('design:type', (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _c) || Object)
+    ], CharBuildStartComponent.prototype, "startGo", void 0);
     CharBuildStartComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-char-build-start',
-            template: __webpack_require__(703),
-            styles: [__webpack_require__(691)]
+            template: __webpack_require__(708),
+            styles: [__webpack_require__(694)]
         }), 
         __metadata('design:paramtypes', [])
     ], CharBuildStartComponent);
     return CharBuildStartComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-start.component.js.map
 
 /***/ }),
 
-/***/ 522:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -727,6 +978,7 @@ var CharBuildThemeComponent = (function () {
         this.decisionsMade = [];
         this.showDesc = {};
         this.themeComplete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.themeUpdate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     CharBuildThemeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -754,9 +1006,11 @@ var CharBuildThemeComponent = (function () {
         if (!this.viewedThemeDecisions) {
             this.showDecisions = false;
             this.decisionsMade = null;
-            this.themeComplete.emit({ theme: this.selectedTheme, decisionsMade: null, decisionsRemaining: null });
+            this.themeUpdate.emit({ theme: this.selectedTheme, decisionsMade: null, decisionsRemaining: null });
+            this.themeComplete.emit(true);
         }
         else {
+            this.themeUpdate.emit({ theme: this.selectedTheme, decisionsMade: null, decisionsRemaining: null });
             this.themeComplete.emit(false);
             this.showDecisions = true;
             this.decisionsMade = [];
@@ -764,27 +1018,31 @@ var CharBuildThemeComponent = (function () {
     };
     CharBuildThemeComponent.prototype.hideShow = function (i) { this.showDesc[i] = !this.showDesc[i]; };
     CharBuildThemeComponent.prototype.makeDecision = function (decisionName, selectElement) {
-        var decisionObject = this.viewedThemeDecisions.find(function (d) { return d.name == decisionName; });
-        var selectedOption = decisionObject.selectOptions[selectElement.selectedIndex - 1];
-        if (this.decisionsMade.find(function (d) { return d.decisionName === decisionName; })) {
-            var existingDecision = this.decisionsMade.find(function (d) { return d.decisionName === decisionName; });
-            existingDecision.selectedOption = selectedOption;
+        var thisDecision = this.viewedThemeDecisions.find(function (d) { return d.name == decisionName; });
+        var decisionEffect = thisDecision.selectOptions[selectElement.selectedIndex - 1].effect;
+        var decisionObject = {
+            name: thisDecision.name,
+            context: thisDecision.context,
+            target: decisionEffect.target,
+            value: decisionEffect.value
+        };
+        if (this.decisionsMade.find(function (d) { return d.name === decisionName; })) {
+            this.decisionsMade = this.decisionsMade.filter(function (d) { return d.name != decisionName; });
         }
-        else {
-            this.decisionsMade.push({ decisionName: decisionName, selectedOption: selectedOption });
-        }
+        this.decisionsMade.push(decisionObject);
         if (this.decisionsComplete()) {
-            this.themeComplete.emit({
+            this.themeUpdate.emit({
                 theme: this.selectedTheme,
                 decisionsMade: this.decisionsMade,
                 decisionsRemaining: this.selectedTheme.decisions.filter(function (d) { return d.context != 'theme'; })
             });
+            this.themeComplete.emit(true);
         }
     };
     CharBuildThemeComponent.prototype.decisionsComplete = function () {
         var decisionNames = this.viewedThemeDecisions.map(function (d) { return d.name; });
         var _loop_1 = function(i) {
-            if (!this_1.decisionsMade.find(function (d) { return d.decisionName === decisionNames[i]; })) {
+            if (!this_1.decisionsMade.find(function (d) { return d.name === decisionNames[i]; })) {
                 return { value: false };
             }
         };
@@ -799,22 +1057,77 @@ var CharBuildThemeComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _a) || Object)
     ], CharBuildThemeComponent.prototype, "themeComplete", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
+        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
+    ], CharBuildThemeComponent.prototype, "themeUpdate", void 0);
     CharBuildThemeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-char-build-theme',
-            template: __webpack_require__(704),
-            styles: [__webpack_require__(692), __webpack_require__(244)]
+            template: __webpack_require__(709),
+            styles: [__webpack_require__(695), __webpack_require__(244)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === 'function' && _c) || Object])
     ], CharBuildThemeComponent);
     return CharBuildThemeComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-theme.component.js.map
 
 /***/ }),
 
-/***/ 523:
+/***/ 524:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CharBuildTrackerComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var CharBuildTrackerComponent = (function () {
+    function CharBuildTrackerComponent() {
+        this.charObject = {};
+    }
+    CharBuildTrackerComponent.prototype.ngOnInit = function () {
+    };
+    CharBuildTrackerComponent.prototype.classString = function () {
+        if (this.charObject.class) {
+            if (this.charObject.class.length == 1) {
+                return this.charObject.class[0].className;
+            }
+            else {
+                return this.charObject.class.map(function (c) { return (c.className + " (" + c.classLevel + ")"); }).join(', ');
+            }
+        }
+    };
+    CharBuildTrackerComponent.prototype.ASMod = function (abilityScore) { return Math.floor((abilityScore - 10) / 2); };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Object)
+    ], CharBuildTrackerComponent.prototype, "charObject", void 0);
+    CharBuildTrackerComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-char-build-tracker',
+            template: __webpack_require__(710),
+            styles: [__webpack_require__(696)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CharBuildTrackerComponent);
+    return CharBuildTrackerComponent;
+}());
+//# sourceMappingURL=D:/StarSeeker/StarSeeker-1/angular-src/src/char-build-tracker.component.js.map
+
+/***/ }),
+
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -842,8 +1155,8 @@ var DashboardComponent = (function () {
     DashboardComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-dashboard',
-            template: __webpack_require__(705),
-            styles: [__webpack_require__(693)]
+            template: __webpack_require__(711),
+            styles: [__webpack_require__(697)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === 'function' && _a) || Object])
     ], DashboardComponent);
@@ -854,7 +1167,7 @@ var DashboardComponent = (function () {
 
 /***/ }),
 
-/***/ 524:
+/***/ 526:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -878,8 +1191,8 @@ var HomeComponent = (function () {
     HomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-home',
-            template: __webpack_require__(706),
-            styles: [__webpack_require__(694)]
+            template: __webpack_require__(712),
+            styles: [__webpack_require__(698)]
         }), 
         __metadata('design:paramtypes', [])
     ], HomeComponent);
@@ -889,7 +1202,7 @@ var HomeComponent = (function () {
 
 /***/ }),
 
-/***/ 525:
+/***/ 527:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -937,8 +1250,8 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-login',
-            template: __webpack_require__(707),
-            styles: [__webpack_require__(695)]
+            template: __webpack_require__(713),
+            styles: [__webpack_require__(699)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === 'function' && _b) || Object])
     ], LoginComponent);
@@ -949,7 +1262,7 @@ var LoginComponent = (function () {
 
 /***/ }),
 
-/***/ 526:
+/***/ 528:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -985,8 +1298,8 @@ var NavbarComponent = (function () {
     NavbarComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-navbar',
-            template: __webpack_require__(708),
-            styles: [__webpack_require__(696)]
+            template: __webpack_require__(714),
+            styles: [__webpack_require__(700)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === 'function' && _b) || Object])
     ], NavbarComponent);
@@ -997,7 +1310,7 @@ var NavbarComponent = (function () {
 
 /***/ }),
 
-/***/ 527:
+/***/ 529:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1034,8 +1347,8 @@ var ProfileComponent = (function () {
     ProfileComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-profile',
-            template: __webpack_require__(709),
-            styles: [__webpack_require__(697)]
+            template: __webpack_require__(715),
+            styles: [__webpack_require__(701)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === 'function' && _b) || Object])
     ], ProfileComponent);
@@ -1046,7 +1359,7 @@ var ProfileComponent = (function () {
 
 /***/ }),
 
-/***/ 528:
+/***/ 530:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1111,8 +1424,8 @@ var RegisterComponent = (function () {
     RegisterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-register',
-            template: __webpack_require__(710),
-            styles: [__webpack_require__(698)]
+            template: __webpack_require__(716),
+            styles: [__webpack_require__(702)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_validate_service__["a" /* ValidateService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_validate_service__["a" /* ValidateService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === 'function' && _c) || Object])
     ], RegisterComponent);
@@ -1123,7 +1436,7 @@ var RegisterComponent = (function () {
 
 /***/ }),
 
-/***/ 529:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1168,7 +1481,7 @@ var AuthGuard = (function () {
 
 /***/ }),
 
-/***/ 530:
+/***/ 532:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1184,59 +1497,45 @@ var environment = {
 
 /***/ }),
 
-/***/ 687:
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ 688:
-/***/ (function(module, exports) {
-
-module.exports = ".container {\r\n    height: 800px; width: 100%;\r\n    padding: 20px;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: distribute; justify-content: space-around;\r\n}\r\n\r\n.container > * {margin: 10px;}\r\n\r\n.charBuild-area {\r\n    height: 630px; width: 100%;\r\n    background-color: #404040;\r\n    border-radius: 10px;\r\n    padding: 10px;\r\n}\r\n\r\n.tab-complete {background-color: #375A7F; color: white; font-weight: bold;}\r\n\r\n.nav-button-border {border-bottom: 2px solid white;}\r\n"
-
-/***/ }),
-
 /***/ 689:
 /***/ (function(module, exports) {
 
-module.exports = ".multiclass-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    padding: 5%;\r\n    margin-bottom: 5%;\r\n    background-color: #303030;\r\n    border-radius: 10px;\r\n}\r\n\r\n.multiclass-checkbox {\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -ms-flex-pack: center;\r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    color: lightgray;\r\n}\r\n\r\n.multiclass-checkbox > * {margin: 5%;}\r\n\r\n.mc-on {background-color: #202020;height: 25%;}\r\n\r\n.mc-classlist {margin-left: 5%; color: lightgray;}\r\n.mc-classlist-item {display: -ms-flexbox;display: flex; -ms-flex-pack: justify; justify-content: space-between;}\r\n.mc-classlevel {display: -ms-flexbox;display: flex; -ms-flex-align: center; align-items: center;}\r\n\r\n.mc-selected {color: #6082a6; font-weight: bold;}\r\n.mc-placeholder {color: gray; margin-left: 5%;}\r\n.mc-error {color: pink; text-align: center;}\r\n\r\nhr {border-color: white; margin-bottom: 0;}\r\n\r\n.mc-charlevel {display: -ms-flexbox;display: flex; -ms-flex-pack: justify; justify-content: space-between; margin: auto 5%;}\r\n\r\n.increment-button {\r\n    display: -ms-flexbox;\r\n    display: flex; \r\n    -ms-flex-pack: center; \r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    height: 15px; width: 15px;\r\n    padding: 0;\r\n}\r\n\r\n.class-detail {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: center; justify-content: center;\r\n    width: 90%;\r\n    text-align: center;\r\n    margin: 3%;\r\n}\r\n"
+module.exports = ".container-fluid {height: 100%;}"
 
 /***/ }),
 
 /***/ 690:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".charbuild-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: start; justify-content: flex-start;\r\n    width: 100%; height: 800px;\r\n}\r\n\r\n.central-container {\r\n    height: 100%; width: 1100px;\r\n    padding: 1% 0 0 1%;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: justify; justify-content: space-between;\r\n    -ms-flex-negative: 1;\r\n        flex-shrink: 1;\r\n}\r\n\r\n/* this has margin-top b/c this div randomly started smushing against \r\nthe top nav buttons and I couldn't figure out why */\r\n.charBuild-area {\r\n    min-height: 650px;\r\n    height: 100%; width: 100%;\r\n    background-color: #404040;\r\n    border-radius: 10px 0 0 10px;\r\n    padding: 1%;\r\n    margin-top: 1%;\r\n}\r\n\r\n.sidebar-right {\r\n    height: 100%; width: 400px;\r\n    padding: 1%;\r\n    background-color: #202020;\r\n    border: 2px solid #404040; border-top: none;\r\n    border-radius: 0 0 10px;\r\n}\r\n\r\n.tab-complete {background-color: #375A7F; color: white; font-weight: bold;}\r\n\r\n.current-tab {border-bottom: 2px solid white;}\r\n"
 
 /***/ }),
 
 /***/ 691:
 /***/ (function(module, exports) {
 
-module.exports = ".start-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: center; justify-content: center;\r\n}\r\n\r\n.name-container, .starting-level-container {display: -ms-flexbox;display: flex;}\r\n\r\n.start-container {height: 100%;}\r\n\r\n.inputs {margin-top: -10%;}\r\n.inputs > * {margin: 20px; height: 45px;}\r\n\r\ninput {background-color: #303030; color: white; text-align: center; font-size: 125%;}\r\n\r\ninput:focus {background-color: #303030; color: white;}\r\n\r\n.input-group-text {width: 200px;}\r\n\r\n.starting-level > input {width: 75px;}\r\n\r\n.increment-button {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: center; justify-content: center;\r\n    background-color: #202020;\r\n}\r\n\r\n.increment-button:hover {background-color: #101010;}\r\n\r\n.error {position: absolute; bottom: 42%; color: pink;}\r\n\r\n/* hides the increment buttons on number-type inputs */\r\ninput[type=number]::-webkit-inner-spin-button,\r\ninput[type=number]::-webkit-outer-spin-button { \r\n    -webkit-appearance: none;\r\n    -moz-appearance: none;\r\n    appearance: none;\r\n    margin: 0; \r\n}"
+module.exports = ""
 
 /***/ }),
 
 /***/ 692:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".multiclass-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    padding: 5%;\r\n    margin-bottom: 5%;\r\n    background-color: #303030;\r\n    border-radius: 10px;\r\n}\r\n\r\n.multiclass-checkbox {\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -ms-flex-pack: center;\r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    color: lightgray;\r\n}\r\n\r\n.multiclass-checkbox > * {margin: 5%;}\r\n\r\n.mc-on {background-color: #202020;height: 25%;}\r\n.mc-classlist {margin-left: 5%; color: lightgray;}\r\n.mc-classlist-item {display: -ms-flexbox;display: flex; -ms-flex-pack: justify; justify-content: space-between;}\r\n.mc-classlevel {display: -ms-flexbox;display: flex; -ms-flex-align: center; align-items: center;}\r\n.mc-selected {color: #6082a6; font-weight: bold;}\r\n.mc-placeholder {color: gray; margin-left: 5%;}\r\n.mc-error {color: pink; text-align: center;}\r\n.mc-charlevel {display: -ms-flexbox;display: flex; -ms-flex-pack: justify; justify-content: space-between; margin: auto 5%;}\r\n\r\nhr {border-color: white; margin-bottom: 0;}\r\n\r\n.increment-button {\r\n    display: -ms-flexbox;\r\n    display: flex; \r\n    -ms-flex-pack: center; \r\n        justify-content: center; -ms-flex-align: center; align-items: center;\r\n    height: 15px; width: 15px;\r\n    padding: 0;\r\n}\r\n\r\n.class-detail {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: center; justify-content: center;\r\n    width: 90%;\r\n    text-align: center;\r\n    margin: 3%;\r\n}\r\n\r\n/* this is here b/c I couldn't figure out why the decisions container\r\nwas smushed against the select class button... */\r\n.decisions {margin-top: 3%;} "
 
 /***/ }),
 
 /***/ 693:
 /***/ (function(module, exports) {
 
-module.exports = ".dashboard-container {\r\n    width: 100%;\r\n    height: 700px;\r\n}\r\n\r\n.char-container {\r\n    background-color: #404040;\r\n    border-radius: 10px;\r\n    height: 100%; width: 30%;\r\n    padding: 10px;\r\n}\r\n\r\n.char-card {\r\n    height: 80px;\r\n}\r\n\r\n.char-card:hover * {\r\n    background-color: #252525;\r\n    color: white;\r\n}\r\n\r\n.add-char {\r\n    display:-ms-flexbox;\r\n    display:flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: space-evenly; justify-content: space-evenly;\r\n    color: #9c9c9c;\r\n    height: 100%;\r\n}\r\n"
+module.exports = ""
 
 /***/ }),
 
 /***/ 694:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".start-container {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: center; justify-content: center;\r\n}\r\n\r\n.name-container, .starting-level-container {display: -ms-flexbox;display: flex;}\r\n\r\n.start-container {height: 100%;}\r\n\r\n.inputs {margin-top: -10%;}\r\n.inputs > * {margin: 20px; height: 45px;}\r\n\r\ninput {background-color: #303030; color: white; text-align: center; font-size: 125%;}\r\n\r\ninput:focus {background-color: #303030; color: white;}\r\n\r\n.input-group-text {width: 200px;}\r\n\r\n.starting-level > input {width: 75px;}\r\n\r\n.increment-button {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: center; justify-content: center;\r\n    background-color: #202020;\r\n}\r\n\r\n.increment-button:hover {background-color: #101010;}\r\n\r\n.error {position: absolute; bottom: 30%; color: pink;}\r\n\r\n/* hides the increment buttons on number-type inputs */\r\ninput[type=number]::-webkit-inner-spin-button,\r\ninput[type=number]::-webkit-outer-spin-button { \r\n    -webkit-appearance: none;\r\n    -moz-appearance: none;\r\n    appearance: none;\r\n    margin: 0; \r\n}"
 
 /***/ }),
 
@@ -1250,14 +1549,14 @@ module.exports = ""
 /***/ 696:
 /***/ (function(module, exports) {
 
-module.exports = ".navitem-spacing {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: row; flex-direction: row; \r\n    -ms-flex-pack: distribute; \r\n        justify-content: space-around;\r\n    margin-right: 3%;\r\n}\r\n\r\n.navitem-spacing > * {margin: 10%;}"
+module.exports = ".tracker-column {\r\n    width: 100%; height: 100%;\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: column; flex-direction: column;\r\n    background-color: #303030;\r\n    border-radius: 15px;\r\n    padding: 10px;\r\n}\r\n\r\n.tracker-column > * {margin: 1% 0;}\r\n\r\n.rounded-box {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-pack: space-evenly; justify-content: space-evenly;\r\n    width: 100%; min-height: 2em;\r\n    background-color: #202020; color: lightgray;\r\n    border-radius: 15px;\r\n    padding: 1% 5%;\r\n    font-size: 90%;\r\n}\r\n\r\n.box-inner-row {display: -ms-flexbox;display: flex; -ms-flex-pack: justify; justify-content: space-between; min-height: 1em;}\r\n\r\n.box-column {display: -ms-flexbox;display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-pack: justify; justify-content: space-between;}\r\n.box-column > * {margin: 2% auto;}\r\n.box-row {display: -ms-flexbox;display: flex;}\r\n\r\n.normal-font {font-size: 100%;}\r\n.flex-column {-ms-flex-direction: column;flex-direction: column;}\r\n.space-around {-ms-flex-pack: distribute;justify-content: space-around;}\r\n.space-between {-ms-flex-pack: justify;justify-content: space-between;}\r\n\r\n.hp-stam-res {display: -ms-flexbox;display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center;}\r\n.hp-stam-res > strong {font-size: 110%; -ms-flex-positive: 1; flex-grow: 1; min-height: 1em;}\r\n\r\n.hp {color: darksalmon;}\r\n.stamina {color: darkseagreen;}\r\n.resolve {color: lightblue;}\r\n\r\n.w-30 {width: 29%;}\r\n.w-40 {width: 39%;}\r\n\r\n.AS > .box-inner-row {-ms-flex-pack: justify;justify-content: space-between;}\r\n.saves > .box-inner-row, .AC > .box-inner-row {-ms-flex-pack: distribute;justify-content: space-around;}\r\n.attack-bonuses {-ms-flex-positive: 1;flex-grow: 1;}\r\n.initiative {-ms-flex-positive: 0.5;flex-grow: 0.5;}"
 
 /***/ }),
 
 /***/ 697:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".dashboard-container {\r\n    width: 100%;\r\n    height: 700px;\r\n}\r\n\r\n.char-container {\r\n    background-color: #404040;\r\n    border-radius: 10px;\r\n    height: 100%; width: 30%;\r\n    padding: 10px;\r\n}\r\n\r\n.char-card {\r\n    height: 80px;\r\n}\r\n\r\n.char-card:hover * {\r\n    background-color: #252525;\r\n    color: white;\r\n}\r\n\r\n.add-char {\r\n    display:-ms-flexbox;\r\n    display:flex; -ms-flex-direction: column; flex-direction: column;\r\n    -ms-flex-align: center;\r\n        align-items: center; -ms-flex-pack: space-evenly; justify-content: space-evenly;\r\n    color: #9c9c9c;\r\n    height: 100%;\r\n}\r\n"
 
 /***/ }),
 
@@ -1271,88 +1570,130 @@ module.exports = ""
 /***/ 699:
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n    <!--<flash-messages></flash-messages>-->\n    <router-outlet></router-outlet>\n</div>\n"
+module.exports = ""
 
 /***/ }),
 
 /***/ 700:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h3>Character Builder</h3>\n  <div class=\"btn-group\" role=\"group\">\n    <button type=\"button\" class=\"btn btn-secondary {{isComplete.start ? 'tab-complete' : ''}} {{isShown.start ? 'nav-button-border' : ''}}\" (click)=\"showTab('start')\">Start</button>\n    <button [disabled]=\"isLocked.raceThemeClass\" type=\"button\" class=\"btn btn-secondary {{isComplete.race ? 'tab-complete' : ''}} {{isShown.race ? 'nav-button-border' : ''}}\" (click)=\"showTab('race')\">Race</button>\n    <button [disabled]=\"isLocked.raceThemeClass\" type=\"button\" class=\"btn btn-secondary {{isComplete.theme ? 'tab-complete' : ''}} {{isShown.theme ? 'nav-button-border' : ''}}\" (click)=\"showTab('theme')\">Theme</button>\n    <button [disabled]=\"isLocked.raceThemeClass\" type=\"button\" class=\"btn btn-secondary {{isComplete.class ? 'tab-complete' : ''}} {{isShown.class ? 'nav-button-border' : ''}}\" (click)=\"showTab('class')\">Class</button>\n    <button disabled type=\"button\" class=\"btn btn-secondary\">Ability Scores</button>\n    <button disabled type=\"button\" class=\"btn btn-secondary\">Class Choices</button>\n    <button disabled type=\"button\" class=\"btn btn-secondary\">Skills</button>\n    <button disabled type=\"button\" class=\"btn btn-secondary\">Feats</button>\n    <button disabled type=\"button\" class=\"btn btn-secondary\">Spells</button>\n  </div>\n  <div class=\"charBuild-area\">\n    <app-char-build-start [hidden]=\"!isShown.start\" (startComplete)=startGo($event) (startUpdate)=startUpdate($event)></app-char-build-start>\n    <app-char-build-race [hidden]=\"!isShown.race\" (raceComplete)=raceComplete($event)></app-char-build-race>\n    <app-char-build-theme [hidden]=\"!isShown.theme\" (themeComplete)=themeComplete($event)></app-char-build-theme>\n    <app-char-build-class [hidden]=\"!isShown.class\" (classComplete)=classComplete($event) [charLevel]=\"charLevel\" [skillsData]=\"skillsData\"></app-char-build-class>\n  </div>\n</div>\n"
+module.exports = ".navitem-spacing {\r\n    display: -ms-flexbox;\r\n    display: flex; -ms-flex-direction: row; flex-direction: row; \r\n    -ms-flex-pack: distribute; \r\n        justify-content: space-around;\r\n    margin-right: 3%;\r\n}\r\n\r\n.navitem-spacing > * {margin: 10%;}"
 
 /***/ }),
 
 /***/ 701:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"component-container\">\n  <div class=\"list-column\">\n    <div *ngIf=\"charLevel > 1\" class=\"multiclass-container {{multiclass ? 'mc-on' : ''}}\">\n      <div class=\"multiclass-checkbox\">\n        <input type=\"checkbox\" id=\"multiclassCheck\" [(ngModel)]=\"multiclass\" name=\"multiclass\" (change)=\"mcToggle()\">\n        <label class=\"{{multiclass ? 'mc-selected' : ''}}\" for=\"multiclassCheck\">Multiclass</label>\n      </div>\n      <div *ngIf=\"multiclass\">\n        <div class=\"mc-placeholder\" *ngIf=\"!selectedClasses.length\">Select a class...</div>\n        <div class=\"mc-classlist\" *ngIf=\"selectedClasses.length\">\n          <div *ngFor=\"let class of selectedClasses\" class=\"mc-classlist-item\">\n            <div>{{class.className}}</div>\n            <div class=\"mc-classlevel\">\n              <div>{{class.classLevel}}</div>\n              <div class=\"btn-group ml-1\">\n                <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(class.className,1)\">\n                  <i class=\"fas fa-xs fa-caret-up\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(class.className,-1)\">\n                  <i class=\"fas fa-xs fa-caret-down\"></i>\n                </button>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"mc-placeholder\" *ngIf=\"selectedClasses.length == 1\">Select another class...</div>\n        <div class=\"mc-footer\">\n          <hr>\n          <div class=\"mc-charlevel\">\n            <small>Character Level</small><small>{{charLevel}}</small>\n          </div>\n          <div class=\"mc-error\">\n            <small *ngIf=\"mcError\">{{mcError}}</small>\n          </div>\n        </div>\n      </div>\n    </div>\n    <ul class=\"list-group\">\n      <li *ngFor=\"let class of classes\" class=\"list-group-item {{selectedClassNames.includes(class.className) ? 'selected' : ''}}\" (click)=\"viewClass(class)\">{{class.className}}</li>\n    </ul>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedClass\" class=\"placeholder\">Select a Class...</div>\n    <div *ngIf=\"viewedClass\" class=\"selection-detail\">\n      <h4>{{viewedClass.className}}</h4>\n      <div class=\"stat-box-centered\">\n        <strong>Stamina: {{viewedClass.classData.stamina}} + Con mod</strong>\n        <strong>HP: {{viewedClass.classData.HP}}</strong>\n      </div>\n      <div class=\"selection-desc\">{{viewedClass.description}}</div>\n      <div class=\"stat-box-centered\">\n        <div class=\"class-detail\">\n          <strong>Key Ability Score:</strong>\n          <small>{{viewedClass.keyABDesc}}</small>\n        </div>\n        <div class=\"class-detail\">\n          <strong>Skills:</strong>\n          <span>Ranks per Level: {{viewedClass.classData.skillRanksPerLvl}}</span>\n          <small>{{createSkillList(viewedClass.classData.skills)}}</small>\n        </div>\n        <div class=\"class-detail\">\n          <strong>Proficiencies:</strong>\n          <div class=\"proficiencies\">\n            <small><strong>Armor:</strong> {{viewedClass.classData.proficiencies.armor.join(', ')}}</small>\n          </div>\n          <div class=\"proficiencies\">\n            <small><strong>Weapons:</strong> {{viewedClass.classData.proficiencies.weapons.join(', ')}}</small>\n          </div>\n        </div>\n      \n      </div>\n      <div class=\"select-button-container\">\n        <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"selectClass(viewedClass)\">Choose This Class</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedClass\" class=\"placeholder\"></div>\n    <div *ngIf=\"viewedClass\" class=\"ability-container\">\n      <div *ngFor=\"let feature of viewedClass.classFeatures; let i = index\" class=\"card ability-card\" (click)=\"hideShow(i)\">\n        <div class=\"card-label\">\n          <div>{{feature.name}}</div><div>Level {{feature.level}}</div>\n        </div>\n        <div class=\"ability-desc\" *ngIf=\"showDesc[i]\">\n          {{feature.desc}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = ""
 
 /***/ }),
 
 /***/ 702:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"component-container\">\n  <div class=\"list-column\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let race of races\" class=\"list-group-item {{race.raceName === selectedRace.raceName ? 'selected' : ''}}\" (click)=\"viewRace(race)\">{{race.raceName}}</li>\n    </ul>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedRace\" class=\"placeholder\">Select a Race...</div>\n    <div *ngIf=\"viewedRace\" class=\"selection-detail\">\n      <h4>{{viewedRace.raceName}}</h4>\n      <div class=\"stat-box-centered\">\n        <strong>{{viewedRace.ASDesc}}</strong>\n        <strong>HP: {{viewedRace.raceData.HP}}</strong>\n        <small>{{viewedRace.sizeType}}</small>\n      </div>\n      <div class=\"selection-desc\">{{viewedRace.description}}</div>\n      <div class=\"select-button-container\">\n        <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"selectRace(viewedRace)\">Choose This Race</button>\n        <div *ngIf=\"viewedRaceDecisions && showDecisions\">\n          <div class=\"decisions\">\n            <div *ngFor=\"let decision of viewedRaceDecisions\">\n              <div>{{decision.selectLabel}}</div>\n              <select class=\"custom-select\" (change)=\"makeDecision(decision.name,$event.target)\">\n                <option hidden disabled selected>Select</option>\n                <option *ngFor=\"let option of decision.selectOptions\">{{option.name}}</option>\n              </select>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedRace\" class=\"placeholder\"></div>\n    <div *ngIf=\"viewedRace\" class=\"ability-container\">\n      <div *ngFor=\"let ability of viewedRace.racialAbilities; let i = index\" class=\"card ability-card\" (click)=\"hideShow(i)\">\n        <div class=\"card-label\">\n          <div>{{ability.name}}</div>\n        </div>\n        <div class=\"ability-desc\" *ngIf=\"showDesc[i]\">\n          {{ability.description}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = ""
 
 /***/ }),
 
 /***/ 703:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"start-container\">\n  <div class=\"inputs\">\n    <div class=\"name-container\">\n      <div class=\"input-group input-group-lg name\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Character Name</span>\n        </div>\n        <input type=\"text\" [(ngModel)]=\"charName\" name=\"charName\" (change)=\"updateParent()\">\n      </div>\n    </div>\n    <div class=\"starting-level-container\">\n      <div class=\"input-group input-group-lg starting-level\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Starting Level</span>\n        </div>\n        <input disabled type=\"number\" [(ngModel)]=\"startingLevel\" name=\"startingLevel\">\n        <div class=\"btn-group-vertical\">\n          <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(1)\">\n            <i class=\"fas fa-caret-up\"></i>\n          </button>\n          <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(-1)\">\n            <i class=\"fas fa-caret-down\"></i>\n          </button>\n        </div>      \n      </div>\n    </div>\n  </div>\n  <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"startGo()\">Go <i class=\"fas fa-arrow-right ml-2\"></i></button>\n  <div *ngIf=\"error\" class=\"error mt-3\">{{ error }}</div>\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container-fluid\">\n    <router-outlet></router-outlet>\n</div>\n"
 
 /***/ }),
 
 /***/ 704:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"component-container\">\n  <div class=\"list-column\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let theme of themes\" class=\"list-group-item {{theme.themeName === selectedTheme.themeName ? 'selected' : ''}}\" (click)=\"viewTheme(theme)\">{{theme.themeName}}</li>\n    </ul>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedTheme\" class=\"placeholder\">Select a Theme...</div>\n    <div *ngIf=\"viewedTheme\" class=\"selection-detail\">\n      <h4>{{viewedTheme.themeName}}</h4>\n      <div class=\"stat-box-centered\">\n        <strong>{{viewedTheme.ASDesc}}</strong>\n      </div>\n      <div class=\"selection-desc\">{{viewedTheme.description}}</div>\n      <div class=\"select-button-container\">\n        <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"selectTheme(viewedTheme)\">Choose This Theme</button>\n        <div *ngIf=\"viewedThemeDecisions && showDecisions\">\n          <div class=\"decisions\">\n            <div *ngFor=\"let decision of viewedThemeDecisions\">\n              <div>{{decision.selectLabel}}</div>\n              <select class=\"custom-select\" (change)=\"makeDecision(decision.name,$event.target)\">\n                <option hidden disabled selected>Select</option>\n                <option *ngFor=\"let option of decision.selectOptions\">{{option.name}}</option>\n              </select>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedTheme\" class=\"placeholder\"></div>\n    <div *ngIf=\"viewedTheme\" class=\"ability-container\">\n      <div *ngFor=\"let ability of viewedTheme.themeAbilities; let i = index\" class=\"card ability-card\" (click)=\"hideShow(i)\">\n          <div class=\"card-label\">\n            <div>{{ability.name}}</div><div>Level {{ability.level}}</div>\n          </div>\n          <div class=\"ability-desc\" *ngIf=\"showDesc[i]\">\n            {{ability.description}}\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"charbuild-container\">\n  <div class=\"central-container\">\n    <h3>Character Builder</h3>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn btn-secondary {{isComplete.start ? 'tab-complete' : ''}} {{isShown == 'start' ? 'current-tab' : ''}}\" (click)=\"showTab('start')\">Start</button>\n      <button [disabled]=\"isLocked.raceThemeClass\" type=\"button\" class=\"btn btn-secondary {{isComplete.race ? 'tab-complete' : ''}} {{isShown == 'race' ? 'current-tab' : ''}}\" (click)=\"showTab('race')\">Race</button>\n      <button [disabled]=\"isLocked.raceThemeClass\" type=\"button\" class=\"btn btn-secondary {{isComplete.theme ? 'tab-complete' : ''}} {{isShown == 'theme' ? 'current-tab' : ''}}\" (click)=\"showTab('theme')\">Theme</button>\n      <button [disabled]=\"isLocked.raceThemeClass\" type=\"button\" class=\"btn btn-secondary {{isComplete.class ? 'tab-complete' : ''}} {{isShown == 'class' ? 'current-tab' : ''}}\" (click)=\"showTab('class')\">Class</button>\n      <button [disabled]=\"isLocked.AS\" type=\"button\" class=\"btn btn-secondary {{isComplete.AS ? 'tab-complete' : ''}} {{isShown == 'class' ? 'current-tab' : ''}}\" (click)=\"showTab('AS')\">Ability Scores</button>\n      <button disabled type=\"button\" class=\"btn btn-secondary\">Class Choices</button>\n      <button disabled type=\"button\" class=\"btn btn-secondary\">Skills</button>\n      <button disabled type=\"button\" class=\"btn btn-secondary\">Feats</button>\n      <button disabled type=\"button\" class=\"btn btn-secondary\">Spells</button>\n    </div>\n    <div class=\"charBuild-area\">\n      <app-char-build-start [hidden]=\"isShown != 'start'\" (startComplete)=startComplete($event) (startGo)=startGo($event) (startUpdate)=startUpdate($event)></app-char-build-start>\n      <app-char-build-race [hidden]=\"isShown != 'race'\" (raceComplete)=raceComplete($event) (raceUpdate)=raceUpdate($event)></app-char-build-race>\n      <app-char-build-theme [hidden]=\"isShown != 'theme'\" (themeComplete)=themeComplete($event)></app-char-build-theme>\n      <app-char-build-class [hidden]=\"isShown != 'class'\" (classComplete)=classComplete($event) (classUpdate)=classUpdate($event) [charLevel]=\"charObject.charLevel\" [skillsData]=\"skillsData\"></app-char-build-class>\n      <app-char-build-as [hidden]=\"isShown != 'AS'\"></app-char-build-as>\n    </div>\n  </div>\n  <div class=\"sidebar-right\">\n    <app-char-build-tracker [charObject]=\"charObject\"></app-char-build-tracker>\n    <button type=\"button\" (click)=\"logCharObject()\">Log charObject</button>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 705:
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Dashboard</h2>\n<div class=\"dashboard-container\">\n    <div class=\"char-container\">\n        <div class=\"card char-card\">\n            <div class=\"add-char\" (click)=\"redirectCharBuild()\">\n                <i class=\"fas fa-2x fa-plus-circle\"></i>\n                <span>Create Character</span>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<p>\n  char-build-as works!\n</p>\n"
 
 /***/ }),
 
 /***/ 706:
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"jumbotron text-center mt-5\">\n  <h1>MEAN Authentication App</h1>\n  <p class=\"lead\">Welcome to our custom MEAN authentication application built from scratch</p>\n  <div>\n    <a class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a class=\"btn btn-primary\" [routerLink]=\"['/login']\">Login</a>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Express Backend</h3>\n    <p>A rock solid Node.js/Express server using Mongoose to organize models and query the database</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Angular-CLI</h3>\n    <p>Angular-CLI to generate components, services and more. Local dev server and easy compilation</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>JWT Tokens</h3>\n    <p>Full featured authentication using JSON web tokens. Login and store user data</p>\n  </div>\n</div>"
+module.exports = "<div class=\"component-container\">\n  <div class=\"list-column\">\n    <div *ngIf=\"charLevel > 1\" class=\"multiclass-container {{multiclass ? 'mc-on' : ''}}\">\n      <div class=\"multiclass-checkbox\">\n        <input type=\"checkbox\" id=\"multiclassCheck\" [(ngModel)]=\"multiclass\" name=\"multiclass\" (change)=\"mcToggle()\">\n        <label class=\"{{multiclass ? 'mc-selected' : ''}}\" for=\"multiclassCheck\">Multiclass</label>\n      </div>\n      <div *ngIf=\"multiclass\">\n        <div class=\"mc-placeholder\" *ngIf=\"!selectedClasses.length\">Select a class...</div>\n        <div class=\"mc-classlist\" *ngIf=\"selectedClasses.length\">\n          <div *ngFor=\"let class of selectedClasses\" class=\"mc-classlist-item\">\n            <div>{{class.className}}</div>\n            <div class=\"mc-classlevel\">\n              <div>{{class.classLevel}}</div>\n              <div class=\"btn-group ml-1\">\n                <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(class.className,1)\">\n                  <i class=\"fas fa-xs fa-caret-up\"></i>\n                </button>\n                <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(class.className,-1)\">\n                  <i class=\"fas fa-xs fa-caret-down\"></i>\n                </button>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"mc-placeholder\" *ngIf=\"selectedClasses.length == 1\">Select another class...</div>\n        <div class=\"mc-footer\">\n          <hr>\n          <div class=\"mc-charlevel\">\n            <small>Character Level</small><small>{{charLevel}}</small>\n          </div>\n          <div class=\"mc-error\">\n            <small *ngIf=\"mcError\">{{mcError}}</small>\n          </div>\n        </div>\n      </div>\n    </div>\n    <ul class=\"list-group\">\n      <li *ngFor=\"let class of classes\" class=\"list-group-item {{selectedClassNames.includes(class.className) ? 'selected' : ''}}\" (click)=\"viewClass(class)\">{{class.className}}</li>\n    </ul>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedClass\" class=\"placeholder\">Select a Class...</div>\n    <div *ngIf=\"viewedClass\" class=\"selection-detail\">\n      <h4>{{viewedClass.className}}</h4>\n      <div class=\"stat-box-centered\">\n        <strong>Stamina: {{viewedClass.classData.stamina}} + Con mod</strong>\n        <strong>HP: {{viewedClass.classData.HP}}</strong>\n      </div>\n      <div class=\"selection-desc\">{{viewedClass.description}}</div>\n      <div class=\"stat-box-centered\">\n        <div class=\"class-detail\">\n          <strong>Key Ability Score:</strong>\n          <small>{{viewedClass.keyABDesc}}</small>\n        </div>\n        <div class=\"class-detail\">\n          <strong>Skills:</strong>\n          <span>Ranks per Level: {{viewedClass.classData.skillRanksPerLvl}}</span>\n          <small>{{createSkillList(viewedClass.classData.skills)}}</small>\n        </div>\n        <div class=\"class-detail\">\n          <strong>Proficiencies:</strong>\n          <div class=\"proficiencies\">\n            <small><strong>Armor:</strong> {{viewedClass.classData.proficiencies.armor.join(', ')}}</small>\n          </div>\n          <div class=\"proficiencies\">\n            <small><strong>Weapons:</strong> {{viewedClass.classData.proficiencies.weapons.join(', ')}}</small>\n          </div>\n        </div>\n      </div>\n      <div class=\"select-button-container\">\n        <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"selectClass(viewedClass)\">Choose This Class</button>\n        <div *ngIf=\"classIsSelected(viewedClass.className) && viewedClassDecisions.length\">\n          <div class=\"decisions\">\n            <div *ngFor=\"let decision of viewedClassDecisions\">\n              <div>{{decision.selectLabel}}</div>\n              <select class=\"custom-select\" (change)=\"makeDecision(decision.name,$event.target)\">\n                <option hidden disabled selected>Select</option>\n                <option *ngFor=\"let option of decision.selectOptions\">{{option.name}}</option>\n              </select>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedClass\" class=\"placeholder\"></div>\n    <div *ngIf=\"viewedClass\" class=\"ability-container\">\n      <div *ngFor=\"let feature of viewedClass.classFeatures; let i = index\" class=\"card ability-card\" (click)=\"hideShow(i)\">\n        <div class=\"card-label\">\n          <div>{{feature.name}}</div><div>Level {{feature.level}}</div>\n        </div>\n        <div class=\"ability-desc\" *ngIf=\"showDesc[i]\">\n          {{feature.desc}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 707:
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"userName\" name=\"userName\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n"
+module.exports = "<div class=\"component-container\">\n  <div class=\"list-column\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let race of races\" class=\"list-group-item {{race.raceName === selectedRace.raceName ? 'selected' : ''}}\" (click)=\"viewRace(race)\">{{race.raceName}}</li>\n    </ul>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedRace\" class=\"placeholder\">Select a Race...</div>\n    <div *ngIf=\"viewedRace\" class=\"selection-detail\">\n      <h4>{{viewedRace.raceName}}</h4>\n      <div class=\"stat-box-centered\">\n        <strong>{{viewedRace.ASDesc}}</strong>\n        <strong>HP: {{viewedRace.raceData.HP}}</strong>\n        <small>{{viewedRace.sizeType}}</small>\n      </div>\n      <div class=\"selection-desc\">{{viewedRace.description}}</div>\n      <div class=\"select-button-container\">\n        <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"selectRace(viewedRace)\">Choose This Race</button>\n        <div *ngIf=\"viewedRace.raceName === selectedRace.raceName && viewedRaceDecisions && showDecisions\">\n          <div class=\"decisions\">\n            <div *ngFor=\"let decision of viewedRaceDecisions\">\n              <div>{{decision.selectLabel}}</div>\n              <select class=\"custom-select\" (change)=\"makeDecision(decision.name,$event.target)\">\n                <option hidden disabled selected>Select</option>\n                <option *ngFor=\"let option of decision.selectOptions\">{{option.name}}</option>\n              </select>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedRace\" class=\"placeholder\"></div>\n    <div *ngIf=\"viewedRace\" class=\"ability-container\">\n      <div *ngFor=\"let ability of viewedRace.racialAbilities; let i = index\" class=\"card ability-card\" (click)=\"hideShow(i)\">\n        <div class=\"card-label\">\n          <div>{{ability.name}}</div>\n        </div>\n        <div class=\"ability-desc\" *ngIf=\"showDesc[i]\">\n          {{ability.description}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
 /***/ 708:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-dark navbar-default\">\n  <a class=\"navbar-brand\" href=\"#\">StarReacher</a>\n  <ul class=\"navbar-nav mr-auto navbar-left\">\n    <li><a routerLink=\"/\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Home</a></li>\n  </ul>\n  <div class=\"navbar-nav navbar-right navitem-spacing\">\n    <a *ngIf=\"!authService.loggedIn()\" routerLink=\"/login\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Login</a>\n    <a *ngIf=\"!authService.loggedIn()\" routerLink=\"/register\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Register</a>\n    <a *ngIf=\"authService.loggedIn()\" routerLink=\"/dashboard\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Dashboard</a>\n    <a *ngIf=\"authService.loggedIn()\" routerLink=\"/profile\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Profile</a>\n    <a *ngIf=\"authService.loggedIn()\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a>\n  </div>\n</nav>"
+module.exports = "<div class=\"start-container\">\n  <div class=\"inputs\">\n    <div class=\"name-container\">\n      <div class=\"input-group input-group-lg name\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Character Name</span>\n        </div>\n        <input type=\"text\" [(ngModel)]=\"charName\" name=\"charName\" (change)=\"updateParent()\">\n      </div>\n    </div>\n    <div class=\"starting-level-container\">\n      <div class=\"input-group input-group-lg starting-level\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\" id=\"basic-addon1\">Starting Level</span>\n        </div>\n        <input disabled type=\"number\" [(ngModel)]=\"startingLevel\" name=\"startingLevel\">\n        <div class=\"btn-group-vertical\">\n          <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(1)\">\n            <i class=\"fas fa-caret-up\"></i>\n          </button>\n          <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"inc(-1)\">\n            <i class=\"fas fa-caret-down\"></i>\n          </button>\n        </div>      \n      </div>\n    </div>\n  </div>\n  <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"go()\">Go <i class=\"fas fa-arrow-right ml-2\"></i></button>\n  <div *ngIf=\"error\" class=\"error mt-3\">{{ error }}</div>\n</div>"
 
 /***/ }),
 
 /***/ 709:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{ user.name }}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.userName}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n  </ul>\n</div>"
+module.exports = "<div class=\"component-container\">\n  <div class=\"list-column\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let theme of themes\" class=\"list-group-item {{theme.themeName === selectedTheme.themeName ? 'selected' : ''}}\" (click)=\"viewTheme(theme)\">{{theme.themeName}}</li>\n    </ul>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedTheme\" class=\"placeholder\">Select a Theme...</div>\n    <div *ngIf=\"viewedTheme\" class=\"selection-detail\">\n      <h4>{{viewedTheme.themeName}}</h4>\n      <div class=\"stat-box-centered\">\n        <strong>{{viewedTheme.ASDesc}}</strong>\n      </div>\n      <div class=\"selection-desc\">{{viewedTheme.description}}</div>\n      <div class=\"select-button-container\">\n        <button type=\"button\" class=\"btn btn-primary btn-lg\" (click)=\"selectTheme(viewedTheme)\">Choose This Theme</button>\n        <div *ngIf=\"viewedThemeDecisions && showDecisions\">\n          <div class=\"decisions\">\n            <div *ngFor=\"let decision of viewedThemeDecisions\">\n              <div>{{decision.selectLabel}}</div>\n              <select class=\"custom-select\" (change)=\"makeDecision(decision.name,$event.target)\">\n                <option hidden disabled selected>Select</option>\n                <option *ngFor=\"let option of decision.selectOptions\">{{option.name}}</option>\n              </select>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container-column-1\">\n    <div *ngIf=\"!viewedTheme\" class=\"placeholder\"></div>\n    <div *ngIf=\"viewedTheme\" class=\"ability-container\">\n      <div *ngFor=\"let ability of viewedTheme.themeAbilities; let i = index\" class=\"card ability-card\" (click)=\"hideShow(i)\">\n          <div class=\"card-label\">\n            <div>{{ability.name}}</div><div>Level {{ability.level}}</div>\n          </div>\n          <div class=\"ability-desc\" *ngIf=\"showDesc[i]\">\n            {{ability.description}}\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 710:
 /***/ (function(module, exports) {
 
+module.exports = "<div class=\"tracker-column\">\n  <div class=\"rounded-box normal-font\">\n    <div *ngIf=\"charObject.charName && charObject.charLevel\">\n      <span>{{charObject.charName}}, Level {{charObject.charLevel}}</span>\n    </div>\n  </div>\n  <div class=\"rounded-box flex-column\">\n    <div class=\"box-inner-row\">\n      <span>Race:</span><div *ngIf=\"charObject.race\"><span>{{charObject.race.raceName}}</span></div>\n    </div>\n    <div class=\"box-inner-row\">\n      <span>Theme:</span><div *ngIf=\"charObject.theme\"><span>{{charObject.theme.themeName}}</span></div>\n    </div>\n    <div class=\"box-inner-row\">\n      <span>Class:</span><span>{{classString()}}</span>\n    </div>\n  </div>\n  <div class=\"rounded-box flex-column\">\n    <div class=\"box-inner-row space-around\">\n      <span *ngIf=\"charObject.race\">Size: {{charObject.race.raceData.size}}</span>\n      <span *ngIf=\"charObject.race\">Speed: {{charObject.race.raceData.speed}}ft</span>\n    </div>\n  </div>\n  <div class=\"rounded-box flex-column\">\n    <div class=\"box-inner-row space-around\">\n      <div class=\"hp-stam-res stamina\">\n        <strong>{{charObject.stamina}}</strong>\n        <small>Stamina</small>\n      </div>\n      <div class=\"hp-stam-res hp\">\n        <strong>{{charObject.HP}}</strong>\n        <small>HP</small>\n      </div>\n      <div class=\"hp-stam-res resolve\">\n        <strong>{{charObject.resolve}}</strong>\n        <small>Resolve</small>\n      </div>\n    </div>\n  </div>\n  <div class=\"box-row space-between\">\n    <div class=\"rounded-box flex-column w-40 AS\">\n      <div class=\"box-inner-row\">\n        <span>Str</span><strong>{{charObject.AS[0]}} ({{ASMod(charObject.AS[0])}})</strong>\n      </div>\n      <div class=\"box-inner-row\">\n        <span>Dex</span><strong>{{charObject.AS[1]}} ({{ASMod(charObject.AS[1])}})</strong>\n      </div>\n      <div class=\"box-inner-row\">\n        <span>Con</span><strong>{{charObject.AS[2]}} ({{ASMod(charObject.AS[2])}})</strong>\n      </div>\n      <div class=\"box-inner-row\">\n        <span>Int</span><strong>{{charObject.AS[3]}} ({{ASMod(charObject.AS[3])}})</strong>\n      </div>\n      <div class=\"box-inner-row\">\n        <span>Wis</span><strong>{{charObject.AS[4]}} ({{ASMod(charObject.AS[4])}})</strong>\n      </div>\n      <div class=\"box-inner-row\">\n        <span>Cha</span><strong>{{charObject.AS[5]}} ({{ASMod(charObject.AS[5])}})</strong>\n      </div>\n    </div>\n    <div class=\"box-column w-30\">\n      <div class=\"rounded-box flex-column saves\">\n        <div class=\"box-inner-row\">\n          <small>Fort (Con)</small><strong>{{charObject.saves.fort}}</strong>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>Ref (Dex)</small><strong>{{charObject.saves.ref}}</strong>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>Will (Wis)</small><strong>{{charObject.saves.will}}</strong>\n        </div>\n      </div>\n      <div class=\"rounded-box flex-column AC\">\n        <div class=\"box-inner-row\">\n          <small>EAC</small><strong>19</strong>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>KAC</small><strong>20</strong>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>vs. CM</small><strong>28</strong>\n        </div>\n      </div>\n    </div>\n    <div class=\"box-column w-30\">\n      <div class=\"rounded-box flex-column attack-bonuses\">\n        <div class=\"box-inner-row space-around\">\n          <small>Attack Bonuses</small>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>Melee (Str)</small><strong>{{charObject.bab.melee}}</strong>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>Ranged (Dex)</small><strong>{{charObject.bab.ranged}}</strong>\n        </div>\n        <div class=\"box-inner-row\">\n          <small>Thrown (Str)</small><strong>{{charObject.bab.thrown}}</strong>\n        </div>\n      </div>\n      <div class=\"rounded-box flex-column initiative\">\n        <div class=\"box-inner-row\">\n          <span>Initiative:</span><strong>{{charObject.ini}}</strong>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 711:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"page-header\">Dashboard</h2>\n<div class=\"dashboard-container\">\n    <div class=\"char-container\">\n        <div class=\"card char-card\">\n            <div class=\"add-char\" (click)=\"redirectCharBuild()\">\n                <i class=\"fas fa-2x fa-plus-circle\"></i>\n                <span>Create Character</span>\n            </div>\n        </div>\n    </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 712:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"jumbotron text-center mt-5\">\n    <h1>StarSeeker</h1>\n    <p class=\"lead\">A hub for all things Starfinder</p>\n    <div>\n      <a class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a class=\"btn btn-primary\" [routerLink]=\"['/login']\">Login</a>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <h3>Character Builder</h3>\n      <p>Build your own character from scratch:</p>\n      <button class=\"btn btn-primary\" [routerLink]=\"['/charBuild']\">Character Builder</button>\n    </div>\n    <div class=\"col-md-4\">\n      <h3>Create & Manage Campaigns</h3>\n      <p>Create campaigns and invite friends. Use StarSeeker as a hub for your character sheets and party inventories. Allow your players to make in-game purchases of gear in a controlled setting. Distribute loot without all the manual bookkeeping.</p>\n    </div>\n    <div class=\"col-md-4\">\n      <h3>All Things Starfinder</h3>\n      <p>In addition to characters, create starships, computers, and mechanic drones. Manage your equipment and more easliy track ammunition, charges, encumbrance, and item upgrades.</p>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ 713:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"userName\" name=\"userName\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n"
+
+/***/ }),
+
+/***/ 714:
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-dark bg-dark navbar-default\">\n  <a class=\"navbar-brand\" href=\"#\">StarSeeker</a>\n  <ul class=\"navbar-nav mr-auto navbar-left\">\n    <li><a routerLink=\"/\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Home</a></li>\n  </ul>\n  <div class=\"navbar-nav navbar-right navitem-spacing\">\n    <a *ngIf=\"!authService.loggedIn()\" routerLink=\"/login\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Login</a>\n    <a *ngIf=\"!authService.loggedIn()\" routerLink=\"/register\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Register</a>\n    <a *ngIf=\"authService.loggedIn()\" routerLink=\"/dashboard\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Dashboard</a>\n    <a *ngIf=\"authService.loggedIn()\" routerLink=\"/profile\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\">Profile</a>\n    <a *ngIf=\"authService.loggedIn()\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a>\n  </div>\n</nav>"
+
+/***/ }),
+
+/***/ 715:
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{ user.name }}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.userName}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n  </ul>\n</div>"
+
+/***/ }),
+
+/***/ 716:
+/***/ (function(module, exports) {
+
 module.exports = "<h2 class=\"page-header mt-3\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"userName\" name=\"userName\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\" >\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n</form>"
 
 /***/ }),
 
-/***/ 748:
+/***/ 754:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(399);
@@ -1368,7 +1709,7 @@ module.exports = __webpack_require__(399);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(379);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_jwt__ = __webpack_require__(531);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_jwt__ = __webpack_require__(533);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_jwt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_jwt__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1433,5 +1774,5 @@ var AuthService = (function () {
 
 /***/ })
 
-},[748]);
+},[754]);
 //# sourceMappingURL=main.bundle.map

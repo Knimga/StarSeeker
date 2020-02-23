@@ -15,18 +15,15 @@
 .multiclass-checkbox > * {margin: 5%;}
 
 .mc-on {background-color: #202020;height: 25%;}
-
 .mc-classlist {margin-left: 5%; color: lightgray;}
 .mc-classlist-item {display: flex; justify-content: space-between;}
 .mc-classlevel {display: flex; align-items: center;}
-
 .mc-selected {color: #6082a6; font-weight: bold;}
 .mc-placeholder {color: gray; margin-left: 5%;}
 .mc-error {color: pink; text-align: center;}
+.mc-charlevel {display: flex; justify-content: space-between; margin: auto 5%;}
 
 hr {border-color: white; margin-bottom: 0;}
-
-.mc-charlevel {display: flex; justify-content: space-between; margin: auto 5%;}
 
 .increment-button {
     display: flex; 
@@ -42,3 +39,7 @@ hr {border-color: white; margin-bottom: 0;}
     text-align: center;
     margin: 3%;
 }
+
+/* this is here b/c I couldn't figure out why the decisions container
+was smushed against the select class button... */
+.decisions {margin-top: 3%;} 

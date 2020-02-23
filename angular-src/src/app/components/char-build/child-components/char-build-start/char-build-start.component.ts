@@ -10,16 +10,26 @@ export class CharBuildStartComponent implements OnInit {
   startingLevel: Number = 1;
   error: String;
 
-  @Output() startComplete: EventEmitter<any> = new EventEmitter();
+  startData: Function = () => {
+    return {charName: this.charName, startingLevel: this.startingLevel}
+  }
+
+  @Output() startComplete: EventEmitter<Boolean> = new EventEmitter();
   @Output() startUpdate: EventEmitter<any> = new EventEmitter();
+  @Output() startGo: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
 
-  startGo() {
+  go() {
     if(this.validate()) 
-      this.startComplete.emit({charName: this.charName, startingLevel: this.startingLevel});
+      this.startGo.emit(this.startData())
+  }
+
+  updateParent() {
+    if(this.validate())
+      this.startUpdate.emit(this.startData())
   }
 
   inc(value) {
@@ -30,14 +40,17 @@ export class CharBuildStartComponent implements OnInit {
     }
   }
 
-  updateParent() {
-    if(this.validate()) 
-      this.startUpdate.emit({charName: this.charName, startingLevel: this.startingLevel})
-  }
-
   validate() {
-    if(!this.charName) {this.error = "Provide a character name"; return false;}
-      else {this.error = ""; return true;}
+    if(!this.charName) {
+      this.error = "Provide a character name";
+      this.startComplete.emit(false);
+      this.startUpdate.emit(this.startData());
+      return false;
+    } else {
+      this.error = "";
+      this.startComplete.emit(true);
+      return true;
+    }
   }
 
 }

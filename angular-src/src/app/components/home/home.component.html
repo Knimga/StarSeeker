@@ -1,23 +1,24 @@
-
-<div class="jumbotron text-center mt-5">
-  <h1>MEAN Authentication App</h1>
-  <p class="lead">Welcome to our custom MEAN authentication application built from scratch</p>
-  <div>
-    <a class="btn btn-primary" [routerLink]="['/register']">Register</a> <a class="btn btn-primary" [routerLink]="['/login']">Login</a>
+<div class="container">
+  <div class="jumbotron text-center mt-5">
+    <h1>StarSeeker</h1>
+    <p class="lead">A hub for all things Starfinder</p>
+    <div>
+      <a class="btn btn-primary" [routerLink]="['/register']">Register</a> <a class="btn btn-primary" [routerLink]="['/login']">Login</a>
+    </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-4">
-    <h3>Express Backend</h3>
-    <p>A rock solid Node.js/Express server using Mongoose to organize models and query the database</p>
-  </div>
-  <div class="col-md-4">
-    <h3>Angular-CLI</h3>
-    <p>Angular-CLI to generate components, services and more. Local dev server and easy compilation</p>
-  </div>
-  <div class="col-md-4">
-    <h3>JWT Tokens</h3>
-    <p>Full featured authentication using JSON web tokens. Login and store user data</p>
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Character Builder</h3>
+      <p>Build your own character from scratch:</p>
+      <button class="btn btn-primary" [routerLink]="['/charBuild']">Character Builder</button>
+    </div>
+    <div class="col-md-4">
+      <h3>Create & Manage Campaigns</h3>
+      <p>Create campaigns and invite friends. Use StarSeeker as a hub for your character sheets and party inventories. Allow your players to make in-game purchases of gear in a controlled setting. Distribute loot without all the manual bookkeeping.</p>
+    </div>
+    <div class="col-md-4">
+      <h3>All Things Starfinder</h3>
+      <p>In addition to characters, create starships, computers, and mechanic drones. Manage your equipment and more easliy track ammunition, charges, encumbrance, and item upgrades.</p>
+    </div>
   </div>
 </div>

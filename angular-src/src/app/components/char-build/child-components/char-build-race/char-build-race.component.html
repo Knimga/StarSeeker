@@ -16,7 +16,7 @@
       <div class="selection-desc">{{viewedRace.description}}</div>
       <div class="select-button-container">
         <button type="button" class="btn btn-primary btn-lg" (click)="selectRace(viewedRace)">Choose This Race</button>
-        <div *ngIf="viewedRaceDecisions && showDecisions">
+        <div *ngIf="viewedRace.raceName === selectedRace.raceName && viewedRaceDecisions && showDecisions">
           <div class="decisions">
             <div *ngFor="let decision of viewedRaceDecisions">
               <div>{{decision.selectLabel}}</div>

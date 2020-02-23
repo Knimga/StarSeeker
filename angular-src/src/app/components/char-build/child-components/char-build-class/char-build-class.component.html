@@ -67,10 +67,20 @@
             <small><strong>Weapons:</strong> {{viewedClass.classData.proficiencies.weapons.join(', ')}}</small>
           </div>
         </div>
-      
       </div>
       <div class="select-button-container">
         <button type="button" class="btn btn-primary btn-lg" (click)="selectClass(viewedClass)">Choose This Class</button>
+        <div *ngIf="classIsSelected(viewedClass.className) && viewedClassDecisions.length">
+          <div class="decisions">
+            <div *ngFor="let decision of viewedClassDecisions">
+              <div>{{decision.selectLabel}}</div>
+              <select class="custom-select" (change)="makeDecision(decision.name,$event.target)">
+                <option hidden disabled selected>Select</option>
+                <option *ngFor="let option of decision.selectOptions">{{option.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

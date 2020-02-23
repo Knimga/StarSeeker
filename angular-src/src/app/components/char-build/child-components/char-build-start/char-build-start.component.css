@@ -25,7 +25,7 @@ input:focus {background-color: #303030; color: white;}
 
 .increment-button:hover {background-color: #101010;}
 
-.error {position: absolute; bottom: 42%; color: pink;}
+.error {position: absolute; bottom: 30%; color: pink;}
 
 /* hides the increment buttons on number-type inputs */
 input[type=number]::-webkit-inner-spin-button,

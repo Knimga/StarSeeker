@@ -5,6 +5,7 @@ const RaceDesc = require('../models/raceDesc.model');
 const ThemeDesc = require('../models/themeDesc.model');
 const ClassDesc = require('../models/classDesc.model');
 const Skills = require('../models/skills.model');
+const BabSaves = require('../models/babSaves.model');
 
 async function getStaticData(model,res) {
     return model.find().lean().then((data) => {
@@ -16,5 +17,6 @@ router.get('/raceDesc', (req,res) => {getStaticData(RaceDesc,res)});
 router.get('/themeDesc', (req,res) => {getStaticData(ThemeDesc,res)});
 router.get('/classDesc', (req,res) => {getStaticData(ClassDesc,res)});
 router.get('/skills', (req,res) => {getStaticData(Skills,res)});
+router.get('/babSaves', (req,res) => {getStaticData(BabSaves,res)});
 
 module.exports = router;
