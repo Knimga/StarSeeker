@@ -14,9 +14,9 @@ export class CharBuildTrackerComponent implements OnInit {
   }
 
   classString() {
-    if(this.charObject.class) {
-      if(this.charObject.class.length == 1) {return this.charObject.class[0].className}
-        else {return this.charObject.class.map(c => `${c.className} (${c.classLevel})`).join(', ')}
+    if(this.charObject.classes) {
+      if(this.charObject.classes.length == 1) {return this.charObject.classes[0].className}
+        else {return this.charObject.classes.map(c => `${c.className} (${c.classLevel})`).join(', ')}
     }
   }
 

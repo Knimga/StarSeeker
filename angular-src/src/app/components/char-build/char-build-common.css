@@ -87,6 +87,8 @@
     color: lightgray;
 }
 
+.ability-card:hover {border: 1px solid gray;}
+
 .card-label {
     display: flex; justify-content: space-between;
     color: #6082a6;

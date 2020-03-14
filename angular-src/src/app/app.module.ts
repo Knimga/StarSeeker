@@ -25,6 +25,7 @@ import { CharBuildThemeComponent } from './components/char-build/child-component
 import { CharBuildClassComponent } from './components/char-build/child-components/char-build-class/char-build-class.component';
 import { CharBuildTrackerComponent } from './components/char-build/child-components/char-build-tracker/char-build-tracker.component';
 import { CharBuildASComponent } from './components/char-build/child-components/char-build-as/char-build-as.component';
+import { CharBuildClassChoicesComponent } from './components/char-build/child-components/char-build-class-choices/char-build-class-choices.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     CharBuildThemeComponent,
     CharBuildClassComponent,
     CharBuildTrackerComponent,
-    CharBuildASComponent
+    CharBuildASComponent,
+    CharBuildClassChoicesComponent
   ],
   imports: [
     BrowserModule,

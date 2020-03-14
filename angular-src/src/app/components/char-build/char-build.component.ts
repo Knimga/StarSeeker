@@ -17,7 +17,13 @@ export class CharBuildComponent implements OnInit {
     race: Object,
     theme: Object,
     classes: Array,
-    AS: Array,
+    AS: {
+      totals: Array,
+      race: Array,
+      theme: Array,
+      pb: Array,
+      levelInc: Array
+    },
     keyAS: Number,
     HP: Number,
     stamina: Number,
@@ -62,7 +68,13 @@ export class CharBuildComponent implements OnInit {
       race: null,
       theme: null,
       classes: [],
-      AS: [10,10,10,10,10,10],
+      AS: {
+        totals: [10,10,10,10,10,10],
+        race: [0,0,0,0,0,0],
+        theme: [0,0,0,0,0,0],
+        pb: [0,0,0,0,0,0],
+        levelInc: [0,0,0,0,0,0]
+      },
       keyAS: null,
       HP: null,
       stamina: null,
@@ -103,7 +115,8 @@ export class CharBuildComponent implements OnInit {
 
   }
 
-  logCharObject() {console.log(this.charObject)} //debugging purposes
+  logCharObject() {console.log(this.charObject)} //dev purposes
+  unlockAS() {this.isLocked.AS = false} //dev purposes
 
   showTab(tabName) {this.isShown = tabName}
 
@@ -127,11 +140,14 @@ export class CharBuildComponent implements OnInit {
   raceComplete(boolean) {this.isComplete.race = boolean; this.tabLockCheck();}
   themeComplete(boolean) {this.isComplete.theme = boolean; this.tabLockCheck();}
   classComplete(boolean) {this.isComplete.class = boolean; this.tabLockCheck();}
-
+  ASComplete(boolean) {this.isComplete.AS = boolean; this.tabLockCheck();}
+  
   raceUpdate(raceInfo) {
     if (raceInfo) {
       this.charObject.race = raceInfo.race;
+      this.charObject.AS.race = this.charObject.race.raceData.AS;
       this.updateDecisions('race',raceInfo.decisionsMade,raceInfo.decisionsToMake);
+      this.processDecisions();
       this.statCalc();
     }
   }
@@ -139,7 +155,9 @@ export class CharBuildComponent implements OnInit {
   themeUpdate(themeInfo) {
     if(themeInfo) {
       this.charObject.theme = themeInfo.theme;
+      this.charObject.AS.theme = this.charObject.theme.themeData.AS;
       this.updateDecisions('theme',themeInfo.decisionsMade,themeInfo.decisionsToMake);
+      this.processDecisions();
       this.statCalc();
     }
   }
@@ -148,12 +166,16 @@ export class CharBuildComponent implements OnInit {
     if(classInfo) {
       this.charObject.classes = classInfo.class;
       this.updateDecisions('class',classInfo.decisionsMade,classInfo.decisionsToMake);
+      this.processDecisions();
       this.statCalc();
     } else {this.isComplete.class = false}
   }
 
+  ASUpdate(newAS) {this.charObject.AS = newAS; this.statCalc();}
+
   tabLockCheck() {
-    if (this.isComplete.race && this.isComplete.theme && this.isComplete.class) {this.isLocked.AS = false}
+    if(this.isComplete.race && this.isComplete.theme && this.isComplete.class) {this.isLocked.AS = false}
+    if(this.isComplete.AS) {this.isLocked.classChoices = false}
   }
 
   updateDecisions(context,decisionsMade,decisionsToMake) {
@@ -165,7 +187,6 @@ export class CharBuildComponent implements OnInit {
 
   statCalc() {
     this.updateAS();
-    this.processDecisions();
     this.updateKeyAS();
     this.updateStamHPResolve();
     this.updateBabSaves();
@@ -176,7 +197,7 @@ export class CharBuildComponent implements OnInit {
     this.decisionsMade.forEach((d) => {
       switch (d.target) {
         case 'AS':
-          for (let i=0;i<6;i++) {this.charObject.AS[i] += d.value[i]}
+          if(d.context == 'race') this.charObject.AS.race = this.sumArrays([this.charObject.race.raceData.AS,d.value]);
           break;
         case 'keyAS':
           let targetClass = this.charObject.classes.find(c => c.className == d.value.className);
@@ -195,9 +216,8 @@ export class CharBuildComponent implements OnInit {
 
   updateAS() {
     let newAS = [10,10,10,10,10,10];
-    if(this.charObject.race) {for (let i=0;i<6;i++) {newAS[i] += this.charObject.race.raceData.AS[i]}}
-    if(this.charObject.theme) {newAS[this.charObject.theme.themeData.ASBonusIndex]++}
-    this.charObject.AS = newAS;
+    newAS = this.sumArrays([newAS,this.charObject.AS.race,this.charObject.AS.theme,this.charObject.AS.pb,this.charObject.AS.levelInc]);
+    this.charObject.AS.totals = newAS;
   }
 
   updateStamHPResolve() {
@@ -228,11 +248,17 @@ export class CharBuildComponent implements OnInit {
       will += allWills[i];
     }
     this.charObject.bab = {melee: bab + this.ASMod(0), ranged: bab + this.ASMod(1), thrown: bab + this.ASMod(0)}
-    this.charObject.saves = {fort: fort, ref: ref, will: will}
+    this.charObject.saves = {fort: fort + this.ASMod(2), ref: ref + this.ASMod(1), will: will  + this.ASMod(4)}
   }
 
   updateIni() {this.charObject.ini = this.ASMod(1)}
 
-  ASMod(ASIndex) {return Math.floor((this.charObject.AS[ASIndex] - 10) / 2)}
+  ASMod(ASIndex) {return Math.floor((this.charObject.AS.totals[ASIndex] - 10) / 2)}
+
+  sumArrays(arrayOfArrays) {
+    let bucket = [0,0,0,0,0,0];
+    for (let a=0;a<arrayOfArrays.length;a++) {for (let i=0;i<6;i++) {bucket[i] += arrayOfArrays[a][i]}}
+    return bucket;
+  }
 
 }

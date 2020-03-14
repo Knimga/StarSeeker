@@ -1,3 +1,72 @@
-<p>
-  char-build-as works!
-</p>
+<div class="component-container">
+  <div class="as-area">
+    <div class="col-double">
+      <small>Scores</small>
+      <div class="as-row">
+        <strong>STR</strong><div class="dark-box big-font">{{AS.totals[0]}}</div>
+      </div>
+      <div class="as-row">
+        <strong>DEX</strong><div class="dark-box big-font">{{AS.totals[1]}}</div>
+      </div>
+      <div class="as-row">
+        <strong>CON</strong><div class="dark-box big-font">{{AS.totals[2]}}</div>
+      </div>
+      <div class="as-row">
+        <strong>INT</strong><div class="dark-box big-font">{{AS.totals[3]}}</div>
+      </div>
+      <div class="as-row">
+        <strong>WIS</strong><div class="dark-box big-font">{{AS.totals[4]}}</div>
+      </div>
+      <div class="as-row">
+        <strong>CHA</strong><div class="dark-box big-font">{{AS.totals[5]}}</div>
+      </div>
+    </div>
+    <div class="col-op"><small></small><div *ngFor="let n of [1,2,3,4,5,6]" class="as-row">=</div></div>
+    <div class="col-half">
+      <small>Base</small>
+      <div class="as-row med-font">10</div>
+      <div class="as-row med-font">10</div>
+      <div class="as-row med-font">10</div>
+      <div class="as-row med-font">10</div>
+      <div class="as-row med-font">10</div>
+      <div class="as-row med-font">10</div>
+    </div>
+    <div class="col-op"><small></small><div *ngFor="let n of [1,2,3,4,5,6]" class="as-row">+</div></div>
+    <div class="col-half">
+      <small>Race</small>
+      <div *ngFor="let raceAS of AS.race; let i = index" class="as-row med-font">{{AS.race[i] || ''}}</div>
+    </div>
+    <div class="col-op"><small></small><div *ngFor="let n of [1,2,3,4,5,6]" class="as-row">+</div></div>
+    <div class="col-half">
+      <small>Theme</small>
+      <div *ngFor="let themeAS of AS.theme; let i = index" class="as-row med-font">{{AS.theme[i] || ''}}</div>
+    </div>
+    <div class="col-op"><small></small><div *ngFor="let n of [1,2,3,4,5,6]" class="as-row">+</div></div>
+    <div class="col-pb">
+      <small>Point Buy ({{pbCount}}/10)</small>
+      <div *ngFor="let pb of AS.pb; let i = index" class="pb-row">
+        <div class="input-group input-group-lg">
+          <input disabled type="number" [(ngModel)]="AS.pb[i]" name="AS.pb[i]">
+          <div class="btn-group-vertical">
+            <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="pbInc(1,i)">
+              <i class="fas fa-caret-up"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="pbInc(-1,i)">
+              <i class="fas fa-caret-down"></i>
+            </button>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let level of ASIncLevels()" class="as-inc-container">
+      <div class="col-op"><small></small><div *ngFor="let n of [1,2,3,4,5,6]" class="as-row">+</div></div>
+      <div class="col-double">
+        <small>Level {{level}}:</small>
+        <div *ngFor="let n of [1,2,3,4,5,6]; let i = index" class="as-row">
+          <span *ngIf="incValue(level,i)" class="med-font">{{incValue(level,i)}}</span>
+          <input type="checkbox" [disabled]="level != 5 && !validateASInc(level - 5)" (change)="ASInc($event.target,level,i)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

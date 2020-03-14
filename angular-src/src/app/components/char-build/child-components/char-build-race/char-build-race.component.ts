@@ -72,6 +72,7 @@ export class CharBuildRaceComponent implements OnInit {
 
     this.decisionsMade.push(decisionObject);
 
+    
     if(this.decisionsComplete()) {
       this.raceUpdate.emit({
         race: this.selectedRace,

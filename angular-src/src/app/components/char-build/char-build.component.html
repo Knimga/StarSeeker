@@ -6,8 +6,8 @@
       <button [disabled]="isLocked.raceThemeClass" type="button" class="btn btn-secondary {{isComplete.race ? 'tab-complete' : ''}} {{isShown == 'race' ? 'current-tab' : ''}}" (click)="showTab('race')">Race</button>
       <button [disabled]="isLocked.raceThemeClass" type="button" class="btn btn-secondary {{isComplete.theme ? 'tab-complete' : ''}} {{isShown == 'theme' ? 'current-tab' : ''}}" (click)="showTab('theme')">Theme</button>
       <button [disabled]="isLocked.raceThemeClass" type="button" class="btn btn-secondary {{isComplete.class ? 'tab-complete' : ''}} {{isShown == 'class' ? 'current-tab' : ''}}" (click)="showTab('class')">Class</button>
-      <button [disabled]="isLocked.AS" type="button" class="btn btn-secondary {{isComplete.AS ? 'tab-complete' : ''}} {{isShown == 'class' ? 'current-tab' : ''}}" (click)="showTab('AS')">Ability Scores</button>
-      <button disabled type="button" class="btn btn-secondary">Class Choices</button>
+      <button [disabled]="isLocked.AS" type="button" class="btn btn-secondary {{isComplete.AS ? 'tab-complete' : ''}} {{isShown == 'AS' ? 'current-tab' : ''}}" (click)="showTab('AS')">Ability Scores</button>
+      <button [disabled]="isLocked.classChoices" type="button" class="btn btn-secondary {{isComplete.classChoices ? 'tab-complete' : ''}} {{isShown == 'classChoices' ? 'current-tab' : ''}}" (click)="showTab('classChoices')">Class Choices</button>
       <button disabled type="button" class="btn btn-secondary">Skills</button>
       <button disabled type="button" class="btn btn-secondary">Feats</button>
       <button disabled type="button" class="btn btn-secondary">Spells</button>
@@ -15,13 +15,17 @@
     <div class="charBuild-area">
       <app-char-build-start [hidden]="isShown != 'start'" (startComplete)=startComplete($event) (startGo)=startGo($event) (startUpdate)=startUpdate($event)></app-char-build-start>
       <app-char-build-race [hidden]="isShown != 'race'" (raceComplete)=raceComplete($event) (raceUpdate)=raceUpdate($event)></app-char-build-race>
-      <app-char-build-theme [hidden]="isShown != 'theme'" (themeComplete)=themeComplete($event)></app-char-build-theme>
+      <app-char-build-theme [hidden]="isShown != 'theme'" (themeComplete)=themeComplete($event) (themeUpdate)=themeUpdate($event)></app-char-build-theme>
       <app-char-build-class [hidden]="isShown != 'class'" (classComplete)=classComplete($event) (classUpdate)=classUpdate($event) [charLevel]="charObject.charLevel" [skillsData]="skillsData"></app-char-build-class>
-      <app-char-build-as [hidden]="isShown != 'AS'"></app-char-build-as>
+      <app-char-build-as [hidden]="isShown != 'AS'" (ASComplete)=ASComplete($event) (ASUpdate)=ASUpdate($event) [AS]="charObject.AS" [charLevel]="charObject.charLevel"></app-char-build-as>
+      <app-char-build-class-choices [hidden]="isShown != 'classChoices'"></app-char-build-class-choices>
     </div>
   </div>
   <div class="sidebar-right">
     <app-char-build-tracker [charObject]="charObject"></app-char-build-tracker>
+    <!-- DEBUGGING BUTTONS; REMOVE FOR PROD 
     <button type="button" (click)="logCharObject()">Log charObject</button>
+    <button type="button" (click)="unlockAS()">Unlock AS</button>
+    -->
   </div>
 </div>
