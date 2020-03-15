@@ -64,7 +64,7 @@
         <small>Level {{level}}:</small>
         <div *ngFor="let n of [1,2,3,4,5,6]; let i = index" class="as-row">
           <span *ngIf="incValue(level,i)" class="med-font">{{incValue(level,i)}}</span>
-          <input type="checkbox" [disabled]="isLevelIncDisabled(level)" (change)="ASInc($event.target,level,i)">
+          <input type="checkbox" [disabled]="isLevelIncDisabled(level)" [checked]="incValue(level,i)" (change)="ASInc($event.target,level,i)">
         </div>
       </div>
     </div>

@@ -83,7 +83,10 @@ export class CharBuildASComponent implements OnInit {
 
   levelIncUpdate() {
     let incLevels = this.ASIncLevels(), arrayBucket = [];
-    for (let i=0;i<incLevels.length;i++) {arrayBucket.push(this.getIncArray(incLevels[i]))}
+    for (let i=0;i<incLevels.length;i++) {
+      if(!this.isLevelIncDisabled(incLevels[i])) {arrayBucket.push(this.getIncArray(incLevels[i]))}
+        else {this.getIncArray(incLevels[i]).fill(0)}
+    }
     this.AS.levelInc = this.sumArrays(arrayBucket);
     this.ASUpdate.emit(this.AS);
     this.ASComplete.emit(this.isASComplete());
