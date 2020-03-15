@@ -592,7 +592,7 @@ var CharBuildASComponent = (function () {
     CharBuildASComponent.prototype.ASInc = function (eventTarget, levelOfInc, ASIndex) {
         var targetArray = this.getIncArray(levelOfInc);
         if (eventTarget.checked) {
-            if (!this.validateASInc(levelOfInc)) {
+            if (!this.isIncComplete(levelOfInc)) {
                 targetArray[ASIndex] += (this.AS.totals[ASIndex] <= 16) ? 2 : 1;
             }
             else {
@@ -604,7 +604,7 @@ var CharBuildASComponent = (function () {
         }
         this.levelIncUpdate();
     };
-    CharBuildASComponent.prototype.validateASInc = function (levelOfInc) {
+    CharBuildASComponent.prototype.isIncComplete = function (levelOfInc) {
         var targetArray = this.getIncArray(levelOfInc), counter = 0;
         for (var i = 0; i < 6; i++) {
             if (targetArray[i])
@@ -616,7 +616,7 @@ var CharBuildASComponent = (function () {
         var ASIncComplete = true, levels = this.ASIncLevels();
         if (levels.length) {
             for (var i = 0; i < levels.length; i++) {
-                if (!this.validateASInc(levels[i]))
+                if (!this.isIncComplete(levels[i]))
                     ASIncComplete = false;
             }
         }
@@ -646,6 +646,16 @@ var CharBuildASComponent = (function () {
             array[i] = (i + 1) * 5;
         }
         return array;
+    };
+    CharBuildASComponent.prototype.isLevelIncDisabled = function (levelOfInc) {
+        if (levelOfInc != 5) {
+            var levels = this.ASIncLevels(), stoppingPoint = levels.indexOf(levelOfInc);
+            for (var i = 0; i < stoppingPoint; i++) {
+                if (!this.isIncComplete(levels[i]))
+                    return true;
+            }
+        }
+        return false;
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
@@ -1797,7 +1807,7 @@ module.exports = "<div class=\"charbuild-container\">\n  <div class=\"central-co
 /***/ 707:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"component-container\">\n  <div class=\"as-area\">\n    <div class=\"col-double\">\n      <small>Scores</small>\n      <div class=\"as-row\">\n        <strong>STR</strong><div class=\"dark-box big-font\">{{AS.totals[0]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>DEX</strong><div class=\"dark-box big-font\">{{AS.totals[1]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>CON</strong><div class=\"dark-box big-font\">{{AS.totals[2]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>INT</strong><div class=\"dark-box big-font\">{{AS.totals[3]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>WIS</strong><div class=\"dark-box big-font\">{{AS.totals[4]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>CHA</strong><div class=\"dark-box big-font\">{{AS.totals[5]}}</div>\n      </div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">=</div></div>\n    <div class=\"col-half\">\n      <small>Base</small>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n    <div class=\"col-half\">\n      <small>Race</small>\n      <div *ngFor=\"let raceAS of AS.race; let i = index\" class=\"as-row med-font\">{{AS.race[i] || ''}}</div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n    <div class=\"col-half\">\n      <small>Theme</small>\n      <div *ngFor=\"let themeAS of AS.theme; let i = index\" class=\"as-row med-font\">{{AS.theme[i] || ''}}</div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n    <div class=\"col-pb\">\n      <small>Point Buy ({{pbCount}}/10)</small>\n      <div *ngFor=\"let pb of AS.pb; let i = index\" class=\"pb-row\">\n        <div class=\"input-group input-group-lg\">\n          <input disabled type=\"number\" [(ngModel)]=\"AS.pb[i]\" name=\"AS.pb[i]\">\n          <div class=\"btn-group-vertical\">\n            <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"pbInc(1,i)\">\n              <i class=\"fas fa-caret-up\"></i>\n            </button>\n            <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"pbInc(-1,i)\">\n              <i class=\"fas fa-caret-down\"></i>\n            </button>\n          </div>      \n        </div>\n      </div>\n    </div>\n    <div *ngFor=\"let level of ASIncLevels()\" class=\"as-inc-container\">\n      <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n      <div class=\"col-double\">\n        <small>Level {{level}}:</small>\n        <div *ngFor=\"let n of [1,2,3,4,5,6]; let i = index\" class=\"as-row\">\n          <span *ngIf=\"incValue(level,i)\" class=\"med-font\">{{incValue(level,i)}}</span>\n          <input type=\"checkbox\" [disabled]=\"level != 5 && !validateASInc(level - 5)\" (change)=\"ASInc($event.target,level,i)\">\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"component-container\">\n  <div class=\"as-area\">\n    <div class=\"col-double\">\n      <small>Scores</small>\n      <div class=\"as-row\">\n        <strong>STR</strong><div class=\"dark-box big-font\">{{AS.totals[0]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>DEX</strong><div class=\"dark-box big-font\">{{AS.totals[1]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>CON</strong><div class=\"dark-box big-font\">{{AS.totals[2]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>INT</strong><div class=\"dark-box big-font\">{{AS.totals[3]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>WIS</strong><div class=\"dark-box big-font\">{{AS.totals[4]}}</div>\n      </div>\n      <div class=\"as-row\">\n        <strong>CHA</strong><div class=\"dark-box big-font\">{{AS.totals[5]}}</div>\n      </div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">=</div></div>\n    <div class=\"col-half\">\n      <small>Base</small>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n      <div class=\"as-row med-font\">10</div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n    <div class=\"col-half\">\n      <small>Race</small>\n      <div *ngFor=\"let raceAS of AS.race; let i = index\" class=\"as-row med-font\">{{AS.race[i] || ''}}</div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n    <div class=\"col-half\">\n      <small>Theme</small>\n      <div *ngFor=\"let themeAS of AS.theme; let i = index\" class=\"as-row med-font\">{{AS.theme[i] || ''}}</div>\n    </div>\n    <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n    <div class=\"col-pb\">\n      <small>Point Buy ({{pbCount}}/10)</small>\n      <div *ngFor=\"let pb of AS.pb; let i = index\" class=\"pb-row\">\n        <div class=\"input-group input-group-lg\">\n          <input disabled type=\"number\" [(ngModel)]=\"AS.pb[i]\" name=\"AS.pb[i]\">\n          <div class=\"btn-group-vertical\">\n            <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"pbInc(1,i)\">\n              <i class=\"fas fa-caret-up\"></i>\n            </button>\n            <button type=\"button\" class=\"btn btn-sm btn-secondary increment-button\" (click)=\"pbInc(-1,i)\">\n              <i class=\"fas fa-caret-down\"></i>\n            </button>\n          </div>      \n        </div>\n      </div>\n    </div>\n    <div *ngFor=\"let level of ASIncLevels()\" class=\"as-inc-container\">\n      <div class=\"col-op\"><small></small><div *ngFor=\"let n of [1,2,3,4,5,6]\" class=\"as-row\">+</div></div>\n      <div class=\"col-double\">\n        <small>Level {{level}}:</small>\n        <div *ngFor=\"let n of [1,2,3,4,5,6]; let i = index\" class=\"as-row\">\n          <span *ngIf=\"incValue(level,i)\" class=\"med-font\">{{incValue(level,i)}}</span>\n          <input type=\"checkbox\" [disabled]=\"isLevelIncDisabled(level)\" (change)=\"ASInc($event.target,level,i)\">\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
