@@ -18,7 +18,7 @@
           <div class="decisions">
             <div *ngFor="let decision of viewedThemeDecisions">
               <div>{{decision.selectLabel}}</div>
-              <select class="custom-select" (change)="makeDecision(decision.name,$event.target)">
+              <select class="custom-select dark-select" (change)="makeDecision(decision.name,$event.target)">
                 <option hidden disabled selected>Select</option>
                 <option *ngFor="let option of decision.selectOptions">{{option.name}}</option>
               </select>
@@ -30,10 +30,15 @@
   </div>
   <div class="container-column-1">
     <div *ngIf="!viewedTheme" class="placeholder"></div>
+    <h4 *ngIf="viewedTheme" class="ability-section-header">Theme Abilities</h4>
     <div *ngIf="viewedTheme" class="ability-container">
       <div *ngFor="let ability of viewedTheme.themeAbilities; let i = index" class="card ability-card" (click)="hideShow(i)">
           <div class="card-label">
-            <div>{{ability.name}}</div><div>Level {{ability.level}}</div>
+            <div>{{ability.name}} (Level {{ability.level}})</div>
+            <div>
+              <div *ngIf="!showDesc[i]"><i class="fas fa-caret-down"></i></div>
+              <div *ngIf="showDesc[i]"><i class="fas fa-caret-left"></i></div>
+            </div>
           </div>
           <div class="ability-desc" *ngIf="showDesc[i]">
             {{ability.description}}

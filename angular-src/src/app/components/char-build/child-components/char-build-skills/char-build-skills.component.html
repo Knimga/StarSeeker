@@ -1,0 +1,50 @@
+<div class="component-container">
+  <div class="rounded-box">
+    <div class="container-1">
+      <div class="ranks-remaining {{tooManyRanks() ? 'error' : ''}}">
+        <span>Ranks Remaining: {{ranksSpent}} / {{skillRanks}}</span>
+        <button type="button" class="btn btn-sm btn-primary" (click)="resetRanks()">Reset</button>
+      </div>
+      <div class="labels-row">
+        <span class="totals-label">Totals</span>
+        <span class="ranks-label">Ranks</span>
+        <span class="mod-label">Mod</span>
+        <span class="trained-label">Trained</span>
+        <span class="bonus-label">Bonus</span>
+      </div>
+      <div class="skills-column">
+        <div *ngFor="let skill of skillsData; let s = index" class="skill-row">
+          <div class="skill-header {{(charSkills.classSkills[s]) ? 'bold highlight' : ''}}">
+            <div class="skill-label">
+              <i class="{{(charSkills.classSkills[s]) ? 'fas' : 'far'}} fa-circle fa-xs"></i>
+              <span>{{skill.skillName}}</span>
+              <span class="badge badge-secondary {{(charSkills.classSkills[s]) ? 'highlight' : 'lightgray'}}">{{skill.ASName}}</span>
+            </div>
+            <strong class="skill-total">{{charSkills.totals[s]}}</strong>
+          </div>
+          <div>=</div>
+          <div class="rank-inc-group">
+            <div class="rank-value {{(ranks[s]) ? 'highlight bold' : ''}}">{{ranks[s]}}</div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-secondary increment-button left-inc" (click)="rankInc(1,s)">
+                <i class="fas fa-caret-up fa-xs"></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-secondary increment-button right-inc" (click)="rankInc(-1,s)">
+                <i class="fas fa-caret-down fa-xs"></i>
+              </button>
+            </div> 
+          </div>
+          <div>+</div>
+          <div class="skill-breakdown">
+            <div>{{charSkills.mod[s]}}</div>
+            <div>+</div>
+            <div>{{charSkills.trained[s]}}</div>
+            <div>+</div>
+            <div>{{charSkills.bonuses[s]}}</div>
+          </div>
+        </div>   
+      </div>     
+    </div>   
+  </div>
+</div>
+<!-- <button type="button" (click)="log()">skillLog()</button> -->

@@ -27,7 +27,7 @@ export class CharBuildASComponent implements OnInit {
   @Output() ASUpdate: EventEmitter<Object> = new EventEmitter();
   @Output() ASComplete: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() {}
+  //constructor() {}
 
   ngOnInit() {}
 
@@ -37,6 +37,10 @@ export class CharBuildASComponent implements OnInit {
       this.pbCount += value;
       this.ASUpdate.emit(this.AS);
       this.ASComplete.emit(this.isASComplete());
+    }
+    if(this.pbCount != 10 && this.charLevel >= 5) {
+      this.ASIncLevels().forEach(l => this.clearASInc(l));
+      this.levelIncUpdate();
     }
   }
 
@@ -53,12 +57,14 @@ export class CharBuildASComponent implements OnInit {
   pb18orBelow(value,pbIndex) {
     let AS = this.sumArrays([[10,10,10,10,10,10],this.AS.race,this.AS.theme,this.AS.pb]);
     AS[pbIndex] += value;
-    for (let i=0;i<6;i++) {if(AS[i] > 18) return false} return true;
+    return !AS.some(abScore => abScore > 18);
   }
 
   getIncArray(levelOfInc) {return this.ASIncTracker.find(as => as.level == levelOfInc).inc}
 
   incValue(levelOfInc,ASIndex) {return this.ASIncTracker.find(as => as.level == levelOfInc).inc[ASIndex]}
+
+  clearASInc(levelOfInc) {this.ASIncTracker.find(as => as.level == levelOfInc).inc.fill(0)}
 
   ASInc(eventTarget,levelOfInc,ASIndex) {
     let targetArray = this.getIncArray(levelOfInc);
@@ -70,19 +76,19 @@ export class CharBuildASComponent implements OnInit {
   }
 
   isIncComplete(levelOfInc) {
-    let targetArray = this.getIncArray(levelOfInc), counter = 0;
+    const targetArray = this.getIncArray(levelOfInc); let counter = 0;
     for (let i=0;i<6;i++) {if(targetArray[i]) counter++}
-    return (counter < 4) ? false : true;
+    return !(counter < 4);
   }
 
   isASComplete() {
-    let ASIncComplete = true, levels = this.ASIncLevels();
+    let ASIncComplete = true; const levels = this.ASIncLevels();
     if(levels.length) {for (let i=0;i<levels.length;i++) {if(!this.isIncComplete(levels[i])) ASIncComplete = false}}
-    return (this.pbCount == 10 && ASIncComplete) ? true : false;
+    return this.pbCount == 10 && ASIncComplete;
   }
 
   levelIncUpdate() {
-    let incLevels = this.ASIncLevels(), arrayBucket = [];
+    const incLevels = this.ASIncLevels(); let arrayBucket = [];
     for (let i=0;i<incLevels.length;i++) {
       if(!this.isLevelIncDisabled(incLevels[i])) {arrayBucket.push(this.getIncArray(incLevels[i]))}
         else {this.getIncArray(incLevels[i]).fill(0)}
@@ -99,17 +105,15 @@ export class CharBuildASComponent implements OnInit {
   }
 
   ASIncLevels() {
-    let length = Math.floor(this.charLevel / 5), array = [];
-    for (let i=0;i<length;i++) {array[i] = (i + 1) * 5}
+    const length = Math.floor(this.charLevel / 5); let array = [];
+    for (let i=0;i<length;i++) array[i] = (i + 1) * 5;
     return array;
   }
 
   isLevelIncDisabled(levelOfInc) {
     if(levelOfInc != 5) {
-      let levels = this.ASIncLevels(), stoppingPoint = levels.indexOf(levelOfInc);
-      for (let i=0;i<stoppingPoint;i++) {if(!this.isIncComplete(levels[i])) return true}
-    }
-    return false;
+      const levels = this.ASIncLevels(), stoppingPoint = levels.indexOf(levelOfInc);
+      for (let i=0;i<stoppingPoint;i++) if(!this.isIncComplete(levels[i])) return true;
+    } else {return (this.pbCount != 10)}
   }
-
 }

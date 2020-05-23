@@ -36,7 +36,7 @@
       </div>
     </div>
     <ul class="list-group">
-      <li *ngFor="let class of classes" class="list-group-item {{selectedClassNames.includes(class.className) ? 'selected' : ''}}" (click)="viewClass(class)">{{class.className}}</li>
+      <li *ngFor="let class of classes" class="list-group-item {{selectedClassNames.includes(class.className) ? 'selected' : ''}} {{(viewedClass == class) ? 'viewed-class' : ''}}" (click)="viewClass(class)">{{class.className}}</li>
     </ul>
   </div>
   <div class="container-column-1">
@@ -44,10 +44,10 @@
     <div *ngIf="viewedClass" class="selection-detail">
       <h4>{{viewedClass.className}}</h4>
       <div class="stat-box-centered">
-        <strong>Stamina: {{viewedClass.classData.stamina}} + Con mod</strong>
-        <strong>HP: {{viewedClass.classData.HP}}</strong>
+        <strong>Stamina: {{viewedClass.stamina}} + Con mod</strong>
+        <strong>HP: {{viewedClass.hp}}</strong>
       </div>
-      <div class="selection-desc">{{viewedClass.description}}</div>
+      <div class="selection-desc">{{viewedClass.desc}}</div>
       <div class="stat-box-centered">
         <div class="class-detail">
           <strong>Key Ability Score:</strong>
@@ -55,16 +55,16 @@
         </div>
         <div class="class-detail">
           <strong>Skills:</strong>
-          <span>Ranks per Level: {{viewedClass.classData.skillRanksPerLvl}}</span>
-          <small>{{createSkillList(viewedClass.classData.skills)}}</small>
+          <span>Ranks per Level: {{viewedClass.skillRanksPerLvl}} + Int mod</span>
+          <small>{{createSkillList(viewedClass.classSkills)}}</small>
         </div>
         <div class="class-detail">
           <strong>Proficiencies:</strong>
           <div class="proficiencies">
-            <small><strong>Armor:</strong> {{viewedClass.classData.proficiencies.armor.join(', ')}}</small>
+            <small><strong>Armor:</strong> {{createProfList(viewedClass.armorProf)}}</small>
           </div>
           <div class="proficiencies">
-            <small><strong>Weapons:</strong> {{viewedClass.classData.proficiencies.weapons.join(', ')}}</small>
+            <small><strong>Weapons:</strong> {{createProfList(viewedClass.weapProf)}}</small>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
           <div class="decisions">
             <div *ngFor="let decision of viewedClassDecisions">
               <div>{{decision.selectLabel}}</div>
-              <select class="custom-select" (change)="makeDecision(decision.name,$event.target)">
+              <select class="custom-select dark-select" (change)="makeDecision(decision.name,$event.target)">
                 <option hidden disabled selected>Select</option>
                 <option *ngFor="let option of decision.selectOptions">{{option.name}}</option>
               </select>
@@ -86,10 +86,13 @@
   </div>
   <div class="container-column-1">
     <div *ngIf="!viewedClass" class="placeholder"></div>
+    <h4 *ngIf="viewedClass" class="ability-section-header">Class Features</h4>
     <div *ngIf="viewedClass" class="ability-container">
-      <div *ngFor="let feature of viewedClass.classFeatures; let i = index" class="card ability-card" (click)="hideShow(i)">
+      <div *ngFor="let feature of viewedClassFeatures; let i = index" class="card ability-card" (click)="hideShow(i)">
         <div class="card-label">
-          <div>{{feature.name}}</div><div>Level {{feature.level}}</div>
+          <div>{{feature.featureName}} (Level {{feature.level}})</div>
+          <div *ngIf="!showDesc[i]"><i class="fas fa-caret-down"></i></div>
+          <div *ngIf="showDesc[i]"><i class="fas fa-caret-left"></i></div>
         </div>
         <div class="ability-desc" *ngIf="showDesc[i]">
           {{feature.desc}}
@@ -98,3 +101,4 @@
     </div>
   </div>
 </div>
+<button type="button" (click)="log()">log()</button>

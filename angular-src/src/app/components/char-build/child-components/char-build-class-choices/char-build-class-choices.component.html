@@ -1,3 +1,41 @@
-<p>
-  char-build-class-choices works!
-</p>
+<div class="component-container">
+  <div class="container-column-1">
+    <div class="selection-list">
+      <div *ngFor="let ability of selectionList.options; let i = index" class="ability-card card" (click)="hideShow(i)">
+        <div class="card-label">
+          <div>
+            <span><i *ngIf="ability.solarianMode" class="fas fa-circle fa-xs {{solarianModeClass(ability.solarianMode)}}" title="{{ability.solarianMode}}"></i>{{ability.optionName}}</span>
+            <span>{{(ability.level) ? ' (Level '+ability.level+')' : ''}}</span>
+          </div>
+          <div *ngIf="!showDesc[i]"><i class="fas fa-caret-down"></i></div>
+          <div *ngIf="showDesc[i]"><i class="fas fa-caret-left"></i></div>
+        </div>
+        <div class="show-hide" *ngIf="showDesc[i]">
+          <div class="ability-desc" >{{ability.desc || ''}}</div>
+          <button class="btn btn secondary ability-select" [disabled]=!canSelect(ability) (click)="selectAbility(selectionList.options[i])" title="{{(!canSelect(ability)) ? 'You cannot choose this.' : ''}}" type="button">Select <i class="fas fa-angle-double-right fa-lg"></i></button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!selectionList.options.length" class="selection-list-placeholder"><span class="italic">Click an ability slot...</span></div>
+  </div>
+  <div class="class-choices-column">
+    <div *ngFor="let class of decisionTracker" class="class-card">
+      <div class="class-name">{{class.className}}, Level {{class.classLevel}}</div>
+      <div *ngIf="noChoicesToMake()" class="italic gray">(No choices to make yet!)</div>
+      <div *ngFor="let decision of class.decisions" class="decision-group">
+        <div class="class-name">{{decision.name}}</div>
+        <button *ngFor="let slot of decision.slots" (click)="clickSlot(class.className,decision,slot.level)" class="btn btn-secondary ability-slot {{(isClicked(decision.name,slot.level)) ? 'clicked' : ''}} {{(slot.selection) ? 'filled' : ''}}" type="button">
+          <i class="fas fa-angle-double-left fa-lg {{hasRemoveOption(class.className,decision,slot.level) ? 'remove' : ''}}" title="{{hasRemoveOption(class.className,decision,slot.level) ? 'Remove' : ''}}" (click)="hasRemoveOption(class.className,decision,slot.level) && removeAbility(class.className,decision.name,slot.level)"></i>
+          <div class="{{(slot.selection) ? 'slot-label' : 'italic'}}">
+            <span *ngIf="slot.selection">
+              <i *ngIf="slot.selection.solarianMode" class="fas fa-circle fa-xs {{solarianModeClass(slot.selection.solarianMode)}}" title="{{slot.selection.solarianMode}}"></i>{{slot.selection.optionName}}
+            </span>
+            <span *ngIf="!slot.selection">{{slotPlaceholderText(decision.name,slot.level)}}</span>
+          </div>
+          <div>Level {{slot.level}}</div> 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <button type="button" (click)="log()">Log()</button> -->

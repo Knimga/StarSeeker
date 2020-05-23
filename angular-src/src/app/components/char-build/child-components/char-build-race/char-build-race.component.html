@@ -20,7 +20,7 @@
           <div class="decisions">
             <div *ngFor="let decision of viewedRaceDecisions">
               <div>{{decision.selectLabel}}</div>
-              <select class="custom-select" (change)="makeDecision(decision.name,$event.target)">
+              <select class="custom-select dark-select" (change)="makeDecision(decision,$event.target)">
                 <option hidden disabled selected>Select</option>
                 <option *ngFor="let option of decision.selectOptions">{{option.name}}</option>
               </select>
@@ -32,15 +32,28 @@
   </div>
   <div class="container-column-1">
     <div *ngIf="!viewedRace" class="placeholder"></div>
+    <h4 *ngIf="viewedRace" class="ability-section-header">Racial Abilities</h4>
     <div *ngIf="viewedRace" class="ability-container">
       <div *ngFor="let ability of viewedRace.racialAbilities; let i = index" class="card ability-card" (click)="hideShow(i)">
         <div class="card-label">
           <div>{{ability.name}}</div>
+          <div *ngIf="!showDesc[i]"><i class="fas fa-caret-down"></i></div>
+          <div *ngIf="showDesc[i]"><i class="fas fa-caret-left"></i></div>
         </div>
         <div class="ability-desc" *ngIf="showDesc[i]">
-          {{ability.description}}
+          <div>{{ability.description}}</div>
+          <div *ngIf="viewedRace.raceName === selectedRace.raceName && ability.decision">
+            <div class="decisions">
+              <div>{{ability.decision.selectLabel}}</div>
+              <select *ngFor="let selection of makeArray(ability.decision.selectionCount); let i = index" class="custom-select dark-select" (change)="makeDecision(ability.decision,$event.target,i)">
+                <option hidden disabled selected>Select</option>
+                <option *ngFor="let option of ability.decision.selectOptions">{{option.name}}</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- <button type="button" (click)="log()">log()</button> -->

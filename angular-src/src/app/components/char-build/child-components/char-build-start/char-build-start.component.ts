@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-char-build-start',
@@ -22,18 +22,17 @@ export class CharBuildStartComponent implements OnInit {
 
   ngOnInit() {}
 
-  go() {
-    if(this.validate()) 
-      this.startGo.emit(this.startData())
+  go() {if(this.validate()) this.startGo.emit(this.startData())}
+
+  name() {
+    this.charName = this.charName.charAt(0).toUpperCase() + this.charName.slice(1);
+    this.updateParent();
   }
 
-  updateParent() {
-    if(this.validate())
-      this.startUpdate.emit(this.startData())
-  }
+  updateParent() {if(this.validate()) this.startUpdate.emit(this.startData())}
 
-  inc(value) {
-    let newLevel = this.startingLevel + value;
+  levelInc(value) {
+    const newLevel = this.startingLevel + value;
     if(newLevel > 0 && newLevel < 21) {
       this.startingLevel = newLevel;
       this.updateParent();

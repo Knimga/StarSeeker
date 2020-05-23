@@ -40,6 +40,8 @@ hr {border-color: white; margin-bottom: 0;}
     margin: 3%;
 }
 
+.viewed-class {border-right: 2px solid white;}
+
 /* this is here b/c I couldn't figure out why the decisions container
 was smushed against the select class button... */
 .decisions {margin-top: 3%;} 

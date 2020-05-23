@@ -1,0 +1,109 @@
+.component-container {color: lightgray;}
+
+.container-column-1 > * {margin: 1% 0;}
+
+.selection-list-placeholder {
+    height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center;
+    background-color: #202020; color: gray;
+    border-radius: 15px;
+}
+
+.selection-list-placeholder > * {margin: 40% 0;}
+
+.select-label {align-self: center; font-weight: bold; font-size: 125%;}
+
+.ability-select {
+    background-color: darkgreen;
+    color: lightgreen;
+    margin-top: 4%;
+    width: 30%;
+}
+.ability-select:hover {color: white; border: 1px solid lightgreen;}
+.ability-select:disabled {background-color: gray; color: lightgray;}
+.ability-select:disabled:hover {color: white; border: 1px solid white;}
+
+.card-label > div {white-space: nowrap;}
+
+.show-hide {
+    display: flex; flex-direction: column;
+    align-items: flex-end;
+}
+
+.class-choices-column {
+    flex-grow: 1;
+    height: 100%;
+    padding: 10px;
+    display: flex; flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.class-card {   
+    width: 100%; height: auto;
+    background-color: #303030;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 3%;
+    display: flex; flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.class-name {font-weight: bold;}
+
+.decision-group {
+    width: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 3% 0;
+    background-color: #202020;
+    border-radius: 15px;
+    padding-top: 2%;
+}
+
+.ability-slot {
+    width: 90%; min-height: 10%;
+    background-color: #303030;
+    color: gray;
+    border-radius: 15px;
+    padding: 10px; margin: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid gray;
+}
+
+.clicked {
+    border: 3px solid lightgray; 
+    color: #407cbd;
+    background-color: #101010;
+}
+
+.filled {color: #407cbd;}
+
+.ability-slot:hover {border: 2px solid lightgray; color: lightgray;}
+
+.ability-slot.clicked:hover {
+    border: 3px solid lightgray; 
+    color: #6ca3df;
+    background-color: black;
+}
+.remove {color: darkred;}
+.remove:hover {color: pink;}
+
+.slot-label {
+    font-size: 110%;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.orange {color: goldenrod;}
+.purple {color: rebeccapurple;}
+.gray {color: gray;}
+
+.fa-circle {margin-right: 2%;}
+
+.italic {font-style: italic;}

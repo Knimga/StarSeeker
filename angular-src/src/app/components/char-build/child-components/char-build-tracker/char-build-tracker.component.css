@@ -10,21 +10,33 @@
 
 .rounded-box {
     display: flex; justify-content: space-evenly;
-    width: 100%; min-height: 2em;
+    width: 100%; 
+    min-height: 2em;
     background-color: #202020; color: lightgray;
     border-radius: 15px;
     padding: 1% 5%;
     font-size: 90%;
 }
 
-.box-inner-row {display: flex; justify-content: space-between; min-height: 1em;}
+.rounded-box.features {padding: 2%;}
+.rounded-box.class-features {justify-content: flex-start;}
+
+.box-inner-row {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    min-height: 1em;
+    white-space: nowrap;
+}
 
 .box-column {display: flex; flex-direction: column; justify-content: space-between;}
-.box-column > * {margin: 2% auto;}
+.box-column > * {margin: 2%;}
 .box-row {display: flex;}
 
 .normal-font {font-size: 100%;}
+.small-font {font-size: 90%;}
 .flex-column {flex-direction: column;}
+
 .space-around {justify-content: space-around;}
 .space-between {justify-content: space-between;}
 
@@ -35,10 +47,36 @@
 .stamina {color: darkseagreen;}
 .resolve {color: lightblue;}
 
+.gray {color: gray;}
+.highlight {color: lightsteelblue;}
+
+.dark {background-color: #191919;}
+
 .w-30 {width: 29%;}
 .w-40 {width: 39%;}
+.w-50 {width: 49%;}
 
 .AS > .box-inner-row {justify-content: space-between;}
 .saves > .box-inner-row, .AC > .box-inner-row {justify-content: space-around;}
 .attack-bonuses {flex-grow: 1;}
 .initiative {flex-grow: 0.5;}
+
+.class-features {max-height: 33%;}
+.feature-list {overflow-y: auto; max-height: 100%; overflow-x: hidden;}
+
+.feature-row {
+    border-radius: 7px;
+    margin-right: 2%;
+    padding: 0 3%;
+}
+.feature-row:hover {border: 1px solid gray;}
+
+::-webkit-scrollbar {
+    width: 3%;  /* set to 0px to hide scrollbar */
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+    background-color: #777;
+}

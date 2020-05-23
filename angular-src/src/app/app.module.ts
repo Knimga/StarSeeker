@@ -17,6 +17,7 @@ import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
 
 import {DataService} from './services/data.service';
+import {CharClassService} from './services/char-class.service';
 
 import { CharBuildComponent } from './components/char-build/char-build.component';
 import { CharBuildStartComponent } from './components/char-build/child-components/char-build-start/char-build-start.component';
@@ -26,6 +27,8 @@ import { CharBuildClassComponent } from './components/char-build/child-component
 import { CharBuildTrackerComponent } from './components/char-build/child-components/char-build-tracker/char-build-tracker.component';
 import { CharBuildASComponent } from './components/char-build/child-components/char-build-as/char-build-as.component';
 import { CharBuildClassChoicesComponent } from './components/char-build/child-components/char-build-class-choices/char-build-class-choices.component';
+import { CharBuildSkillsComponent } from './components/char-build/child-components/char-build-skills/char-build-skills.component';
+import { CharBuildFeatsComponent } from './components/char-build/child-components/char-build-feats/char-build-feats.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -52,7 +55,9 @@ const appRoutes: Routes = [
     CharBuildClassComponent,
     CharBuildTrackerComponent,
     CharBuildASComponent,
-    CharBuildClassChoicesComponent
+    CharBuildClassChoicesComponent,
+    CharBuildSkillsComponent,
+    CharBuildFeatsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ValidateService,AuthService,AuthGuard,DataService],
+  providers: [ValidateService,AuthService,AuthGuard,DataService,CharClassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

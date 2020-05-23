@@ -5,7 +5,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Character Name</span>
         </div>
-        <input type="text" [(ngModel)]="charName" name="charName" (change)="updateParent()">
+        <input type="text" [(ngModel)]="charName" name="charName" (input)="name()">
       </div>
     </div>
     <div class="starting-level-container">
@@ -15,10 +15,10 @@
         </div>
         <input disabled type="number" [(ngModel)]="startingLevel" name="startingLevel">
         <div class="btn-group-vertical">
-          <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="inc(1)">
+          <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="levelInc(1)">
             <i class="fas fa-caret-up"></i>
           </button>
-          <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="inc(-1)">
+          <button type="button" class="btn btn-sm btn-secondary increment-button" (click)="levelInc(-1)">
             <i class="fas fa-caret-down"></i>
           </button>
         </div>      

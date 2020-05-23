@@ -4,7 +4,7 @@ import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'app-char-build-theme',
   templateUrl: './char-build-theme.component.html',
-  styleUrls: ['./char-build-theme.component.css','../../char-build-common.css']
+  styleUrls: ['../../char-build-common.css']
 })
 export class CharBuildThemeComponent implements OnInit {
   themes: Object;
@@ -12,7 +12,7 @@ export class CharBuildThemeComponent implements OnInit {
   viewedThemeDecisions: any[];
   selectedTheme: any = {};
   showDecisions: Boolean;
-  decisionsMade: {name: String, context: String, target: String, value: any}[] = [];
+  decisionsMade: {name: String, context: String, effect: any}[] = [];
   showDesc: any = {};
 
   @Output() themeComplete: EventEmitter<Boolean> = new EventEmitter();
@@ -35,7 +35,7 @@ export class CharBuildThemeComponent implements OnInit {
       this.viewedThemeDecisions = this.viewedTheme.decisions.filter(d => d.context == 'theme')
     } else {this.viewedThemeDecisions = null}
 
-    let length = this.viewedTheme.themeAbilities.length;
+    const length = this.viewedTheme.themeAbilities.length;
     for (let i=0;i<length;i++) {this.showDesc[i] = false}
   }
 
@@ -57,14 +57,12 @@ export class CharBuildThemeComponent implements OnInit {
   hideShow(i) {this.showDesc[i] = !this.showDesc[i]}
 
   makeDecision(decisionName,selectElement) {
-    let thisDecision = this.viewedThemeDecisions.find((d) => d.name == decisionName);
-    let decisionEffect = thisDecision.selectOptions[selectElement.selectedIndex - 1].effect;
+    const thisDecision = this.viewedThemeDecisions.find((d) => d.name == decisionName);
 
-    let decisionObject = {
+    const decisionObject = {
       name: thisDecision.name, 
       context: thisDecision.context,
-      target: decisionEffect.target,
-      value: decisionEffect.value
+      effect: thisDecision.selectOptions[selectElement.selectedIndex - 1].effect
     }
 
     if(this.decisionsMade.find(d => d.name === decisionName)) {
@@ -84,7 +82,7 @@ export class CharBuildThemeComponent implements OnInit {
   }
 
   decisionsComplete() {
-    let decisionNames = this.viewedThemeDecisions.map(d => d.name);
+    const decisionNames = this.viewedThemeDecisions.map(d => d.name);
     for (let i=0;i<decisionNames.length;i++) {
       if(!this.decisionsMade.find(d => d.name === decisionNames[i])) {return false}
     }

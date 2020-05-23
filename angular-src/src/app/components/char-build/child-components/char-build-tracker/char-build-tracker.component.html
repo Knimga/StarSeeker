@@ -1,42 +1,61 @@
 <div class="tracker-column">
   <div class="rounded-box normal-font">
     <div *ngIf="charObject.charName && charObject.charLevel">
-      <span>{{charObject.charName}}, Level {{charObject.charLevel}}</span>
+      <span>{{charObject.charName}}</span>
     </div>
   </div>
-  <div class="rounded-box flex-column">
-    <div class="box-inner-row">
-      <span>Race:</span><div *ngIf="charObject.race"><span>{{charObject.race.raceName}}</span></div>
-    </div>
-    <div class="box-inner-row">
-      <span>Theme:</span><div *ngIf="charObject.theme"><span>{{charObject.theme.themeName}}</span></div>
-    </div>
-    <div class="box-inner-row">
-      <span>Class:</span><span>{{classString()}}</span>
-    </div>
-  </div>
-  <div class="rounded-box flex-column">
-    <div class="box-inner-row space-around">
-      <span *ngIf="charObject.race">Size: {{charObject.race.raceData.size}}</span>
-      <span *ngIf="charObject.race">Speed: {{charObject.race.raceData.speed}}ft</span>
-    </div>
-  </div>
-  <div class="rounded-box flex-column">
-    <div class="box-inner-row space-around">
-      <div class="hp-stam-res stamina">
-        <strong>{{charObject.stamina}}</strong>
-        <small>Stamina</small>
+  <div class="box-row space-between">
+    <div class="rounded-box flex-column mr-2">
+      <div class="box-inner-row">
+        <span>Race:</span><div><span>{{(charObject.race) ? charObject.race.raceName : '-'}}</span></div>
       </div>
-      <div class="hp-stam-res hp">
-        <strong>{{charObject.HP}}</strong>
-        <small>HP</small>
+      <div class="box-inner-row">
+        <span>Theme:</span><div><span>{{(charObject.theme) ? charObject.theme.themeName : '-'}}</span></div>
       </div>
-      <div class="hp-stam-res resolve">
-        <strong>{{charObject.resolve}}</strong>
-        <small>Resolve</small>
+      <div class="box-inner-row">
+        <span>Class:</span><span class="{{(classes.length > 1) ? 'small-font' : ''}}">{{(classString()) ? classString() : '-'}}</span>
+      </div>
+    </div>
+    <div class="rounded-box flex-column w-30">
+      <div class="box-inner-row space-around">
+        <div class="hp-stam-res">
+          <strong>{{charObject.charLevel}}</strong>
+          <small title="Character Level">Level</small>
+        </div>
       </div>
     </div>
   </div>
+  <div class="box-row space-between">
+    <div class="rounded-box flex-column mr-2">
+      <div class="box-inner-row space-around">
+        <div class="hp-stam-res stamina">
+          <strong>{{charObject.stamina || '-'}}</strong>
+          <small>Stamina</small>
+        </div>
+        <div class="hp-stam-res hp">
+          <strong>{{charObject.HP || '-'}}</strong>
+          <small>HP</small>
+        </div>
+        <div class="hp-stam-res resolve">
+          <strong>{{charObject.resolve || '-'}}</strong>
+          <small>Resolve</small>
+        </div>
+      </div>
+    </div>
+    <div class="rounded-box flex-column w-50">
+      <div class="box-inner-row space-around">
+        <div class="hp-stam-res">
+          <span>{{(charObject.race) ? charObject.race.raceData.size : ' -'}}</span>
+          <small>Size</small>
+        </div>
+        <div class="hp-stam-res">
+            <span>{{(charObject.race) ? charObject.race.raceData.speed+'ft' : ' -'}}</span>
+            <small>Speed</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="box-row space-between">
     <div class="rounded-box flex-column w-40 AS">
       <div class="box-inner-row">
@@ -61,13 +80,13 @@
     <div class="box-column w-30">
       <div class="rounded-box flex-column saves">
         <div class="box-inner-row">
-          <small>Fort (Con)</small><strong>{{charObject.saves.fort}}</strong>
+          <small>Fort (Con)</small><strong>{{charObject.saves.fort || 0}}</strong>
         </div>
         <div class="box-inner-row">
-          <small>Ref (Dex)</small><strong>{{charObject.saves.ref}}</strong>
+          <small>Ref (Dex)</small><strong>{{charObject.saves.ref || 0}}</strong>
         </div>
         <div class="box-inner-row">
-          <small>Will (Wis)</small><strong>{{charObject.saves.will}}</strong>
+          <small>Will (Wis)</small><strong>{{charObject.saves.will || 0}}</strong>
         </div>
       </div>
       <div class="rounded-box flex-column AC">
@@ -88,18 +107,38 @@
           <small>Attack Bonuses</small>
         </div>
         <div class="box-inner-row">
-          <small>Melee (Str)</small><strong>{{charObject.bab.melee}}</strong>
+          <small>Melee (Str)</small><strong>{{charObject.bab.melee || 0}}</strong>
         </div>
         <div class="box-inner-row">
-          <small>Ranged (Dex)</small><strong>{{charObject.bab.ranged}}</strong>
+          <small>Ranged (Dex)</small><strong>{{charObject.bab.ranged || 0}}</strong>
         </div>
         <div class="box-inner-row">
-          <small>Thrown (Str)</small><strong>{{charObject.bab.thrown}}</strong>
+          <small>Thrown (Str)</small><strong>{{charObject.bab.thrown || 0}}</strong>
         </div>
       </div>
       <div class="rounded-box flex-column initiative">
         <div class="box-inner-row">
-          <span>Initiative:</span><strong>{{charObject.ini}}</strong>
+          <span>Initiative:</span><strong>{{charObject.ini || 0}}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-row space-between">
+    <div class="rounded-box w-50 flex-column mr-2">
+      <div class="box-inner-row {{(charObject.skills.classSkills[s]) ? 'highlight' : ''}}" *ngFor="let skill of skillsData; let s = index">
+        <small><i class="{{(charObject.skills.classSkills[s]) ? 'fas' : 'far'}} fa-circle fa-xs"></i> {{skill.skillName}} ({{skill.ASName}})</small>
+        <strong>{{charObject.skills.totals[s]}}</strong>
+      </div>
+    </div>    
+    <div class="rounded-box w-50 features">
+      <div class="rounded-box flex-column dark class-features">
+        <div class="box-inner-row space-around mb-1">
+          <strong>Class Features</strong>
+        </div>
+        <div class="feature-list">
+          <div *ngFor="let feature of currentFeatures" class="box-inner-row feature-row {{(feature.level > getClassLevel(feature.className)) ? 'gray' : ''}}" title="{{(charObject.classes.length > 1) ? feature.className+': ' : ''}} {{feature.desc}}">
+            <small>{{feature.level}}</small><span class="small-font">{{feature.featureName}}</span>
+          </div>
         </div>
       </div>
     </div>
